@@ -27,4 +27,4 @@
 
 ## 🗽 偉大な飛躍 偉大な行進
 
-![image](https://cdn.fanzeel.com/rep/302/5e54bdfc654e1.jpg)
+![image](https://mblogthumb-phinf.pstatic.net/20160816_58/ywmeong8805_1471324363987SXCzc_JPEG/22123.JPG?type=w800)
