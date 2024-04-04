@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  tomcat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mysql
+    environment:
+      db.driverClass: 'com.mysql.jdbc.Driver'
+      db.url: 'jdbc:mysql://mysql:3306/every-pet'
+      db.username: 'root'
+      db.password: 'root'
+    networks:
+      - network
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: lavanderia
+    ports:
+      - '3306:3306'
+    networks:
+      - network
+
+networks:
+  network:
