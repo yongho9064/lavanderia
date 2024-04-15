@@ -5,11 +5,14 @@ import com.kyungmin.lavanderia.jwt.filter.CustomLogoutFilter;
 import com.kyungmin.lavanderia.jwt.filter.JWTFilter;
 import com.kyungmin.lavanderia.jwt.filter.LoginFilter;
 import com.kyungmin.lavanderia.jwt.util.JWTUtil;
+import com.kyungmin.lavanderia.oauth2.handler.CustomSuccessHandler;
+import com.kyungmin.lavanderia.oauth2.service.CustomOAuth2UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,13 +33,16 @@ public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JWTUtil jwtUtil;
-
     private final RefreshRepository refreshRepository;
+    private final CustomOAuth2UserService customOAuth2UserService;
+    private final CustomSuccessHandler customSuccessHandler;
 
-    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil,RefreshRepository refreshRepository) {
+    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil,RefreshRepository refreshRepository,CustomOAuth2UserService customOAuth2UserService,CustomSuccessHandler customSuccessHandler) {
         this.authenticationConfiguration = authenticationConfiguration;
         this.jwtUtil =jwtUtil;
         this.refreshRepository = refreshRepository;
+        this.customOAuth2UserService = customOAuth2UserService;
+        this.customSuccessHandler = customSuccessHandler;
     }
 
     //AuthenticationManager Bean 등록
@@ -66,6 +72,7 @@ public class SecurityConfig {
                         configuration.setAllowedHeaders(Collections.singletonList("*")); // 헤더 허용
                         configuration.setMaxAge(3600L);
 
+                        configuration.setExposedHeaders(Collections.singletonList("Set-Cookie"));
                         configuration.setExposedHeaders(Collections.singletonList("Authorization")); // 헤더 허용
 
                         return null;
@@ -81,7 +88,13 @@ public class SecurityConfig {
         // HTTP Basic 인증을 비활성화 -> 보완성이 낮아서 비활성
         http.httpBasic((auth) -> auth.disable());
 
-        //경로별 인가 작업
+        // oauth2
+        http.oauth2Login((oauth2) -> oauth2
+                .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
+                        .userService(customOAuth2UserService))
+                .successHandler(customSuccessHandler));
+
+        // 경로별 인가 작업
         http.authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/login", "/", "/signup").permitAll() // /login, /, /join 경로는 모든 사용자가 접근할 수 있도록 허용
                         .requestMatchers("reissue").permitAll() // refresh token 재발급 모든 사용자 접근 허용
