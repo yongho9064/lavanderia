@@ -12,6 +12,7 @@ import java.util.Collection;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "TBL_MEMBER")
 public class MemberEntity implements UserDetails {
@@ -23,14 +24,17 @@ public class MemberEntity implements UserDetails {
     private String memberPwd;
     @Column(name = "MEMBER_NAME")
     private String memberName;
+    @Column(name = "MEMBER_EMAIL")
+    private String memberEmail;
     @Column(name = "MEMBER_ROLE")
     private String memberRole;
 
     @Builder
-    public MemberEntity(String memberId, String memberPwd, String memberName, String memberRole){
+    public MemberEntity(String memberId, String memberPwd, String memberName,String memberEmail, String memberRole){
         this.memberId = memberId;
         this.memberPwd = memberPwd;
         this.memberName = memberName;
+        this.memberEmail = memberEmail;
         this.memberRole = memberRole;
     }
 
