@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import 'tailwindcss/tailwind.css';
 
 function App() {
   const [hello, setHello] = useState('')
@@ -12,8 +11,8 @@ function App() {
   }, []);
 
   return (
-      <div className="hi bg-red-500 p-4 h-800px">
-          <p className="hi bg-red-500 p-4">This is a styled div using Tailwind CSS.</p>
+      <div>
+        백엔드에서 가져온 데이터입니다 : {hello}
       </div>
   );
 }

@@ -23,6 +23,22 @@
 | Library    | ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white) ![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=spring-security&logoColor=white) ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black) ![OAuth2](https://img.shields.io/badge/OAuth2-2E86C1?style=for-the-badge&logo=oauth&logoColor=white) ![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)                                                                                                                                                      |
 | Server     | ![Apache Tomcat](https://img.shields.io/badge/Apache_Tomcat-F8DC75?style=for-the-badge&logo=apache-tomcat&logoColor=black)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | Tool       | ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)                                                                                                                                                                                                                                                                                                                 |
+## 🗽 프론트엔드 폴더에 대한 명세서
+
+    Assets : 폰트, 이미지 등을 담는다.
+
+    Components : (재사용이 가능한) 컴포넌트들을 담는다.
+        Common : Buttton 등의 프로젝트 전반적으로 재사용 할 수 있는 컴포넌트
+        Contents : props를 받아서 어느정도 재사용 할 수 있는 컴포넌트
+
+    Pages : Router를 사용하여 이동할 큼지막한 컴포넌트
+
+    Store : 데이터와 데이터를 관리하는 파일들을 담는다.
+    - Data : Redux 관련 store / Actions / Reducer 등
+    - Type : 인터페이스나 이미지 파일을 처리하는 모듈 등
+
+    Styles : Style 관련 파일들은 담는다
+
 
 
 ## 🗽 偉大な飛躍 偉大な行進
