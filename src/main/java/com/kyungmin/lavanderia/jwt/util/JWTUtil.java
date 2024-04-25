@@ -1,5 +1,7 @@
 package com.kyungmin.lavanderia.jwt.util;
 
+import com.kyungmin.lavanderia.jwt.data.entity.RefreshEntity;
+import com.kyungmin.lavanderia.jwt.data.repository.RefreshRepository;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -13,9 +15,12 @@ import java.util.Date;
 public class JWTUtil {
 
     private SecretKey secretKey;
+    private final RefreshRepository refreshRepository;
 
-    public JWTUtil(@Value("${spring.jwt.secret}") String secret) {
+
+    public JWTUtil(@Value("${spring.jwt.secret}") String secret, RefreshRepository refreshRepository) {
         this.secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
+        this.refreshRepository = refreshRepository;
     }
 
     public String getMemberId(String token) {
@@ -43,5 +48,16 @@ public class JWTUtil {
                 .expiration(new Date(System.currentTimeMillis() + expiredMs))
                 .signWith(secretKey)
                 .compact();
+    }
+
+    public void addRefreshEntity(String memberId, String refresh, Long expiredMs) {
+
+        RefreshEntity refreshEntity = RefreshEntity.builder()
+                .memberId(memberId)
+                .refresh(refresh)
+                .expiration(expiredMs)
+                .build();
+
+        refreshRepository.save(refreshEntity);
     }
 }
