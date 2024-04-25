@@ -1,4 +1,4 @@
-CREATE TABLE `TBL_MEMBER` (
+CREATE TABLE TBL_MEMBER (
     `MEMBER_ID` VARCHAR(255) NOT NULL,
     `MEMBER_PWD` VARCHAR(255) NOT NULL,
     `MEMBER_NAME` VARCHAR(255) NOT NULL,
@@ -18,3 +18,6 @@ CREATE TABLE `TBL_MEMBER` (
     `ACC_DELETE_DATE` DATETIME NULL,
     PRIMARY KEY (`MEMBER_ID`)
 );
+
+INSERT INTO TBL_MEMBER (MEMBER_ID, MEMBER_PWD, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONE, AGREE_MARKETING_YN) VALUES('user', '$2a$10$HdOg00x3nTNCO06RwdeiA.dsWWJlWLHpx9jM8qVnQp35H3cxjDfCy', '유저',
+                                                                                                                   'abc@naver.com', '010-1234-5678', 'Y');
