@@ -5,14 +5,15 @@ import com.kyungmin.lavanderia.jwt.filter.CustomLogoutFilter;
 import com.kyungmin.lavanderia.jwt.filter.JWTFilter;
 import com.kyungmin.lavanderia.jwt.filter.LoginFilter;
 import com.kyungmin.lavanderia.jwt.util.JWTUtil;
+import com.kyungmin.lavanderia.jwt.util.MakeCookie;
 import com.kyungmin.lavanderia.oauth2.handler.CustomSuccessHandler;
 import com.kyungmin.lavanderia.oauth2.service.CustomOAuth2UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,6 +28,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import java.util.Collections;
 
 @Configuration
+@RequiredArgsConstructor
 @EnableWebSecurity // Spring Security를 위한 설정 클래스임을 선언
 @ComponentScan(basePackages = {"com.kyungmin.lavanderia.jwt.data.*","com.kyungmin.lavanderia.*"})
 public class SecurityConfig {
@@ -36,14 +38,9 @@ public class SecurityConfig {
     private final RefreshRepository refreshRepository;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomSuccessHandler customSuccessHandler;
+    private final MakeCookie makeCookie;
 
-    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil,RefreshRepository refreshRepository,CustomOAuth2UserService customOAuth2UserService,CustomSuccessHandler customSuccessHandler) {
-        this.authenticationConfiguration = authenticationConfiguration;
-        this.jwtUtil =jwtUtil;
-        this.refreshRepository = refreshRepository;
-        this.customOAuth2UserService = customOAuth2UserService;
-        this.customSuccessHandler = customSuccessHandler;
-    }
+
 
     //AuthenticationManager Bean 등록
     @Bean
@@ -103,7 +100,7 @@ public class SecurityConfig {
 
         http.addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
-        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration),jwtUtil,refreshRepository), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration),jwtUtil,refreshRepository,makeCookie), UsernamePasswordAuthenticationFilter.class);
 
         http.addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshRepository), LogoutFilter.class);
 

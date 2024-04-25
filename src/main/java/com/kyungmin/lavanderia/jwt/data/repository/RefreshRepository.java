@@ -10,6 +10,5 @@ public interface RefreshRepository extends CrudRepository<RefreshEntity,String> 
 
     Boolean existsByRefresh(String refresh);
 
-    @Transactional
-    void deleteByRefresh(String refresh);
+    RefreshEntity findByRefresh(String refresh);
 }
