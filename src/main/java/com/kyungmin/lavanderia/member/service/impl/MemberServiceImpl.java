@@ -39,7 +39,9 @@ public class MemberServiceImpl implements MemberService {
                 .memberId(signupDto.getMemberId())
                 .memberPwd(passwordEncoder.encode(signupDto.getMemberPwd()))
                 .memberName(signupDto.getMemberName())
-                .memberRole("ROLE_USER")
+                .memberEmail(signupDto.getMemberEmail())
+                .memberPhone(signupDto.getMemberPhone())
+                .agreeMarketingYn(signupDto.getAgreeMarketingYn())
                 .build();
 
         memberRepository.save(memberEntity);

@@ -5,6 +5,7 @@ import com.kyungmin.lavanderia.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -18,7 +19,7 @@ public class MemberController {
     }
 
     @PostMapping("/signup")
-    public String signup(SignupDto signupDto) {
+    public String signup(@RequestBody SignupDto signupDto) {
         memberService.signup(signupDto);
         return "ok";
     }

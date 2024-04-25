@@ -1,16 +1,13 @@
 package com.kyungmin.lavanderia.jwt.util;
 
 import com.kyungmin.lavanderia.member.data.entity.MemberEntity;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-@RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
-
     private MemberEntity memberEntity;
 
     public CustomUserDetails(MemberEntity memberEntity) {
@@ -61,11 +58,4 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
-
 }
-
-
-
-

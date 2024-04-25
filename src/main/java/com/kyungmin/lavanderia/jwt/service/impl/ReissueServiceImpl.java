@@ -80,8 +80,8 @@ public class ReissueServiceImpl implements ReissueService {
         String newRefresh = jwtUtil.createJwt("refresh", memberId, role, refreshExpiredMs);
 
         //Refresh 토큰 저장 DB에 기존의 Refresh 토큰 삭제 후 새 Refresh 토큰 저장
-        refreshRepository.deleteByRefresh(refresh);
-        addRefreshEntity(memberId, newRefresh, refreshExpiredMs);
+        refreshRepository.delete(refreshRepository.findByRefresh(refresh));
+        jwtUtil.addRefreshEntity(memberId, newRefresh, refreshExpiredMs);
 
         //response
         response.setHeader("access", newAccess);
@@ -99,17 +99,6 @@ public class ReissueServiceImpl implements ReissueService {
         cookie.setHttpOnly(true);
 
         return cookie;
-    }
-
-    private void addRefreshEntity(String memberId, String refresh, Long expiredMs) {
-
-        RefreshEntity refreshEntity = RefreshEntity.builder()
-                .memberId(memberId)
-                .refresh(refresh)
-                .expiration(expiredMs)
-                .build();
-
-        refreshRepository.save(refreshEntity);
     }
 
 }

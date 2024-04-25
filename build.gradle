@@ -48,6 +48,12 @@ dependencies {
     // oauth2
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:3.2.4'
 
+    // 유효성 검사
+    implementation 'jakarta.validation:jakarta.validation-api:3.1.0-M2'
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+
+
+
 }
 
 tasks.named('test') {

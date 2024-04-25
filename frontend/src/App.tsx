@@ -1,12 +1,15 @@
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import 'tailwindcss/tailwind.css';
+import Home from './pages/Home';
+import Login from './pages/auth/Login';
 
 function App() {
   return (
-    <div className='hi bg-red-500 p-4 h-800px'>
-      <p className='hi bg-red-500 p-4'>
-        This is a styled div using Tailwind CSS.
-      </p>
-    </div>
+    <Routes>
+      <Route path='/' element={<Home />}></Route>
+      <Route path='/login' element={<Login />} />
+    </Routes>
   );
 }
 
