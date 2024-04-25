@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Component
 public class JWTUtil {
@@ -51,11 +53,18 @@ public class JWTUtil {
     }
 
     public void addRefreshEntity(String memberId, String refresh, Long expiredMs) {
+        // 한국 시간대로 설정
+        TimeZone timeZone = TimeZone.getTimeZone("Asia/Seoul");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년MM월dd일 HH:mm:ss");
+        dateFormat.setTimeZone(timeZone);
+
+        Date date = new Date(System.currentTimeMillis() + expiredMs);
+        String formattedDate = dateFormat.format(date);
 
         RefreshEntity refreshEntity = RefreshEntity.builder()
-                .memberId(memberId)
+                .memberId(memberId + ":" + formattedDate)
                 .refresh(refresh)
-                .expiration(expiredMs)
+                .expiration(expiredMs / 1000)
                 .build();
 
         refreshRepository.save(refreshEntity);

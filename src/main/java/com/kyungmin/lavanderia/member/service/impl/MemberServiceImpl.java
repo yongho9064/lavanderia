@@ -1,7 +1,6 @@
 package com.kyungmin.lavanderia.member.service.impl;
 
-import com.kyungmin.lavanderia.jwt.util.CustomUserDetails;
-import com.kyungmin.lavanderia.member.data.dto.SignupDto;
+import com.kyungmin.lavanderia.member.data.dto.SignupDTO;
 import com.kyungmin.lavanderia.member.data.entity.MemberEntity;
 import com.kyungmin.lavanderia.member.data.repository.MemberRepository;
 import com.kyungmin.lavanderia.member.service.MemberService;
@@ -26,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public void signup(SignupDto signupDto) {
+    public void signup(SignupDTO signupDto) {
 
         // 회원 중복 체크
         Boolean isExist = memberRepository.existsById(signupDto.getMemberId());
@@ -52,7 +51,7 @@ public class MemberServiceImpl implements MemberService {
         Optional<MemberEntity> memberEntity = memberRepository.findById(username);
 
         if (memberEntity.isPresent()) {
-            return new CustomUserDetails(memberEntity.get());
+            return memberEntity.get();
         }
         return null;
     }
