@@ -80,7 +80,13 @@ public class ReissueServiceImpl implements ReissueService {
 
         //Refresh 토큰 저장 DB에 기존의 Refresh 토큰 삭제 후 새 Refresh 토큰 저장
         refreshRepository.delete(refreshRepository.findByRefresh(refresh));
-        jwtUtil.addRefreshEntity(memberId, newRefresh, refreshExpiredMs);
+
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+
+        jwtUtil.addRefreshEntity(memberId, newRefresh, refreshExpiredMs, ipAddress);
 
         //response
         response.setHeader("access", newAccess);

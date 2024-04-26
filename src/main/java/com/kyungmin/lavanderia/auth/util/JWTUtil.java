@@ -52,17 +52,11 @@ public class JWTUtil {
                 .compact();
     }
 
-    public void addRefreshEntity(String memberId, String refresh, Long expiredMs) {
-        // 한국 시간대로 설정
-        TimeZone timeZone = TimeZone.getTimeZone("Asia/Seoul");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년MM월dd일 HH:mm:ss");
-        dateFormat.setTimeZone(timeZone);
+    public void addRefreshEntity(String memberId, String refresh, Long expiredMs, String ipAddress) {
 
-        Date date = new Date(System.currentTimeMillis() + expiredMs);
-        String formattedDate = dateFormat.format(date);
 
         RefreshEntity refreshEntity = RefreshEntity.builder()
-                .memberId(memberId + ":" + formattedDate)
+                .memberId(memberId + ":" + ipAddress)
                 .refresh(refresh)
                 .expiration(expiredMs / 1000)
                 .build();

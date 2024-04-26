@@ -63,8 +63,13 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String access = jwtUtil.createJwt("access", memberId, role, accessExpiredMs);
         String refresh = jwtUtil.createJwt("refresh", memberId, role, refreshExpiredMs);
 
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+
         // Refresh 토큰 저장
-        jwtUtil.addRefreshEntity(memberId,refresh,  refreshExpiredMs);
+        jwtUtil.addRefreshEntity(memberId, refresh, refreshExpiredMs, ipAddress);
 
         //응답 설정
         response.setHeader("access", access);
