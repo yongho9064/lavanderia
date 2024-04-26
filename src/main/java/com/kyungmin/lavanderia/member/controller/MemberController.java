@@ -1,8 +1,7 @@
 package com.kyungmin.lavanderia.member.controller;
 
-import com.kyungmin.lavanderia.member.data.dto.SignupDto;
+import com.kyungmin.lavanderia.member.data.dto.SignupDTO;
 import com.kyungmin.lavanderia.member.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +18,7 @@ public class MemberController {
     }
 
     @PostMapping("/signup")
-    public String signup(@RequestBody SignupDto signupDto) {
+    public String signup(@RequestBody SignupDTO signupDto) {
         memberService.signup(signupDto);
         return "ok";
     }
