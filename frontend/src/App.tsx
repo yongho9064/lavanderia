@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "tailwindcss/tailwind.css";
-import Header from "./Components/Common/Header";
-import Application from "./pages/Application/Application";
-import Premium from "./pages/Premium/Premium";
-import Community from "./pages/Community/Community";
-import ServiceCenter from "./pages/ServiceCenter/ServiceCenter";
-import Login from "./pages/auth/Login";
-import Signup from "./pages/Signup/Signup";
-import Home from "./pages/Home";
+import Application from "./Pages/Application/Application";
+import Premium from "./Pages/Premium/Premium";
+import Community from "./Pages/Community/Community";
+import ServiceCenter from "./Pages/ServiceCenter/ServiceCenter";
+import Home from "./Pages/Home";
+import Header from "./components/Common/Header";
+import Login from "./Pages/auth/Login";
+import { Signup } from "./Pages/auth/Signup";
 
 function App() {
   return (
@@ -18,10 +18,14 @@ function App() {
         <Route path="premium" element={<Premium />} />
         <Route path="community" element={<Community />} />
         <Route path="servicecenter" element={<ServiceCenter />} />
+      </Route>
+      <Route path="/" element={<Home />} />
+
+      {/* 로그인, 회원가입 관련 */}
+      <Route path="/auth">
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
       </Route>
-      <Route path="/" element={<Home />} />
     </Routes>
   );
 }

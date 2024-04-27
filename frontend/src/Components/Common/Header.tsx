@@ -1,6 +1,6 @@
 import React from 'react';
 import {Outlet} from "react-router-dom";
-import Navigation from "../Nvigation/Navigation";
+import Navigation from '../Navigation/Navigation';
 
 
 const Header = () => {

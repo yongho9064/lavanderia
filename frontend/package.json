@@ -45,6 +45,11 @@
     ]
   },
   "proxy": "http://localhost:8080",
+  "devServer": {
+    "allowedHosts": [
+      "localhost"
+    ]
+  },
   "devDependencies": {
     "postcss": "^8.4.38",
     "postcss-cli": "^11.0.0",

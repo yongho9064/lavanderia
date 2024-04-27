@@ -34,12 +34,12 @@ const Navigation = () => {
                 </ul>
                 <ul className='flex items-center ml-auto  space-x-4'>
                     <li>
-                        <Link to='/login'>
+                        <Link to='/auth/login'>
                             로그인
                         </Link>
                     </li>
                     <li>
-                        <Link to='/signup'>
+                        <Link to='/auth/signup'>
                             회원가입
                         </Link>
                     </li>
