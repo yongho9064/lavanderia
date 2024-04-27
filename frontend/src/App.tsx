@@ -7,13 +7,13 @@ import Community from "./Pages/Community/Community";
 import ServiceCenter from "./Pages/ServiceCenter/ServiceCenter";
 import Home from "./Pages/Home";
 import Header from "./components/Common/Header";
-import Login from "./Pages/auth/Login";
-import { Signup } from "./Pages/auth/Signup";
+import Login from "./Pages/Auth/Login";
+import { Signup } from "./Pages/Auth/Signup";
 
 function App() {
   return (
-    <Routes> 
-        <Route element={<Header />}>
+    <Routes>
+      <Route element={<Header />}>
         <Route path="application" element={<Application />} />
         <Route path="premium" element={<Premium />} />
         <Route path="community" element={<Community />} />

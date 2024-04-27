@@ -26,6 +26,8 @@ services:
       MYSQL_DATABASE: lavanderia
     ports:
       - '3306:3306'
+    volumes:
+      - ./docs/data.sql:/docker-entrypoint-initdb.d/data.sql
     networks:
       - network
 
