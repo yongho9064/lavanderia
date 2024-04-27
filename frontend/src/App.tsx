@@ -12,8 +12,8 @@ import { Signup } from "./Pages/auth/Signup";
 
 function App() {
   return (
-    <Routes>
-      <Route element={<Header />}>
+    <Routes> 
+        <Route element={<Header />}>
         <Route path="application" element={<Application />} />
         <Route path="premium" element={<Premium />} />
         <Route path="community" element={<Community />} />
