@@ -7,21 +7,21 @@ import Community from "./Pages/Community/Community";
 import ServiceCenter from "./Pages/ServiceCenter/ServiceCenter";
 import Home from "./Pages/Home";
 import Header from "./components/Common/Header";
-import Login from "./Pages/auth/Login";
-import { Signup } from "./Pages/auth/Signup";
+import Login from "./Pages/Auth/Login";
+import { Signup } from "./Pages/Auth/Signup";
 
 function App() {
   return (
-    <Routes> 
-        <Route element={<Header />}>
+    <Routes>
+      <Route element={<Header />}>
         <Route path="application" element={<Application />} />
         <Route path="premium" element={<Premium />} />
         <Route path="community" element={<Community />} />
         <Route path="servicecenter" element={<ServiceCenter />} />
       </Route>
+
       <Route path="/" element={<Home />} />
 
-      {/* 로그인, 회원가입 관련 */}
       <Route path="/auth">
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
