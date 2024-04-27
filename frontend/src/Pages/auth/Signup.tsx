@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Signup = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 px-4">
+    <div className="flex min-h-screen flex-col items-center justify-center px-4">
       <div className="flex w-full max-w-lg flex-col">
         {/* Logo container aligned to the left */}
         <div className="mb-5 flex w-full items-center">
@@ -14,7 +14,7 @@ export const Signup = () => {
             lavanderia
           </Link>
         </div>
-        <form className="w-full max-w-lg rounded-lg bg-white p-6 shadow">
+        <form className="w-full max-w-lg rounded-lg border bg-white p-6 shadow">
           {/* Username */}
           <div className="mb-4">
             <label
