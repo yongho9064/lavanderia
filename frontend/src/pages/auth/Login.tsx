@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="flex h-[750px] w-[600px] flex-col items-center gap-2  bg-white text-center">
+    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
+      <div className="flex h-[750px] w-[600px] flex-col items-center gap-2  rounded-lg bg-white text-center shadow">
         <div className="flex h-32 w-full items-center justify-center ">
           <span className="font-courgette text-5xl">
             <Link to="/">lavanderia</Link>
