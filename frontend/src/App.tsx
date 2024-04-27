@@ -19,9 +19,9 @@ function App() {
         <Route path="community" element={<Community />} />
         <Route path="servicecenter" element={<ServiceCenter />} />
       </Route>
+
       <Route path="/" element={<Home />} />
 
-      {/* 로그인, 회원가입 관련 */}
       <Route path="/auth">
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />

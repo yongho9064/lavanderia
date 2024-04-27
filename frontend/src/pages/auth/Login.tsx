@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -5,32 +6,48 @@ const Login = () => {
   const handleSubmit = async (event: any) => {
     event.preventDefault(); // Prevent the default form submission behavior
 
-    // Extract data using the form element names
     const formData = new FormData(event.target);
-    const username = formData.get("username"); // Get username from form data
-    const password = formData.get("password"); // Get password from form data
-    const remember = formData.get("remember"); // Get password from form data
+    const memberId = formData.get("username"); // Get username from form data, map it to memberId
+    const memberPwd = formData.get("password"); // Get password from form data, map it to memberPwd
+    // const remember = formData.get("remember"); // This remains the same if needed
 
-    // Log the username and password to the console
-    console.log(
-      "Username:",
-      username,
-      "Password:",
-      password,
-      "Remember:",
-      remember,
-    );
+    // 로그인
 
-    // Example of sending this data to a server using axios
-    // You might uncomment and modify this part as needed
-    /*
+    // 클라이언트에서 저장
+
+    // 로컬
+    // 코드상으로만 존재
+    //   액세스
+    //   리프레쉬
+
+    // 클라에서 삭제
+
+    // 사용자가 페이지 이용
+
+    // console.log(
+    //   "Username:",
+    //   username,
+    //   "Password:",
+    //   password,
+    //   "Remember:",
+    //   remember,
+    // );
+
     try {
-      const response = await axios.post("/api/login", { username, password });
-      console.log("Server response:", response.data);
+      const response = await axios.post("/signin", { memberId, memberPwd });
+      console.log("Server response:", response.headers.access);
+      console.log("Server response:", response.headers.statusCode);
+
+      const token = response.data.token;
+      console.log("JWT:", token);
     } catch (error) {
-      console.error("Error:", error.response ? error.response.data : error.message);
+      console.error("Error:");
     }
-    */
+
+    // 전역 관리
+    // 통신 기록삭제, 쿠키삭제
+
+    // 리프레쉬 토큰을 남겨서 로그인 유지 기능 구현
   };
 
   return (
