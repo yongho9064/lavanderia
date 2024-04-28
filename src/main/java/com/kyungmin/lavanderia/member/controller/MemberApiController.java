@@ -2,6 +2,8 @@ package com.kyungmin.lavanderia.member.controller;
 
 import com.kyungmin.lavanderia.member.data.dto.CheckCodeDTO;
 import com.kyungmin.lavanderia.member.data.dto.SignupDTO;
+import com.kyungmin.lavanderia.member.exception.DuplicatePhoneNumberEx;
+import com.kyungmin.lavanderia.member.exception.EmailSendFailedEx;
 import com.kyungmin.lavanderia.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -30,11 +32,35 @@ public class MemberApiController {
             @ApiResponse(responseCode = "201", description = "회원 가입 완료", content = @Content(mediaType = "application/json")),
     })
     public ResponseEntity<String> signup(@RequestBody SignupDTO signupDto) {
+
         memberService.signup(signupDto);
 
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
-                .body("회원 가입 완료");
+        HttpStatus httpStatus = HttpStatus.CREATED;
+        String result = "회원 가입 완료";
+
+        return response(httpStatus, result);
+    }
+
+    @PostMapping("/check-member-id")
+    @Operation(summary = "전화번호 중복 확인", description = "전화번호 중복을 확인합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "전화번호 가입 가능", content = @Content(mediaType = "application/json")),
+    })
+    public ResponseEntity<String> checkMemberId(@RequestBody String memberId) {
+
+        HttpStatus httpStatus;
+        String result;
+
+        try {
+            memberService.checkMemberId(memberId);
+            httpStatus = HttpStatus.CREATED;
+            result = "가입 가능한 아이디입니다";
+        } catch (DuplicatePhoneNumberEx e) {
+            httpStatus = HttpStatus.BAD_REQUEST;
+            result = "이미 존재하는 아이디입니다";
+        }
+
+        return response(httpStatus, result);
     }
 
     @PostMapping("/check-phone-number")
@@ -44,11 +70,19 @@ public class MemberApiController {
     })
     public ResponseEntity<String> checkPhoneNumber(@RequestBody String phoneNumber) {
 
-        String result = memberService.checkPhoneNumber(phoneNumber);
+        HttpStatus httpStatus;
+        String result;
 
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
-                .body(result);
+        try {
+            memberService.checkPhoneNumber(phoneNumber);
+            httpStatus = HttpStatus.CREATED;
+            result = "가입 가능한 번호입니다";
+        } catch (DuplicatePhoneNumberEx e) {
+            httpStatus = HttpStatus.BAD_REQUEST;
+            result = "이미 존재하는 번호입니다";
+        }
+
+        return response(httpStatus, result);
     }
 
     @PostMapping("/send-code")
@@ -58,14 +92,19 @@ public class MemberApiController {
     })
     public ResponseEntity<String> sendSignupCode(@RequestBody String email) {
 
+        HttpStatus httpStatus;
+        String result;
 
+        try {
+            memberService.sendSignupCode(email);
+            httpStatus = HttpStatus.CREATED;
+            result = "이메일 전송 완료";
+        } catch (EmailSendFailedEx e) {
+            httpStatus = HttpStatus.BAD_REQUEST;
+            result = "이메일 전송 실패";
+        }
 
-        String result = memberService.sendSignupCode(email);
-
-
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
-                .body(result);
+        return response(httpStatus, result);
     }
 
     @PostMapping("/check-code")
@@ -75,9 +114,23 @@ public class MemberApiController {
     })
     public ResponseEntity<String> checkSignupCode(@RequestBody CheckCodeDTO checkCodeDTO) {
 
-        String result = memberService.checkSignupCode(checkCodeDTO.getEmail(), checkCodeDTO.getCode());
+        HttpStatus httpStatus;
+        String result;
 
-        return ResponseEntity.status(HttpStatus.CREATED)
+        try {
+            memberService.checkSignupCode(checkCodeDTO.getEmail(), checkCodeDTO.getCode());
+            httpStatus = HttpStatus.CREATED;
+            result = "이메일 인증 성공";
+        } catch (EmailSendFailedEx e) {
+            httpStatus = HttpStatus.BAD_REQUEST;
+            result = "이메일 인증 실패";
+        }
+
+        return response(httpStatus, result);
+    }
+
+    private ResponseEntity<String> response(HttpStatus httpStatus,String result) {
+        return ResponseEntity.status(httpStatus)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
                 .body(result);
     }

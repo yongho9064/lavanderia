@@ -95,10 +95,11 @@ public class SecurityConfig {
 
         // 경로별 인가 작업
         http.authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/signin", "/", "/signup", "/check-phone-number", "/send-code", "/check-code").permitAll() // /login, /, /join 경로는 모든 사용자가 접근할 수 있도록 허용
+                        .requestMatchers("/signin", "/signup", "/check-phone-number", "/send-code", "/check-code").permitAll() // /login, /, /join 경로는 모든 사용자가 접근할 수 있도록 허용
                         .requestMatchers("reissue").permitAll() // refresh token 재발급 모든 사용자 접근 허용
                         .requestMatchers("/admin").hasRole("ADMIN") // /admin 경로는 "ADMIN" 역할을 가진 사용자만 접근할 수 있도록 설정
-                        .anyRequest().permitAll()); // 나머지 요청은 모두 인증된 사용자만 접근할 수 있도록 설정
+                        .requestMatchers("/").authenticated() // 인증된 유저만 접근 가능
+                        .anyRequest().permitAll()); // 나머지 요청은 모두 접근 가능
 
         http.addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
