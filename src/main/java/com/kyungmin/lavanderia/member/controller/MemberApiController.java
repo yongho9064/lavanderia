@@ -2,7 +2,9 @@ package com.kyungmin.lavanderia.member.controller;
 
 import com.kyungmin.lavanderia.member.data.dto.CheckCodeDTO;
 import com.kyungmin.lavanderia.member.data.dto.SignupDTO;
+import com.kyungmin.lavanderia.member.exception.DuplicateMemberIdEx;
 import com.kyungmin.lavanderia.member.exception.DuplicatePhoneNumberEx;
+import com.kyungmin.lavanderia.member.exception.EmailAuthenticationFailedEx;
 import com.kyungmin.lavanderia.member.exception.EmailSendFailedEx;
 import com.kyungmin.lavanderia.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,7 +46,8 @@ public class MemberApiController {
     @PostMapping("/check-member-id")
     @Operation(summary = "전화번호 중복 확인", description = "전화번호 중복을 확인합니다.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "전화번호 가입 가능", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "201", description = "아이디 가입 가능", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "400", description = "아이디 가입 불가능", content = @Content(mediaType = "application/json")),
     })
     public ResponseEntity<String> checkMemberId(@RequestBody String memberId) {
 
@@ -55,7 +58,7 @@ public class MemberApiController {
             memberService.checkMemberId(memberId);
             httpStatus = HttpStatus.CREATED;
             result = "가입 가능한 아이디입니다";
-        } catch (DuplicatePhoneNumberEx e) {
+        } catch (DuplicateMemberIdEx e) {
             httpStatus = HttpStatus.BAD_REQUEST;
             result = "이미 존재하는 아이디입니다";
         }
@@ -67,6 +70,7 @@ public class MemberApiController {
     @Operation(summary = "전화번호 중복 확인", description = "전화번호 중복을 확인합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "전화번호 가입 가능", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "400", description = "전화번호 가입 불가능", content = @Content(mediaType = "application/json")),
     })
     public ResponseEntity<String> checkPhoneNumber(@RequestBody String phoneNumber) {
 
@@ -89,6 +93,7 @@ public class MemberApiController {
     @Operation(summary = "이메일 인증코드 전송", description = "이메일 인증코드를 전송합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "이메일 인증코드 전송 완료", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "400", description = "이메일 인증코드 전송 실패", content = @Content(mediaType = "application/json")),
     })
     public ResponseEntity<String> sendSignupCode(@RequestBody String email) {
 
@@ -110,7 +115,8 @@ public class MemberApiController {
     @PostMapping("/check-code")
     @Operation(summary = "이메일 인증코드 검사", description = "이메일 인증코드를 검사합니다.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "이메일 인증코드 검사 완료", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "201", description = "이메일 인증코드 인증 성공", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "400", description = "이메일 인증코드 인증 실패", content = @Content(mediaType = "application/json")),
     })
     public ResponseEntity<String> checkSignupCode(@RequestBody CheckCodeDTO checkCodeDTO) {
 
@@ -121,7 +127,7 @@ public class MemberApiController {
             memberService.checkSignupCode(checkCodeDTO.getEmail(), checkCodeDTO.getCode());
             httpStatus = HttpStatus.CREATED;
             result = "이메일 인증 성공";
-        } catch (EmailSendFailedEx e) {
+        } catch (EmailAuthenticationFailedEx e) {
             httpStatus = HttpStatus.BAD_REQUEST;
             result = "이메일 인증 실패";
         }
