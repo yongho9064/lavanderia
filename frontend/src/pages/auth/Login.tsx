@@ -38,6 +38,8 @@ const Login = () => {
       console.log("Server response:", response.headers.access);
       console.log("Server response:", response.headers.statusCode);
 
+      window.localStorage.setItem("access", response.headers.access);
+
       const token = response.data.token;
       console.log("JWT:", token);
     } catch (error) {
