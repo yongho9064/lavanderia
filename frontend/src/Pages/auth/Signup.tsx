@@ -1,7 +1,48 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Signup = () => {
+  const [formData, setFormData] = useState({
+    id: "",
+    password: "",
+    email: "",
+    name: "",
+    dob: "",
+    phone: "",
+    address: "",
+    detailedAddress: "",
+    recommender: "",
+    consentPromo: "",
+  });
+
+  const handleChange = (event: any) => {
+    const { id, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+
+  const handlesignup = async (event: any) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    // 아이디 중복검사 @ 아이디 정규화
+    // 이메일 중복검사 후 코드 전송 가능하게
+    // 전화번호 중복검사
+    // 주소는 api 사용
+
+    console.log(formData);
+    // try {
+    //   const response = await axios.post("/signup", formData);
+    //   console.log("Server response:", response);
+    //   // Additional actions based on success (e.g., redirect to login page)
+    // } catch (error) {
+    //   console.error("Error submitting form:", error);
+    //   // Handle errors here, such as displaying error messages to the user
+    // }
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 px-4">
       <div className="flex w-full max-w-lg flex-col">
@@ -14,7 +55,10 @@ export const Signup = () => {
             lavanderia
           </Link>
         </div>
-        <form className="w-full max-w-lg rounded-lg bg-white p-6 shadow">
+        <form
+          className="w-full max-w-lg rounded-lg bg-white p-6 shadow"
+          onSubmit={handlesignup}
+        >
           {/* Username */}
           <div className="mb-4">
             <label
@@ -23,12 +67,15 @@ export const Signup = () => {
             >
               아이디
             </label>
+
             <input
-              id="username"
+              id="id"
               type="text"
               required
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="아이디"
+              value={formData.id}
+              onChange={handleChange}
             />
           </div>
 
@@ -46,6 +93,8 @@ export const Signup = () => {
               required
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="비밀번호"
+              value={formData.password}
+              onChange={handleChange}
             />
           </div>
 
@@ -63,6 +112,8 @@ export const Signup = () => {
               required
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="이메일"
+              value={formData.email}
+              onChange={handleChange}
             />
             <button
               type="button"
@@ -86,6 +137,8 @@ export const Signup = () => {
               required
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="이름"
+              value={formData.name}
+              onChange={handleChange}
             />
           </div>
 
@@ -103,6 +156,8 @@ export const Signup = () => {
               required
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="YYYYMMDD"
+              value={formData.dob}
+              onChange={handleChange}
             />
           </div>
 
@@ -120,6 +175,8 @@ export const Signup = () => {
               required
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="전화번호"
+              value={formData.phone}
+              onChange={handleChange}
             />
           </div>
 
@@ -137,6 +194,8 @@ export const Signup = () => {
               required
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="주소"
+              value={formData.address}
+              onChange={handleChange}
             />
           </div>
 
@@ -154,6 +213,8 @@ export const Signup = () => {
               required
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="상세주소"
+              value={formData.detailedAddress}
+              onChange={handleChange}
             />
           </div>
 
@@ -171,7 +232,43 @@ export const Signup = () => {
               required
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               placeholder="추천인"
+              value={formData.recommender}
+              onChange={handleChange}
             />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              광고성 메시지 수신 동의
+            </label>
+            <div className="mt-1 flex gap-4">
+              <label className="flex items-center">
+                <input
+                  id="consentPromo"
+                  type="radio"
+                  name="consentPromo"
+                  value="Yes"
+                  checked={formData.consentPromo === "Yes"}
+                  onChange={handleChange}
+                  className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                />
+                <span className="ml-2 text-sm text-gray-600">동의</span>
+              </label>
+              <label className="flex items-center">
+                <input
+                  id="consentPromo"
+                  type="radio"
+                  name="consentPromo"
+                  value="No"
+                  checked={formData.consentPromo === "No"}
+                  onChange={handleChange}
+                  className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                />
+                <span className="ml-2 text-sm text-gray-600">
+                  동의하지 않음
+                </span>
+              </label>
+            </div>
           </div>
 
           {/* Submit Button */}
