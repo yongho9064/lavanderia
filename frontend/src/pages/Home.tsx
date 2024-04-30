@@ -1,12 +1,142 @@
 import React from "react";
-import Header from "./../components/Common/Header";
+import Header from "../Components/Common/Header";
+import home from "../Assets/Img/homeImg.jpg";
+
 
 const Home = () => {
-  return (
-    <div>
-      <Header />
-    </div>
-  );
+    return (
+        <>
+            <Header/>
+            <section className="mt-4">
+                {/* 광고 */}
+                <article className='max-w-5xl m-auto'>
+                    <div className='flex items-center justify-center'>
+                        <img src={home} className="mt-36px" alt="Home"/>
+                    </div>
+                </article>
+
+                {/* 첫 번쨰 소개글 */}
+                <article className='max-w-5xl m-auto'>
+                    <div className='flex items-center justify-between mt-4'>
+                        <div>
+                            <h4>DAILY WASH</h4>
+                            <h1>귀찮은 세탁을 간편하게<br/>
+                                모두를 위한 편리한 세탁 서비스
+                            </h1>
+                            <span>라벤데리아 웹으로 간편하게 <br/>
+                            세탁을 예약하세요.</span>
+                        </div>
+                        <img
+                            src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
+                            alt="Second Image"
+                            className='w-8'/>
+                    </div>
+                </article>
+
+                {/* 두 번째 소개글 */}
+                <article className='max-w-5xl m-auto'>
+                    <div className='text-center mt-12'>
+                        <h3><strong>All In One</strong> 세탁 서비스</h3>
+                        <p>수거에서 부터 세탁 및 새벽 배송까지</p>
+                    </div>
+                    {/* 카드*/}
+                    <div className='flex items-center justify-between mt-12'>
+                        <div>
+                            <div>
+                                <img
+                                    src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
+                                    className='w-8'
+                                />
+                            </div>
+                            <div>
+                                <span>----------</span>
+                                <h4>수거 1</h4>
+                                박스나 비닐을 이용해 집앞에 세탁물을 <br/>
+                                놓아주시면 기사님이 픽업합니다.
+                            </div>
+                        </div>
+                        {/* 카드 2*/}
+                        <div>
+                            <div>
+                                <img
+                                    src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
+                                    className='w-8'
+                                />
+                            </div>
+                            <div>
+                                <span>----------</span>
+                                <h4>수거 1</h4>
+                                박스나 비닐을 이용해 집앞에 세탁물을 <br/>
+                                놓아주시면 기사님이 픽업합니다.
+                            </div>
+                        </div>
+                        {/* 카드 3*/}
+                        <div>
+                            <div>
+                                <img
+                                    src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
+                                    className='w-8'
+                                />
+                            </div>
+                            <div>
+                                <span>----------</span>
+                                <h4>수거 1</h4>
+                                박스나 비닐을 이용해 집앞에 세탁물을 <br/>
+                                놓아주시면 기사님이 픽업합니다.
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                {/* 세 번째 소개글*/}
+                <article className='max-w-5xl m-auto'>
+                    <div className='flex flex-col items-center justify-between mt-12'>
+                        {/* 지그재그 */}
+                        <div className='mr-auto'>
+                            <div>
+                                <img
+                                    src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
+                                    className='w-8'/>
+                            </div>
+                            <div>
+                                <h4>합리적인 가격</h4>
+                                <p>업계 최대 최저가로 집에서 좋은 가성비로 깔끔하고 꺠끗한 세탁 서비스를 <br/>
+                                    이용해 보세요.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className='ml-auto'>
+                            <div>
+                                <img
+                                    src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
+                                    className='w-8'/>
+                            </div>
+                            <div>
+                                <h4>합리적인 가격</h4>
+                                <p>업계 최대 최저가로 집에서 좋은 가성비로 깔끔하고 꺠끗한 세탁 서비스를 <br/>
+                                    이용해 보세요.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                {/* 네 번쨰 소개글*/}
+                <section className='max-w-5xl m-auto'>
+                    <div className='mt-12'>
+                        <h4>귀찮은 빨래는 라벤데리아에 맞기고,
+                            <br/>
+                            이제부터 여러분의 <strong>소중한 시간을</strong> 챙기세요.
+                        </h4>
+                        <img
+                            src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
+                            className='w-full'/>
+                    </div>
+                </section>
+            </section>
+        </>
+    );
 };
 
 export default Home;
