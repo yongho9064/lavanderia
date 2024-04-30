@@ -112,16 +112,17 @@ const Home = () => {
 
                         <div className='ml-auto'>
                             <div>
-                                <img
-                                    src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
-                                    className='w-8'
-                                    alt="Home"/>
+                                <h4 className='text-right'>명품 케어</h4>
+                                <p>
+                                    고가의 브랜드 제품의 경우에는 프리미엄 장인들의 꼼꼼한 세탁으로 <br/>
+                                    진행하여 원단 손상은 최소화 깨끗함은 최대화로 완성됩니다
+                                </p>
                             </div>
                             <div>
-                                <h4>합리적인 가격</h4>
-                                <p>업계 최대 최저가로 집에서 좋은 가성비로 깔끔하고 꺠끗한 세탁 서비스를 <br/>
-                                    이용해 보세요.
-                                </p>
+                                <img
+                                    src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
+                                    className='w-8 ml-auto'
+                                    alt="Home"/>
                             </div>
                         </div>
                     </div>
