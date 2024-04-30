@@ -46,6 +46,7 @@ const Home = () => {
                                 <img
                                     src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
                                     className='w-8'
+                                    alt="Home"
                                 />
                             </div>
                             <div>
@@ -61,6 +62,7 @@ const Home = () => {
                                 <img
                                     src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
                                     className='w-8'
+                                    alt="Home"
                                 />
                             </div>
                             <div>
@@ -76,6 +78,7 @@ const Home = () => {
                                 <img
                                     src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
                                     className='w-8'
+                                    alt="Home"
                                 />
                             </div>
                             <div>
@@ -96,7 +99,8 @@ const Home = () => {
                             <div>
                                 <img
                                     src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
-                                    className='w-8'/>
+                                    className='w-8'
+                                    alt="Home"/>
                             </div>
                             <div>
                                 <h4>합리적인 가격</h4>
@@ -110,7 +114,8 @@ const Home = () => {
                             <div>
                                 <img
                                     src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
-                                    className='w-8'/>
+                                    className='w-8'
+                                    alt="Home"/>
                             </div>
                             <div>
                                 <h4>합리적인 가격</h4>
@@ -131,7 +136,8 @@ const Home = () => {
                         </h4>
                         <img
                             src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
-                            className='w-full'/>
+                            className='w-full'
+                            alt="Home"/>
                     </div>
                 </section>
             </section>
