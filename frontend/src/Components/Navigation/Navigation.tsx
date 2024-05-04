@@ -4,10 +4,10 @@ import {Link} from "react-router-dom";
 const Navigation = () => {
     return (
         <>
-            <div className='flex items-center justify-between'>
+            <div className='flex  items-center justify-between font-roboto h-16'>
                 <div>
                     <Link to='/'>
-                        <h1>lavanderia</h1>
+                        <h1 className='text-3xl text-blue-500 '>lavanderia</h1>
                     </Link>
                 </div>
                 <ul className='flex items-center  ml-auto  space-x-4'>
@@ -32,7 +32,7 @@ const Navigation = () => {
                         </Link>
                     </li>
                 </ul>
-                <ul className='flex items-center ml-auto  space-x-4'>
+                <ul className='flex  ml-auto  space-x-4'>
                     <li>
                         <Link to='/auth/login'>
                             로그인
