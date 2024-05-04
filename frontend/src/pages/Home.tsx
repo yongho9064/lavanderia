@@ -1,91 +1,102 @@
 import React from "react";
 import Header from "../Components/Common/Header";
-import home from "../Assets/Img/homeImg.jpg";
-
+import home from "../Assets/Img/20230516021744012618.jpg";
+import step1 from "../Assets/Img/step01.png";
+import step2 from "../Assets/Img/step02.png";
+import step3 from "../Assets/Img/step03.png";
+import gitImage from "../Assets/Img/af9e0e944df57d63d4eec5a60a89cfb2.gif";
 
 const Home = () => {
     return (
         <>
             <Header/>
-            <section className="mt-4">
+            <section className="mt-4 font-roboto">
                 {/* 광고 */}
-                <article className='max-w-5xl m-auto'>
-                    <div className='flex items-center justify-center'>
-                        <img src={home} className="mt-36px" alt="Home"/>
+                <article>
+                    <div>
+                        <img src={home} alt="Home"/>
                     </div>
                 </article>
 
                 {/* 첫 번쨰 소개글 */}
                 <article className='max-w-5xl m-auto'>
-                    <div className='flex items-center justify-between mt-4'>
+                    <div className='flex items-center justify-between mt-40 pb-20'>
                         <div>
-                            <h4>DAILY WASH</h4>
-                            <h1>귀찮은 세탁을 간편하게<br/>
+                            <h4 className='text-blue-500 text-2xl mb-4'>D A I L Y W A S H</h4>
+                            <h1 className='text-4xl mb-4'>귀찮은 세탁을 간편하게<br/>
                                 모두를 위한 편리한 세탁 서비스
                             </h1>
-                            <span>라벤데리아 웹으로 간편하게 <br/>
+                            <span className='text-base text-gray-500'>라벤데리아 웹으로 간편하게 <br/>
                             세탁을 예약하세요.</span>
                         </div>
                         <img
-                            src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
+                            src={gitImage}
                             alt="Second Image"
-                            className='w-8'/>
+                            className='w-80 h-90 rounded-2xl'
+                        />
                     </div>
                 </article>
 
                 {/* 두 번째 소개글 */}
                 <article className='max-w-5xl m-auto'>
-                    <div className='text-center mt-12'>
-                        <h3><strong>All In One</strong> 세탁 서비스</h3>
-                        <p>수거에서 부터 세탁 및 새벽 배송까지</p>
+                    <div className='text-center  mt-16 mb-16'>
+                        <span className='text-blue-500 text-3xl'>All In One</span> <span
+                        className='text-3xl'> 세탁 서비스</span>
+                        <p className='text-gray-500 mt-4 text-base'>수거에서 부터 세탁 및 새벽 배송까지</p>
                     </div>
                     {/* 카드*/}
-                    <div className='flex items-center justify-between mt-12'>
+                    <div className='flex items-center justify-between pt-4'>
                         <div>
                             <div>
                                 <img
-                                    src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
-                                    className='w-8'
+                                    src={step1}
                                     alt="Home"
+                                    className='w-64 mb-4'
                                 />
                             </div>
                             <div>
-                                <span>----------</span>
-                                <h4>수거 1</h4>
-                                박스나 비닐을 이용해 집앞에 세탁물을 <br/>
-                                놓아주시면 기사님이 픽업합니다.
+                                <p className='border-b-4 border-blue-500 mb-4'></p>
+                                <h4 className='text-2xl mb-2'>수거</h4>
+                                <p className='text-sm text-gray-500'>
+                                    박스나 비닐을 이용해 집앞에 세탁물을 <br/>
+                                    놓아주시면 기사님이 픽업합니다.
+                                </p>
                             </div>
                         </div>
                         {/* 카드 2*/}
                         <div>
                             <div>
                                 <img
-                                    src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
-                                    className='w-8'
+                                    src={step2}
+                                    className='w-64 mb-4'
                                     alt="Home"
                                 />
                             </div>
                             <div>
-                                <span>----------</span>
-                                <h4>수거 1</h4>
-                                박스나 비닐을 이용해 집앞에 세탁물을 <br/>
-                                놓아주시면 기사님이 픽업합니다.
+                                <p className='border-b-4 border-blue-500 mb-4'></p>
+                                <h4 className='text-2xl mb-2'>검수/세탁</h4>
+                                <p className='text-sm text-gray-500'>
+                                    박스나 비닐을 이용해 집앞에 세탁물을 <br/>
+                                    놓아주시면 기사님이 픽업합니다.
+                                </p>
                             </div>
                         </div>
                         {/* 카드 3*/}
                         <div>
                             <div>
                                 <img
-                                    src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
-                                    className='w-8'
+                                    src={step3}
+                                    className='w-64 mb-4'
                                     alt="Home"
                                 />
                             </div>
                             <div>
-                                <span>----------</span>
-                                <h4>수거 1</h4>
-                                박스나 비닐을 이용해 집앞에 세탁물을 <br/>
-                                놓아주시면 기사님이 픽업합니다.
+                                <p className='border-b-4 border-blue-500 mb-4'></p>
+                                <h4 className='text-2xl mb-2'>배달</h4>
+                                <p className='text-sm text-gray-500'>
+                                    박스나 비닐을 이용해 집앞에 세탁물을 <br/>
+                                    놓아주시면 기사님이 픽업합니다.
+                                </p>
                             </div>
                         </div>
                     </div>
