@@ -9,6 +9,7 @@ import price from "../Assets/Img/price.png";
 import dry from "../Assets/Img/dry.png";
 import drywarter from "../Assets/Img/drywater.png";
 import delivery from "../Assets/Img/delivery.png";
+import story from "../Assets/Img/story.png";
 import luxury from "../Assets/Img/luxury.png";
 
 const Home = () => {
@@ -193,13 +194,13 @@ const Home = () => {
 
                 {/* 네 번쨰 소개글*/}
                 <section className='max-w-5xl m-auto'>
-                    <div className='mt-12'>
-                        <h4>귀찮은 빨래는 라벤데리아에 맞기고,
+                    <div className='mt-40'>
+                        <h4 className='text-3xl'>세탁으로 부터 찾는 나의 시간,
                             <br/>
-                            이제부터 여러분의 <strong>소중한 시간을</strong> 챙기세요.
+                            이제 <strong className='text-blue-500'>라벤데리아에</strong> 맡기세요
                         </h4>
                         <img
-                            src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
+                            src={story}
                             className='w-full'
                             alt="Home"/>
                     </div>
