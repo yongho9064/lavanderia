@@ -8,6 +8,8 @@ import gitImage from "../Assets/Img/af9e0e944df57d63d4eec5a60a89cfb2.gif";
 import price from "../Assets/Img/price.png";
 import dry from "../Assets/Img/dry.png";
 import drywarter from "../Assets/Img/drywater.png";
+import delivery from "../Assets/Img/delivery.png";
+import luxury from "../Assets/Img/luxury.png";
 
 const Home = () => {
     return (
@@ -113,7 +115,7 @@ const Home = () => {
                             <div>
                                 <img
                                     src={price}
-                                    className='w-80'
+                                    className='w-96'
                                     alt="Home"/>
                             </div>
                             <div>
@@ -144,7 +146,7 @@ const Home = () => {
                             <div>
                                 <img
                                     src={drywarter}
-                                    className='w-80'
+                                    className='w-96'
                                     alt="Home"/>
                             </div>
                             <div>
@@ -152,6 +154,38 @@ const Home = () => {
                                 <p className='text-base text-gray-500'>무거운 침구류를 이제 대신 세탁해드립니다. 깨끗하게 세탁 후 <br/>
                                     배송해드립니다.
                                 </p>
+                            </div>
+                        </div>
+
+                        <div className='ml-auto mb-16'>
+                            <div>
+                                <h4 className='text-right text-2xl mb-4'>새벽배송</h4>
+                                <p className='text-base text-gray-500'>
+                                    아침에 일어나서 바로 즉시 깨끗한 세탁물을 받을 수 있는 새벽 배송을 <br/>
+                                    진행합니다.
+                                </p>
+                            </div>
+                            <div>
+                                <img
+                                    src={delivery}
+                                    className='w-96 ml-auto'
+                                    alt="Home"/>
+                            </div>
+                        </div>
+
+                        <div className='mr-auto mb-16'>
+                            <div>
+                                <h4 className='text-2xl mb-4'>명품케어</h4>
+                                <p className='text-base text-gray-500'>고가의 브랜드 제품의 경우에는 프리미엄 장인들의 꼼꼼한 세탁으로 <br/>
+                                    진행하여 원단 손상은 최소화 깨끗함은 최대화로 완성됩니다.
+                                </p>
+                            </div>
+
+                            <div>
+                                <img
+                                    src={luxury}
+                                    className='w-96'
+                                    alt="Home"/>
                             </div>
                         </div>
                     </div>
