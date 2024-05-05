@@ -5,6 +5,9 @@ import step1 from "../Assets/Img/step01.png";
 import step2 from "../Assets/Img/step02.png";
 import step3 from "../Assets/Img/step03.png";
 import gitImage from "../Assets/Img/af9e0e944df57d63d4eec5a60a89cfb2.gif";
+import price from "../Assets/Img/price.png";
+import dry from "../Assets/Img/dry.png";
+import drywarter from "../Assets/Img/drywater.png";
 
 const Home = () => {
     return (
@@ -104,36 +107,51 @@ const Home = () => {
 
                 {/* 세 번째 소개글*/}
                 <article className='max-w-5xl m-auto'>
-                    <div className='flex flex-col items-center justify-between mt-12'>
+                    <div className='flex flex-col items-center justify-between mt-60'>
                         {/* 지그재그 */}
-                        <div className='mr-auto'>
+                        <div className='mr-auto mb-16'>
                             <div>
                                 <img
-                                    src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
-                                    className='w-8'
+                                    src={price}
+                                    className='w-80'
                                     alt="Home"/>
                             </div>
                             <div>
-                                <h4>합리적인 가격</h4>
-                                <p>업계 최대 최저가로 집에서 좋은 가성비로 깔끔하고 꺠끗한 세탁 서비스를 <br/>
+                                <h4 className='text-2xl mb-4'>합리적인 가격</h4>
+                                <p className='text-base text-gray-500'>업계 최대 최저가로 집에서 좋은 가성비로 깔끔하고 꺠끗한 세탁 서비스를 <br/>
                                     이용해 보세요.
                                 </p>
                             </div>
                         </div>
 
-                        <div className='ml-auto'>
+                        <div className='ml-auto mb-16'>
                             <div>
-                                <h4 className='text-right'>명품 케어</h4>
-                                <p>
-                                    고가의 브랜드 제품의 경우에는 프리미엄 장인들의 꼼꼼한 세탁으로 <br/>
-                                    진행하여 원단 손상은 최소화 깨끗함은 최대화로 완성됩니다
+                                <h4 className='text-right text-2xl mb-4'>드라이&물세탁</h4>
+                                <p className='text-base text-gray-500'>
+                                    라벤데리앙의 꼼꼼한 절차를 선정된 10년 이상의 경력을 보유한 전문가가 <br/>
+                                    고퀄리티의 세탁 서비스를 완성합니다.
                                 </p>
                             </div>
                             <div>
                                 <img
-                                    src='https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG'
-                                    className='w-8 ml-auto'
+                                    src={dry}
+                                    className='w-80 ml-auto'
                                     alt="Home"/>
+                            </div>
+                        </div>
+
+                        <div className='mr-auto mb-16'>
+                            <div>
+                                <img
+                                    src={drywarter}
+                                    className='w-80'
+                                    alt="Home"/>
+                            </div>
+                            <div>
+                                <h4 className='text-2xl mb-4'>침구류 물세탁</h4>
+                                <p className='text-base text-gray-500'>무거운 침구류를 이제 대신 세탁해드립니다. 깨끗하게 세탁 후 <br/>
+                                    배송해드립니다.
+                                </p>
                             </div>
                         </div>
                     </div>
