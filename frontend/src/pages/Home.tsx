@@ -20,7 +20,7 @@ const Home = () => {
                 {/* 광고 */}
                 <article>
                     <div>
-                        <img src={home} alt="Home"/>
+                        <img src={home} alt="Home" className='w-full'/>
                     </div>
                 </article>
 
@@ -120,7 +120,7 @@ const Home = () => {
                                     alt="Home"/>
                             </div>
                             <div>
-                                <h4 className='text-2xl mb-4'>합리적인 가격</h4>
+                                <h4 className='text-2xl mb-4 mt-4'>합리적인 가격</h4>
                                 <p className='text-base text-gray-500'>업계 최대 최저가로 집에서 좋은 가성비로 깔끔하고 꺠끗한 세탁 서비스를 <br/>
                                     이용해 보세요.
                                 </p>
@@ -130,7 +130,7 @@ const Home = () => {
                         <div className='ml-auto mb-16'>
                             <div>
                                 <h4 className='text-right text-2xl mb-4'>드라이&물세탁</h4>
-                                <p className='text-base text-gray-500'>
+                                <p className='text-base text-gray-500 mb-4'>
                                     라벤데리앙의 꼼꼼한 절차를 선정된 10년 이상의 경력을 보유한 전문가가 <br/>
                                     고퀄리티의 세탁 서비스를 완성합니다.
                                 </p>
@@ -151,7 +151,7 @@ const Home = () => {
                                     alt="Home"/>
                             </div>
                             <div>
-                                <h4 className='text-2xl mb-4'>침구류 물세탁</h4>
+                                <h4 className='text-2xl mb-4 mt-4'>침구류 물세탁</h4>
                                 <p className='text-base text-gray-500'>무거운 침구류를 이제 대신 세탁해드립니다. 깨끗하게 세탁 후 <br/>
                                     배송해드립니다.
                                 </p>
@@ -161,7 +161,7 @@ const Home = () => {
                         <div className='ml-auto mb-16'>
                             <div>
                                 <h4 className='text-right text-2xl mb-4'>새벽배송</h4>
-                                <p className='text-base text-gray-500'>
+                                <p className='text-base text-gray-500 mb-4'>
                                     아침에 일어나서 바로 즉시 깨끗한 세탁물을 받을 수 있는 새벽 배송을 <br/>
                                     진행합니다.
                                 </p>
@@ -177,7 +177,7 @@ const Home = () => {
                         <div className='mr-auto mb-16'>
                             <div>
                                 <h4 className='text-2xl mb-4'>명품케어</h4>
-                                <p className='text-base text-gray-500'>고가의 브랜드 제품의 경우에는 프리미엄 장인들의 꼼꼼한 세탁으로 <br/>
+                                <p className='text-base text-gray-500 mb-4'>고가의 브랜드 제품의 경우에는 프리미엄 장인들의 꼼꼼한 세탁으로 <br/>
                                     진행하여 원단 손상은 최소화 깨끗함은 최대화로 완성됩니다.
                                 </p>
                             </div>
