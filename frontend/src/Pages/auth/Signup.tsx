@@ -1,6 +1,13 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  FaUser,
+  FaLock,
+  FaEnvelope,
+  FaCalendarAlt,
+  FaPhone,
+  FaHome,
+} from "react-icons/fa";
 
 export const Signup = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +19,6 @@ export const Signup = () => {
     phone: "",
     address: "",
     detailedAddress: "",
-    recommender: "",
     consentPromo: "",
   });
 
@@ -44,7 +50,7 @@ export const Signup = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 px-4">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 px-4 py-5">
       <div className="flex w-full max-w-lg flex-col">
         {/* Logo container aligned to the left */}
         <div className="mb-5 flex w-full items-center">
@@ -68,15 +74,18 @@ export const Signup = () => {
               아이디
             </label>
 
-            <input
-              id="id"
-              type="text"
-              required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              placeholder="아이디"
-              value={formData.id}
-              onChange={handleChange}
-            />
+            <div className="flex items-center rounded-md border border-gray-300 shadow-sm">
+              <FaUser className="ml-2 inline text-blue-400" />
+              <input
+                id="id"
+                type="text"
+                required
+                className="px-3 py-2 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                placeholder="아이디"
+                value={formData.id}
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
           {/* Password */}
@@ -87,15 +96,18 @@ export const Signup = () => {
             >
               비밀번호
             </label>
-            <input
-              id="password"
-              type="password"
-              required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              placeholder="비밀번호"
-              value={formData.password}
-              onChange={handleChange}
-            />
+            <div className="flex items-center rounded-md border border-gray-300">
+              <FaLock className="ml-2 inline text-blue-400" />
+              <input
+                id="password"
+                type="password"
+                required
+                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                placeholder="비밀번호"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
           {/* Email */}
@@ -106,15 +118,20 @@ export const Signup = () => {
             >
               이메일
             </label>
-            <input
-              id="email"
-              type="email"
-              required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              placeholder="이메일"
-              value={formData.email}
-              onChange={handleChange}
-            />
+
+            <div className="flex items-center rounded-md border border-gray-300">
+              <FaEnvelope className="ml-2 inline text-blue-400" />
+              <input
+                id="email"
+                type="email"
+                required
+                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                placeholder="이메일"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+
             <button
               type="button"
               className="mt-2 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
@@ -131,15 +148,19 @@ export const Signup = () => {
             >
               이름
             </label>
-            <input
-              id="name"
-              type="text"
-              required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              placeholder="이름"
-              value={formData.name}
-              onChange={handleChange}
-            />
+
+            <div className="flex items-center rounded-md border border-gray-300">
+              <FaUser className="ml-2 inline text-blue-400" />
+              <input
+                id="name"
+                type="text"
+                required
+                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                placeholder="이름"
+                value={formData.name}
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
           {/* Date of Birth */}
@@ -150,15 +171,19 @@ export const Signup = () => {
             >
               생년월일 (8자리)
             </label>
-            <input
-              id="dob"
-              type="text"
-              required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              placeholder="YYYYMMDD"
-              value={formData.dob}
-              onChange={handleChange}
-            />
+
+            <div className="flex items-center rounded-md border border-gray-300">
+              <FaCalendarAlt className="ml-2 inline text-blue-400" />
+              <input
+                id="dob"
+                type="text"
+                required
+                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                placeholder="YYYYMMDD"
+                value={formData.dob}
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
           {/* Mobile Phone */}
@@ -169,15 +194,19 @@ export const Signup = () => {
             >
               전화번호
             </label>
-            <input
-              id="phone"
-              type="tel"
-              required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              placeholder="전화번호"
-              value={formData.phone}
-              onChange={handleChange}
-            />
+
+            <div className="flex items-center rounded-md border border-gray-300">
+              <FaPhone className="ml-2 inline text-blue-400" />
+              <input
+                id="phone"
+                type="tel"
+                required
+                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                placeholder="전화번호"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
           {/* Address */}
@@ -188,15 +217,19 @@ export const Signup = () => {
             >
               주소
             </label>
-            <input
-              id="address"
-              type="text"
-              required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              placeholder="주소"
-              value={formData.address}
-              onChange={handleChange}
-            />
+
+            <div className="flex items-center rounded-md border border-gray-300">
+              <FaHome className="ml-2 inline text-blue-400" />
+              <input
+                id="address"
+                type="text"
+                required
+                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                placeholder="주소"
+                value={formData.address}
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
           {/* Detailed Address */}
@@ -207,34 +240,18 @@ export const Signup = () => {
             >
               상세 주소
             </label>
-            <input
-              id="detailedAddress"
-              type="text"
-              required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              placeholder="상세주소"
-              value={formData.detailedAddress}
-              onChange={handleChange}
-            />
-          </div>
-
-          {/* Recommender */}
-          <div className="mb-4">
-            <label
-              htmlFor="recommender"
-              className="block text-sm font-medium text-gray-700"
-            >
-              추천인
-            </label>
-            <input
-              id="recommender"
-              type="text"
-              required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              placeholder="추천인"
-              value={formData.recommender}
-              onChange={handleChange}
-            />
+            <div className="flex items-center rounded-md border border-gray-300">
+              <FaHome className="ml-2 inline text-blue-400" />
+              <input
+                id="detailedAddress"
+                type="text"
+                required
+                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                placeholder="상세주소"
+                value={formData.detailedAddress}
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
           <div className="mb-4">

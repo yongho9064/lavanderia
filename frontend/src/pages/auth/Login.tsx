@@ -62,7 +62,7 @@ const Login = () => {
         </div>
         <div className="w-full">
           <div className="mb-6 text-base text-gray-500">
-            <span className="font-courgette">lavanderia </span>
+            <span className="font-roboto">lavanderia </span>
             <span className="font-roboto font-extrabold">계정으로 로그인</span>
           </div>
         </div>
@@ -111,9 +111,7 @@ const Login = () => {
             <button>
               <img src="/img/naver.png" alt="Naver" className="h-12" />
             </button>
-            <button>
-              <img src="/img/apple.png" alt="Apple" className="h-12" />
-            </button>
+
             <button>
               <img src="/img/kakao.png" alt="Kakao" className="h-12" />
             </button>
