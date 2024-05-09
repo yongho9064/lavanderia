@@ -54,12 +54,13 @@ const Login = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
-      <div className="flex h-[750px] w-[500px] flex-col items-center gap-2 rounded-lg bg-white text-center shadow">
+      <div className="flex h-[700px] w-[500px] flex-col items-center gap-2 rounded-lg bg-white text-center shadow">
         <div className="flex h-32 w-full items-center justify-center">
           <span className="font-courgette text-5xl">
             <Link to="/">lavanderia</Link>
           </span>
         </div>
+
         <div className="w-full">
           <div className="mb-6 text-base text-gray-500">
             <span className="font-roboto">lavanderia </span>
@@ -98,7 +99,7 @@ const Login = () => {
 
         <div className="mb-5 w-3/4 text-sm font-bold text-gray-500">
           <Link to="/auth/find">아이디 찾기 | 비밀번호 찾기 </Link>
-          <Link to="/auth/signup">| 회원가입</Link>
+          <Link to="/auth/agreement">| 회원가입</Link>
         </div>
         <div className="mb-5">
           <div className="mb-5 text-base font-bold text-gray-500">

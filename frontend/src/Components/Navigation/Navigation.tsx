@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 const Navigation = () => {
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex  h-16 items-center justify-between font-roboto">
         <div>
           <Link to="/">
-            <h1>lavanderia</h1>
+            <h1 className="text-3xl text-blue-500 ">lavanderia</h1>
           </Link>
         </div>
         <ul className="ml-auto flex  items-center  space-x-4">
@@ -24,12 +24,12 @@ const Navigation = () => {
             <Link to="servicecenter">고객센터</Link>
           </li>
         </ul>
-        <ul className="ml-auto flex items-center  space-x-4">
+        <ul className="ml-auto  flex  space-x-4">
           <li>
             <Link to="/auth/login">로그인</Link>
           </li>
           <li>
-            <Link to="/auth/agreement">회원가입</Link>
+            <Link to="/auth/signup">회원가입</Link>
           </li>
         </ul>
       </div>
