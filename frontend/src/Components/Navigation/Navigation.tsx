@@ -29,7 +29,7 @@ const Navigation = () => {
             <Link to="/auth/login">로그인</Link>
           </li>
           <li>
-            <Link to="/auth/signup">회원가입</Link>
+            <Link to="/auth/agreement">회원가입</Link>
           </li>
         </ul>
       </div>
