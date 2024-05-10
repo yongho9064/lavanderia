@@ -1,6 +1,6 @@
 import React, { useState, MouseEvent, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AgreementJoin } from "../../typings/Agreements";
+import { AgreementJoin } from "../../Typings/auth/Agreements";
 
 const Agreement = () => {
   const [allIsChecked, setAllIsChecked] = useState(false);

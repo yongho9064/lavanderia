@@ -6,10 +6,10 @@ import Premium from "./Pages/Premium/Premium";
 import Community from "./Pages/Community/Community";
 import ServiceCenter from "./Pages/ServiceCenter/ServiceCenter";
 import Home from "./Pages/Home";
-import Login from "./Pages/auth/Login";
-import { Signup } from "./Pages/auth/Signup";
-import Header from "./Components/Common/Header";
-import Agreement from "./Pages/auth/Agreement";
+import Login from "./Pages/Auth/Login";
+import Agreement from "./Pages/Auth/Agreement";
+import { Signup } from "./Pages/Auth/Signup";
+import Header from "./components/Common/Header";
 
 function App() {
   return (

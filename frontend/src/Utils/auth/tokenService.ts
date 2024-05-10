@@ -1,4 +1,5 @@
 // tokenService.ts
+// axios는 default export로 제공되기 때문에 단일로 가져와야함
 import axios from "axios";
 
 /**
