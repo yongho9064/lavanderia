@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kyungmin.lavanderia.auth.util.JWTUtil;
 import com.kyungmin.lavanderia.auth.util.MakeCookie;
 import com.kyungmin.lavanderia.auth.util.TokenExpirationTime;
-import com.kyungmin.lavanderia.member.data.entity.MemberEntity;
+import com.kyungmin.lavanderia.member.data.entity.Member;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,7 +37,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         try {
             // json으로 로그인
             ObjectMapper objectMapper = new ObjectMapper();
-            MemberEntity member = objectMapper.readValue(request.getInputStream(), MemberEntity.class);
+            Member member = objectMapper.readValue(request.getInputStream(), Member.class);
 
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(member.getMemberId(), member.getMemberPwd());
             // AuthenticationManager를 통해 인증 프로세스 시작

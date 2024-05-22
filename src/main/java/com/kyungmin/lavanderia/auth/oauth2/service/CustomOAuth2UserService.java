@@ -1,6 +1,6 @@
 package com.kyungmin.lavanderia.auth.oauth2.service;
 
-import com.kyungmin.lavanderia.member.data.entity.MemberEntity;
+import com.kyungmin.lavanderia.member.data.entity.Member;
 import com.kyungmin.lavanderia.member.data.repository.MemberRepository;
 import com.kyungmin.lavanderia.auth.oauth2.data.dto.CustomOAuth2User;
 import com.kyungmin.lavanderia.auth.oauth2.data.dto.GoogleResponse;
@@ -50,11 +50,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         //리소스 서버에서 발급 받은 정보로 사용자를 특정할 아이디값을 만듬
         String username = oAuth2Response.getProvider()+" "+oAuth2Response.getProviderId();
 
-        Optional<MemberEntity> existData = memberRepository.findById(username);
+        Optional<Member> existData = memberRepository.findById(username);
 
         if (existData.isEmpty()) {
 
-            MemberEntity memberEntity = MemberEntity.builder()
+            Member member = Member.builder()
                     .memberId(username)
                     .memberName(oAuth2Response.getName())
                     .memberEmail(oAuth2Response.getEmail())
@@ -62,22 +62,22 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                     .build();
 
 
-            memberRepository.save(memberEntity);
+            memberRepository.save(member);
 
-            return new CustomOAuth2User(memberEntity);
+            return new CustomOAuth2User(member);
         }
         else {
 
-            MemberEntity memberEntity = MemberEntity.builder()
+            Member member = Member.builder()
                     .memberId(existData.get().getMemberId())
                     .memberName(oAuth2Response.getName())
                     .memberEmail(oAuth2Response.getEmail())
                     .memberRole(existData.get().getMemberRole())
                     .build();
 
-            memberRepository.save(memberEntity);
+            memberRepository.save(member);
 
-            return new CustomOAuth2User(memberEntity);
+            return new CustomOAuth2User(member);
         }
     }
 

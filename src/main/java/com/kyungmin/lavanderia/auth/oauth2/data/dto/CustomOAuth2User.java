@@ -1,6 +1,6 @@
 package com.kyungmin.lavanderia.auth.oauth2.data.dto;
 
-import com.kyungmin.lavanderia.member.data.entity.MemberEntity;
+import com.kyungmin.lavanderia.member.data.entity.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -10,10 +10,10 @@ import java.util.Map;
 
 public class CustomOAuth2User implements OAuth2User{
 
-    private final MemberEntity memberEntity;
+    private final Member member;
 
-    public CustomOAuth2User(MemberEntity memberEntity) {
-        this.memberEntity = memberEntity;
+    public CustomOAuth2User(Member member) {
+        this.member = member;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class CustomOAuth2User implements OAuth2User{
             @Override
             public String getAuthority() {
 
-                return memberEntity.getMemberRole();
+                return member.getMemberRole();
             }
         });
 
@@ -42,11 +42,11 @@ public class CustomOAuth2User implements OAuth2User{
     @Override
     public String getName() {
 
-        return memberEntity.getMemberId();
+        return member.getMemberId();
     }
 
     public String getUsername() {
 
-        return memberEntity.getMemberName();
+        return member.getMemberName();
     }
 }
