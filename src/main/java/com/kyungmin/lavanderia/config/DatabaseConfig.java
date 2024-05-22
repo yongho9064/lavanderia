@@ -13,7 +13,6 @@ import org.springframework.context.annotation.PropertySource;
 @ComponentScan(basePackages = {"com.kyungmin.lavanderia.*.data.*","com.kyungmin.lavanderia.*"})
 public class DatabaseConfig {
 
-
     // mysql 설정
     @Value("${db.driverClass}")
     private String driverClass;
