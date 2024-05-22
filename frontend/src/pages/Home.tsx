@@ -9,7 +9,7 @@ import drywarter from "../Assets/Img/drywater.png";
 import delivery from "../Assets/Img/delivery.png";
 import story from "../Assets/Img/story.png";
 import luxury from "../Assets/Img/luxury.png";
-import Header from "../components/Common/Header";
+import Header from "../Components/Common/Header";
 
 const Home = () => {
   return (
