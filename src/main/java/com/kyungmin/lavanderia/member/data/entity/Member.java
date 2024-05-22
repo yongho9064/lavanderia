@@ -16,7 +16,7 @@ import java.util.Date;
 @DynamicInsert
 @NoArgsConstructor
 @Table(name = "TBL_MEMBER")
-public class MemberEntity implements UserDetails {
+public class Member implements UserDetails {
 
     @Id
     @Column(name = "MEMBER_ID")
@@ -72,7 +72,7 @@ public class MemberEntity implements UserDetails {
 
 
     @Builder
-    public MemberEntity(String memberId, String memberPwd, String memberName,String memberEmail, String memberPhone, String agreeMarketingYn,String memberRole){
+    public Member(String memberId, String memberPwd, String memberName, String memberEmail, String memberPhone, String agreeMarketingYn, String memberRole){
         this.memberId = memberId;
         this.memberPwd = memberPwd;
         this.memberName = memberName;

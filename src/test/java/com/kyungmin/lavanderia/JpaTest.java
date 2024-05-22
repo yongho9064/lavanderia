@@ -1,6 +1,6 @@
 package com.kyungmin.lavanderia;
 
-import com.kyungmin.lavanderia.member.data.entity.MemberEntity;
+import com.kyungmin.lavanderia.member.data.entity.Member;
 import com.kyungmin.lavanderia.member.data.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class JpaTest {
     @Test
     public void testSaveMember() {
         // Given
-        MemberEntity member = MemberEntity.builder()
+        Member member = Member.builder()
                 .memberId("user2")
                 .memberPwd("1234")
                 .memberName("user2")
@@ -28,7 +28,7 @@ public class JpaTest {
                 .build();
 
         // When
-        MemberEntity savedMember = memberRepository.save(member);
+        Member savedMember = memberRepository.save(member);
 
         // Then
         assertEquals(member.getMemberId(), savedMember.getMemberId());
@@ -42,17 +42,17 @@ public class JpaTest {
     @Test
     public void testFindById() {
         // Given
-        MemberEntity member = MemberEntity.builder()
+        Member member = Member.builder()
                 .memberId("user2")
                 .memberPwd("1234")
                 .memberName("user2")
                 .memberRole("ADMIN")
                 .build();
-        MemberEntity savedMember = memberRepository.save(member);
+        Member savedMember = memberRepository.save(member);
 
 
         // When
-        Optional<MemberEntity> foundMember = memberRepository.findById(savedMember.getMemberId());
+        Optional<Member> foundMember = memberRepository.findById(savedMember.getMemberId());
 
         // Then
         assertEquals(foundMember.get().getMemberId(), savedMember.getMemberId());

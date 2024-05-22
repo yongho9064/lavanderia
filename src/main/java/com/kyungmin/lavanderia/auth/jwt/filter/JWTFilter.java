@@ -1,7 +1,7 @@
 package com.kyungmin.lavanderia.auth.jwt.filter;
 
 import com.kyungmin.lavanderia.auth.util.JWTUtil;
-import com.kyungmin.lavanderia.member.data.entity.MemberEntity;
+import com.kyungmin.lavanderia.member.data.entity.Member;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -67,7 +67,7 @@ public class JWTFilter extends OncePerRequestFilter {
         String memberId = jwtUtil.getMemberId(accessToken);
         String role = jwtUtil.getRole(accessToken);
 
-        MemberEntity userEntity = MemberEntity.builder()
+        Member userEntity = Member.builder()
                 .memberId(memberId)
                 .memberRole(role)
                 .build();

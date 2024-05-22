@@ -1,7 +1,7 @@
 package com.kyungmin.lavanderia.member.service.impl;
 
 import com.kyungmin.lavanderia.member.data.dto.SignupDTO;
-import com.kyungmin.lavanderia.member.data.entity.MemberEntity;
+import com.kyungmin.lavanderia.member.data.entity.Member;
 import com.kyungmin.lavanderia.member.data.repository.MemberRepository;
 import com.kyungmin.lavanderia.member.exception.DuplicateMemberIdEx;
 import com.kyungmin.lavanderia.member.exception.DuplicatePhoneNumberEx;
@@ -35,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void signup(SignupDTO signupDto) {
 
-        MemberEntity memberEntity = MemberEntity.builder()
+        Member member = Member.builder()
                 .memberId(signupDto.getMemberId())
                 .memberPwd(passwordEncoder.encode(signupDto.getMemberPwd()))
                 .memberName(signupDto.getMemberName())
@@ -44,7 +44,7 @@ public class MemberServiceImpl implements MemberService {
                 .agreeMarketingYn(signupDto.getAgreeMarketingYn())
                 .build();
 
-        memberRepository.save(memberEntity);
+        memberRepository.save(member);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<MemberEntity> memberEntity = memberRepository.findById(username);
+        Optional<Member> memberEntity = memberRepository.findById(username);
 
         if (memberEntity.isPresent()) {
             return memberEntity.get();
