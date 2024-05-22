@@ -44,24 +44,26 @@ const services = [
   },
 ];
 
-const ServiceCard = ({
+const ServiceCard: React.FC<ServiceCardProps> = ({
   title,
   description,
   details,
   image,
   isHighlighted,
-}: ServiceCardProps) => (
+}) => (
   <div className="flex h-full cursor-pointer flex-row items-center justify-between rounded-lg border border-gray-300 p-5 shadow-md transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg">
     <div className="mt-0 flex h-full flex-grow flex-col ">
-      <h2 className="mb-2 text-xl font-bold">{title}</h2>
-      <p className="mb-2 text-left text-sm text-gray-500">{description}</p>
-      <p className="text-left text-xs text-blue-400">{details}</p>
+      <h2 className="mb-2 text-xl font-bold xl:text-2xl">{title}</h2>
+      <p className="mb-2 text-left text-sm text-gray-500 xl:text-base">
+        {description}
+      </p>
+      <p className="text-left text-xs text-blue-400 xl:text-sm">{details}</p>
     </div>
     {image && (
       <img
         src={image}
         alt={title}
-        className={`ml-4 h-24 w-24 object-contain ${isHighlighted ? "mt-24" : ""}`}
+        className={`ml-4 h-24 w-24 object-contain ${isHighlighted ? "mt-24" : ""} xl:h-32 xl:w-32`}
       />
     )}
   </div>
@@ -71,10 +73,10 @@ const Application = () => {
   return (
     <div className="mt-5 h-full md:h-[500px]">
       <header className="mb-0 px-5 text-center md:mb-5 md:px-0">
-        <h1 className="mb-3 flex justify-start text-3xl font-bold md:text-4xl">
+        <h1 className="mb-3 flex justify-start text-3xl font-bold md:text-4xl xl:text-5xl ">
           오늘 밤 11시까지 신청하면
         </h1>
-        <span className="flex justify-start text-sm text-gray-600 md:text-base">
+        <span className="flex justify-start text-sm text-gray-600 md:text-base xl:text-lg">
           04/29(월) 아침 7시까지 배송완료!
         </span>
       </header>
@@ -87,7 +89,7 @@ const Application = () => {
               title={service.title}
               description={service.description}
               details={service.details}
-              image={service.image} // Pass image prop
+              image={service.image}
               isHighlighted={service.isHighlighted}
             />
           ))}
@@ -100,7 +102,7 @@ const Application = () => {
               title={service.title}
               description={service.description}
               details={service.details}
-              image={service.image} // Pass image prop
+              image={service.image}
               isHighlighted={service.isHighlighted}
             />
           ))}
