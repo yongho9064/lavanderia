@@ -4,15 +4,17 @@ import com.kyungmin.lavanderia.member.data.dto.SignupDTO;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface MemberService extends UserDetailsService {
-    public void signup(SignupDTO signupDto);
 
-    public void checkMemberId(String memberId);
+    void signup(SignupDTO signupDto);
 
-    public void checkPhoneNumber(String phoneNumber);
+    void checkMemberId(String memberId);
 
-    public void sendSignupCode(String email);
+    void checkPhoneNumber(String phoneNumber);
 
-    public void checkSignupCode(String email, String code);
+    void sendSignupCode(String email);
 
-    public void sendEmail(String email,String subject, String text);
+    void checkSignupCode(String email, String code);
+
+    void sendEmail(String email,String subject, String text);
+
 }
