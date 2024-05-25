@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./Application.module.css";
 
 const Application = () => {
   return (
