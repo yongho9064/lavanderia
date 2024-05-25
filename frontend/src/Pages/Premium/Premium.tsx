@@ -184,7 +184,6 @@ const CheckoutPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Points Benefits */}
         <div className="rounded-lg border p-5 shadow-md">
           <h2 className="mb-4 text-xl font-bold">포인트 혜택</h2>
           <div className="mb-2 flex justify-between">

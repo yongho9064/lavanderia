@@ -63,7 +63,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       <img
         src={image}
         alt={title}
-        className={`ml-4 h-24 w-24 object-contain ${isHighlighted ? "mt-24" : ""} xl:h-32 xl:w-32`}
+        className={`ml-4 h-24 w-24 object-contain ${isHighlighted ? "mt-24" : ""}`}
       />
     )}
   </div>
@@ -71,41 +71,43 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 
 const Application = () => {
   return (
-    <div className="mt-5 h-full md:h-[500px]">
-      <header className="mb-0 px-5 text-center md:mb-5 md:px-0">
-        <h1 className="mb-3 flex justify-start text-3xl font-bold md:text-4xl xl:text-5xl ">
-          오늘 밤 11시까지 신청하면
-        </h1>
-        <span className="flex justify-start text-sm text-gray-600 md:text-base xl:text-lg">
-          04/29(월) 아침 7시까지 배송완료!
-        </span>
-      </header>
+    <div className="">
+      <div className="mt-5 h-full md:h-[500px]">
+        <header className="mb-0 px-5 text-center md:mb-5 md:px-0">
+          <h1 className="mb-3 flex justify-start text-3xl font-bold md:text-4xl">
+            오늘 밤 11시까지 신청하면
+          </h1>
+          <span className="flex justify-start text-sm text-gray-600 md:text-base xl:text-lg">
+            04/29(월) 아침 7시까지 배송완료!
+          </span>
+        </header>
 
-      <div className="grid h-full grid-cols-1 gap-x-5 gap-y-5 p-5 md:grid-cols-2 md:p-0">
-        <div className="col-span-1 flex flex-col gap-5 md:col-span-1">
-          {services.slice(0, 2).map((service) => (
-            <ServiceCard
-              key={service.title}
-              title={service.title}
-              description={service.description}
-              details={service.details}
-              image={service.image}
-              isHighlighted={service.isHighlighted}
-            />
-          ))}
-        </div>
+        <div className="grid h-full grid-cols-1 gap-x-5 gap-y-5 p-5 md:grid-cols-2 md:p-0">
+          <div className="col-span-1 flex flex-col gap-5 md:col-span-1">
+            {services.slice(0, 2).map((service) => (
+              <ServiceCard
+                key={service.title}
+                title={service.title}
+                description={service.description}
+                details={service.details}
+                image={service.image}
+                isHighlighted={service.isHighlighted}
+              />
+            ))}
+          </div>
 
-        <div className="col-span-1 grid grid-rows-3 gap-5 md:col-span-1 ">
-          {services.slice(2).map((service) => (
-            <ServiceCard
-              key={service.title}
-              title={service.title}
-              description={service.description}
-              details={service.details}
-              image={service.image}
-              isHighlighted={service.isHighlighted}
-            />
-          ))}
+          <div className="col-span-1 grid grid-rows-3 gap-5 md:col-span-1 ">
+            {services.slice(2).map((service) => (
+              <ServiceCard
+                key={service.title}
+                title={service.title}
+                description={service.description}
+                details={service.details}
+                image={service.image}
+                isHighlighted={service.isHighlighted}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
