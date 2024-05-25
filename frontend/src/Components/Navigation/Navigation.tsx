@@ -1,37 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+// Define the JSON object for navigation links
+const navLinks = [
+  { path: "/application", label: "신청하기" },
+  { path: "/premium", label: "프리미엄" },
+  { path: "/community", label: "커뮤니티" },
+  { path: "/servicecenter", label: "고객센터" },
+];
+
+const authLinks = [
+  { path: "/auth/login", label: "로그인" },
+  { path: "/auth/agreement", label: "회원가입" },
+];
+
 const Navigation = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <div className="w-full">
-      <div className="mx-auto flex h-16 w-2/3 items-center justify-between font-roboto">
-        <div>
+    <div className="w-screen">
+      <div className="mx-auto flex h-auto w-full flex-col px-5 pt-5 font-roboto lg:h-16 lg:w-2/3 lg:flex-row lg:items-center lg:justify-between lg:p-0">
+        <div className="flex w-full items-center justify-between pr-4 lg:mb-0 lg:w-auto lg:justify-start">
           <Link to="/">
             <h1 className="text-3xl text-blue-500">lavanderia</h1>
           </Link>
+          <button
+            className="block lg:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            &#9776; {/* This is the hamburger icon */}
+          </button>
         </div>
-        <ul className="ml-auto flex items-center space-x-4">
-          <li className="m-1.5">
-            <Link to="/application">신청하기</Link>
-          </li>
-          <li>
-            <Link to="/premium">프리미엄</Link>
-          </li>
-          <li>
-            <Link to="/community">커뮤니티</Link>
-          </li>
-          <li>
-            <Link to="/servicecenter">고객센터</Link>
-          </li>
-        </ul>
-        <ul className="ml-auto flex items-center space-x-4">
-          <li>
-            <Link to="/auth/login">로그인</Link>
-          </li>
-          <li>
-            <Link to="/auth/agreement">회원가입</Link>
-          </li>
-        </ul>
+        <div
+          className={`w-full flex-col gap-0 ${menuOpen ? "flex" : "hidden"} lg:flex lg:w-auto lg:flex-row lg:items-center lg:justify-between lg:gap-20`}
+        >
+          <ul className="flex flex-col items-start lg:flex-row lg:items-center lg:space-x-4">
+            {navLinks.map((link) => (
+              <li key={link.path} className="mt-2 lg:m-1.5">
+                <Link to={link.path}>{link.label}</Link>
+              </li>
+            ))}
+          </ul>
+          <ul className="flex flex-col items-start lg:flex-row lg:items-center lg:space-x-4">
+            {authLinks.map((link) => (
+              <li key={link.path} className="mt-2 lg:m-1.5">
+                <Link to={link.path}>{link.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
