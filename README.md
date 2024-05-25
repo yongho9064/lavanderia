@@ -6,7 +6,7 @@
 
 ### 🔫 <span style="color:#FF0000; font-family: 'Comic Sans MS', cursive, sans-serif;">청년 정치인 김건</span>
 
-### ☀️ <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">이세계 아이돌 노희철</span>
+### 🌈 <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">성소수자 노희철</span>
 
 ### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">일간베스트 총괄 이관용</span>
 
@@ -14,8 +14,7 @@
 
 ## 🚀 프로젝트 실행 방법
 
-database.properties 올바른 데이터베이스 정보를 입력해주세요. </br>
-docs 폴더에 data.sql 쿼리문을 실행해주세요.
+알아서 실행하세요
 
 ## 🐳 Docker로 실행하기
 
@@ -53,12 +52,12 @@ docker-compose down
 | Frontend   | ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)                                                                                                 |
 | Library    | ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white) ![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=spring-security&logoColor=white) ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black) ![OAuth2](https://img.shields.io/badge/OAuth2-2E86C1?style=for-the-badge&logo=oauth&logoColor=white) ![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)                                                                            |
 | Server     | ![Apache Tomcat](https://img.shields.io/badge/Apache_Tomcat-F8DC75?style=for-the-badge&logo=apache-tomcat&logoColor=black)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Tool       | ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white) ![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white) ![Asana](https://img.shields.io/badge/Asana-27384D?style=for-the-badge&logo=asana&logoColor=white)                                                                                                                                                                                                             |
+| Tool       | ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white) ![Storybook](https://img.shields.io/badge/Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white) ![Asana](https://img.shields.io/badge/Asana-27384D?style=for-the-badge&logo=asana&logoColor=white) ![Google Cloud](https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)                                                                                                                                                                                                            |
 
 ## 🎯서비스 핵심기능
 
 ```
-👨‍👨‍👧 회원 : 로그인 | 회원가입 |
+👨‍👨‍👧 회원 : 로그인 | 회원가입 | 메일인증
 ```
 
 <details>
@@ -70,14 +69,10 @@ docker-compose down
 </div>
 </details>
 
-## 📋 해야할것
-
-1. OAuth2 수정
-
 ## 📖 문제가 많은 ERD
 
-![img](https://i.ibb.co/k9MYN9h/Every-Pet-2.png)
+🚧 공사중
 
-## 🧁 デザートはおいしい
+## 🎸 私たちのプロジェクトは台無しだった...
 
-![image](https://image.fmkorea.com/files/attach/new3/20230626/494354581/3518499000/5908077306/4bd032db20049b25a1cd220aa78d4343.jpg)
+![image](https://mblogthumb-phinf.pstatic.net/MjAyMzAyMjdfNTYg/MDAxNjc3NDI4ODkxNzg4.XxxPeBm9ltiL0iF2h0ikAzdG81pEMB4Tp-ORexO6NFog.e4zEIRUMalaHP29ukMhnfC-VtkPRZZLr-jTqXYp3ArUg.JPEG.thsldpswpf0112/봇치2.jpg?type=w800)
