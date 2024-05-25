@@ -53,11 +53,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 }) => (
   <div className="flex h-full cursor-pointer flex-row items-center justify-between rounded-lg border border-gray-300 p-5 shadow-md transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg">
     <div className="mt-0 flex h-full flex-grow flex-col ">
-      <h2 className="mb-2 text-xl font-bold xl:text-2xl">{title}</h2>
-      <p className="mb-2 text-left text-sm text-gray-500 xl:text-base">
+      <h2 className="mb-2 text-xl font-bold 2xl:text-2xl">{title}</h2>
+      <p className="mb-2 text-left text-sm text-gray-500 2xl:text-base">
         {description}
       </p>
-      <p className="text-left text-xs text-blue-400 xl:text-sm">{details}</p>
+      <p className="text-left text-xs text-blue-400 2xl:text-sm">{details}</p>
     </div>
     {image && (
       <img
@@ -71,19 +71,19 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 
 const Application = () => {
   return (
-    <div className="">
-      <div className="mt-5 h-full md:h-[500px]">
-        <header className="mb-0 px-5 text-center md:mb-5 md:px-0">
-          <h1 className="mb-3 flex justify-start text-3xl font-bold md:text-4xl">
+    <div className="w-screen ">
+      <div className=" mx-auto mt-5 h-3/4 w-full pr-4 lg:h-[500px] lg:w-2/3 lg:pr-0 2xl:h-[700px]">
+        <header className="mb-0 px-5 text-center lg:mb-5 lg:px-0">
+          <h1 className="mb-3 flex justify-start text-xl font-bold lg:text-4xl">
             오늘 밤 11시까지 신청하면
           </h1>
-          <span className="flex justify-start text-sm text-gray-600 md:text-base xl:text-lg">
+          <span className="flex justify-start text-sm text-gray-600 lg:text-lg">
             04/29(월) 아침 7시까지 배송완료!
           </span>
         </header>
 
-        <div className="grid h-full grid-cols-1 gap-x-5 gap-y-5 p-5 md:grid-cols-2 md:p-0">
-          <div className="col-span-1 flex flex-col gap-5 md:col-span-1">
+        <div className="grid h-full grid-cols-1 gap-x-5 gap-y-5 p-5 lg:grid-cols-2 lg:p-0">
+          <div className="col-span-1 flex flex-col gap-5 lg:col-span-1">
             {services.slice(0, 2).map((service) => (
               <ServiceCard
                 key={service.title}
@@ -96,7 +96,7 @@ const Application = () => {
             ))}
           </div>
 
-          <div className="col-span-1 grid grid-rows-3 gap-5 md:col-span-1 ">
+          <div className="col-span-1 grid grid-rows-3 gap-5 lg:col-span-1 ">
             {services.slice(2).map((service) => (
               <ServiceCard
                 key={service.title}
