@@ -20,7 +20,7 @@ const Navigation = () => {
   return (
     <div className="w-screen">
       <div className="mx-auto flex h-auto w-full flex-col px-5 pt-5 font-roboto lg:h-16 lg:w-2/3 lg:flex-row lg:items-center lg:justify-between lg:p-0">
-        <div className="flex w-full items-center justify-between pr-4 lg:mb-0 lg:w-auto lg:justify-start">
+        <div className="flex w-full items-center justify-between lg:mb-0 lg:w-auto lg:justify-start">
           <Link to="/">
             <h1 className="text-3xl text-blue-500">lavanderia</h1>
           </Link>

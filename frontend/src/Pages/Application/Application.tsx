@@ -72,7 +72,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 const Application = () => {
   return (
     <div className="w-screen ">
-      <div className=" mx-auto mt-5 h-3/4 w-full pr-4 lg:h-[500px] lg:w-2/3 lg:pr-0 2xl:h-[700px]">
+      <div className=" mx-auto mt-5 h-3/4 w-full lg:h-[500px] lg:w-2/3 lg:pr-0 2xl:h-[700px]">
         <header className="mb-0 px-5 text-center lg:mb-5 lg:px-0">
           <h1 className="mb-3 flex justify-start text-xl font-bold lg:text-4xl">
             오늘 밤 11시까지 신청하면
