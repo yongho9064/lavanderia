@@ -19,30 +19,6 @@ const Login = () => {
     setIdError(!isUsernameValid);
     setPasswordError(!isPasswordValid);
 
-    // const remember = formData.get("remember"); // This remains the same if needed
-
-    // 로그인
-
-    // 클라이언트에서 저장
-
-    // 로컬
-    // 코드상으로만 존재
-    //   액세스
-    //   리프레쉬
-
-    // 클라에서 삭제
-
-    // 사용자가 페이지 이용
-
-    // console.log(
-    //   "Username:",
-    //   username,
-    //   "Password:",
-    //   password,
-    //   "Remember:",
-    //   remember,
-    // );
-
     if (isUsernameValid && isPasswordValid) {
       try {
         const response = await axios.post("/signin", { userId, password });
@@ -57,11 +33,6 @@ const Login = () => {
         console.error("Error:");
       }
     }
-
-    // 전역 관리
-    // 통신 기록삭제, 쿠키삭제
-
-    // 리프레쉬 토큰을 남겨서 로그인 유지 기능 구현
   };
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,25 +61,22 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
-      <div className="flex h-[650px] w-[500px] flex-col items-center justify-center gap-2 rounded-lg bg-white text-center shadow">
-        <div className="flex h-20 w-full items-center justify-center">
+    <div className="flex h-screen items-center justify-center bg-gray-100 lg:px-4 ">
+      <div className=" flex h-full w-full flex-col items-center justify-center gap-8 rounded-lg bg-white p-6 text-center shadow md:h-[650px] md:w-[450px] md:gap-4 lg:gap-2">
+        <div className="flex w-full items-center justify-center lg:h-20">
           <span className="font-courgette text-5xl">
             <Link to="/">lavanderia</Link>
           </span>
         </div>
-
-        <div className="w-full">
-          <div className="text-base text-gray-500">
-            <span className="font-roboto">lavanderia </span>
-            <span className="font-roboto font-extrabold">계정으로 로그인</span>
-          </div>
+        <div className="text-sm text-gray-500 md:text-base">
+          <span className="font-roboto">lavanderia </span>
+          <span className="font-roboto font-extrabold">계정으로 로그인</span>
         </div>
 
-        <form className="w-3/4" onSubmit={handleSubmit}>
+        <form className="w-full max-w-xs md:w-3/4" onSubmit={handleSubmit}>
           <div className="mb-5 flex w-full flex-col items-center justify-center gap-5">
             <input
-              className={`h-12 w-full rounded border ${idError ? "border-red-400" : "border-gray-400"}  p-3 placeholder-gray-600 placeholder:text-base`}
+              className={`h-12 w-full rounded border ${idError ? "border-red-400" : "border-gray-400"} p-3 placeholder-gray-600 placeholder:text-base`}
               type="text"
               name="username"
               placeholder="아이디를 입력해주세요"
@@ -133,7 +101,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="h-14 w-full rounded-full border bg-neutral-400 text-xl font-bold text-white"
+            className="h-12 w-full rounded-full border bg-neutral-400 text-lg font-bold text-white md:h-14 md:text-xl"
           >
             로그인
           </button>
@@ -147,21 +115,24 @@ const Login = () => {
           <div className="mb-5 text-base font-bold text-gray-500">
             소셜 로그인
           </div>
-          <div className="flex gap-10">
+          <div className="flex gap-6 md:gap-10">
             <button>
-              <img src="/img/google.png" alt="Google" className="h-12" />
+              <img
+                src="/img/google.png"
+                alt="Google"
+                className="h-10 md:h-12"
+              />
             </button>
             <button>
-              <img src="/img/naver.png" alt="Naver" className="h-12" />
+              <img src="/img/naver.png" alt="Naver" className="h-10 md:h-12" />
             </button>
-
             <button>
-              <img src="/img/kakao.png" alt="Kakao" className="h-12" />
+              <img src="/img/kakao.png" alt="Kakao" className="h-10 md:h-12" />
             </button>
           </div>
         </div>
-        <div className="w-3/4">
-          <span className="text-base font-bold text-gray-500">
+        <div className="w-full max-w-xs md:w-3/4">
+          <span className="text-sm font-bold text-gray-500 md:text-base">
             * 소셜계정과 기존 lavanderia 계정은 서로 연동되지 않으니 이용에
             참고해주시기 바랍니다.
           </span>
