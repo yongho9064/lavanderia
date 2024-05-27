@@ -1,10 +1,11 @@
 import React, { useState, MouseEvent, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AgreementJoin } from "../../Typings/auth/Agreements";
 
 const Agreement = () => {
   const [allIsChecked, setAllIsChecked] = useState(false);
   const [agreement, setAgreement] = useState<AgreementJoin[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("/mock/agreements.json")
@@ -27,8 +28,12 @@ const Agreement = () => {
     );
     setAgreement(updatedAgreement);
 
-    // Check if all are checked after this change
-    setAllIsChecked(updatedAgreement.every((item) => item.checked));
+    // Check if all required are checked after this change
+    setAllIsChecked(
+      updatedAgreement
+        .filter((item) => item.value !== "check4")
+        .every((item) => item.checked),
+    );
   };
 
   const onAllCheck = (e: MouseEvent<HTMLInputElement>) => {
@@ -37,11 +42,27 @@ const Agreement = () => {
     setAgreement(agreement.map((item) => ({ ...item, checked: isChecked })));
   };
 
-  const isButtonDisabled = !agreement.every((item) => item.checked);
+  const isButtonDisabled = !agreement
+    .filter((item) => item.value !== "check4")
+    .every((item) => item.checked);
+
+  const handleSubmit = () => {
+    const marketingConsent = agreement[3].checked;
+
+    console.log(marketingConsent);
+
+    navigate("/auth/signup", { state: { marketingConsent } });
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 p-4">
-      <form className="w-full max-w-xl rounded-md border bg-white p-6 shadow">
+      <form
+        className="w-full max-w-xl rounded-md border bg-white p-6 shadow"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
         <div className="mb-5 flex w-full items-center">
           <Link
             to="/"
@@ -92,14 +113,15 @@ const Agreement = () => {
             </label>
           </div>
         ))}
-        <Link to="/auth/signup">
-          <button
-            disabled={isButtonDisabled}
-            className={`mt-4 w-full rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 ${isButtonDisabled ? "cursor-not-allowed opacity-50" : ""}`}
-          >
-            동의하고 진행하기
-          </button>
-        </Link>
+        <button
+          type="submit"
+          disabled={isButtonDisabled}
+          className={`mt-4 w-full rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 ${
+            isButtonDisabled ? "cursor-not-allowed opacity-50" : ""
+          }`}
+        >
+          동의하고 진행하기
+        </button>
       </form>
     </div>
   );

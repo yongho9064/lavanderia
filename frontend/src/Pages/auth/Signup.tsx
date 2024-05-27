@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   FaUser,
   FaLock,
   FaEnvelope,
-  FaCalendarAlt,
   FaPhone,
   FaHome,
+  FaCalendarAlt,
 } from "react-icons/fa";
 
 export const Signup = () => {
+  const location = useLocation();
+  const { marketingConsent } = location.state || {};
+
   const [formData, setFormData] = useState({
     id: "",
     password: "",
@@ -19,6 +22,17 @@ export const Signup = () => {
     phone: "",
     address: "",
     detailedAddress: "",
+    consentPromo: "",
+    marketingConsent: marketingConsent,
+  });
+
+  const [errors, setErrors] = useState({
+    id: "",
+    password: "",
+    email: "",
+    name: "",
+    dob: "",
+    phone: "",
     consentPromo: "",
   });
 
@@ -30,13 +44,60 @@ export const Signup = () => {
     }));
   };
 
-  const handlesignup = async (event: any) => {
+  const validateInputs = () => {
+    const newErrors: any = {};
+
+    // ID validation
+    if (!/^[a-zA-Z0-9]{8,}$/.test(formData.id)) {
+      newErrors.id = "아이디는 영어와 숫자로만 구성된 8글자 이상이어야 합니다.";
+    }
+
+    // Password validation
+    if (
+      !/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/.test(
+        formData.password,
+      )
+    ) {
+      newErrors.password =
+        "비밀번호는 영어, 숫자, 특수문자가 포함된 8글자 이상이어야 합니다.";
+    }
+
+    // Email validation
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "유효한 이메일 주소를 입력해주세요.";
+    }
+
+    // Name validation
+    if (!/^[가-힣a-zA-Z\s]+$/.test(formData.name)) {
+      newErrors.name = "이름은 한국어와 영어로만 입력해주세요.";
+    }
+
+    // Date of Birth validation
+    if (!/^\d{8}$/.test(formData.dob)) {
+      newErrors.dob = "생년월일은 8자리 숫자로 입력해주세요 (YYYYMMDD).";
+    }
+
+    // Phone validation
+    if (!/^010\d{8}$/.test(formData.phone)) {
+      newErrors.phone = "전화번호는 010과 8자리 숫자로 입력해주세요.";
+    }
+
+    // ConsentPromo validation
+    if (!formData.consentPromo) {
+      newErrors.consentPromo = "광고성 메시지 수신 동의를 선택해주세요.";
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSignup = async (event: any) => {
     event.preventDefault(); // Prevent the default form submission behavior
 
-    // 아이디 중복검사 @ 아이디 정규화
-    // 이메일 중복검사 후 코드 전송 가능하게
-    // 전화번호 중복검사
-    // 주소는 api 사용
+    if (!validateInputs()) {
+      return;
+    }
 
     console.log(formData);
     // try {
@@ -50,10 +111,10 @@ export const Signup = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 px-4 py-5">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100">
       <div className="flex w-full max-w-lg flex-col">
         {/* Logo container aligned to the left */}
-        <div className="mb-5 flex w-full items-center">
+        <div className="mb-10 flex w-full items-center">
           <Link
             to="/"
             className="text-2xl font-bold text-blue-500 hover:text-blue-700"
@@ -63,12 +124,12 @@ export const Signup = () => {
         </div>
         <form
           className="w-full max-w-lg rounded-lg bg-white p-6 shadow"
-          onSubmit={handlesignup}
+          onSubmit={handleSignup}
         >
           {/* Username */}
           <div className="mb-4">
             <label
-              htmlFor="username"
+              htmlFor="id"
               className="block text-sm font-medium text-gray-700"
             >
               아이디
@@ -80,12 +141,13 @@ export const Signup = () => {
                 id="id"
                 type="text"
                 required
-                className="px-3 py-2 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                className="w-full px-3 py-2 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                 placeholder="아이디"
                 value={formData.id}
                 onChange={handleChange}
               />
             </div>
+            {errors.id && <p className="text-sm text-red-500">{errors.id}</p>}
           </div>
 
           {/* Password */}
@@ -102,12 +164,15 @@ export const Signup = () => {
                 id="password"
                 type="password"
                 required
-                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                className="w-full  px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                 placeholder="비밀번호"
                 value={formData.password}
                 onChange={handleChange}
               />
             </div>
+            {errors.password && (
+              <p className="text-sm text-red-500">{errors.password}</p>
+            )}
           </div>
 
           {/* Email */}
@@ -125,19 +190,15 @@ export const Signup = () => {
                 id="email"
                 type="email"
                 required
-                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                className="w-full px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                 placeholder="이메일"
                 value={formData.email}
                 onChange={handleChange}
               />
             </div>
-
-            <button
-              type="button"
-              className="mt-2 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-            >
-              코드 전송
-            </button>
+            {errors.email && (
+              <p className="text-sm text-red-500">{errors.email}</p>
+            )}
           </div>
 
           {/* Name */}
@@ -155,12 +216,15 @@ export const Signup = () => {
                 id="name"
                 type="text"
                 required
-                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                className="w-full px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                 placeholder="이름"
                 value={formData.name}
                 onChange={handleChange}
               />
             </div>
+            {errors.name && (
+              <p className="text-sm text-red-500">{errors.name}</p>
+            )}
           </div>
 
           {/* Date of Birth */}
@@ -169,7 +233,7 @@ export const Signup = () => {
               htmlFor="dob"
               className="block text-sm font-medium text-gray-700"
             >
-              생년월일 (8자리)
+              생년월일
             </label>
 
             <div className="flex items-center rounded-md border border-gray-300">
@@ -178,12 +242,13 @@ export const Signup = () => {
                 id="dob"
                 type="text"
                 required
-                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                className="w-full px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                 placeholder="YYYYMMDD"
                 value={formData.dob}
                 onChange={handleChange}
               />
             </div>
+            {errors.dob && <p className="text-sm text-red-500">{errors.dob}</p>}
           </div>
 
           {/* Mobile Phone */}
@@ -201,12 +266,15 @@ export const Signup = () => {
                 id="phone"
                 type="tel"
                 required
-                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
-                placeholder="전화번호"
+                className="w-full  px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                placeholder="010XXXXXXXX"
                 value={formData.phone}
                 onChange={handleChange}
               />
             </div>
+            {errors.phone && (
+              <p className="text-sm text-red-500">{errors.phone}</p>
+            )}
           </div>
 
           {/* Address */}
@@ -224,7 +292,7 @@ export const Signup = () => {
                 id="address"
                 type="text"
                 required
-                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                className="w-full  px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                 placeholder="주소"
                 value={formData.address}
                 onChange={handleChange}
@@ -246,7 +314,7 @@ export const Signup = () => {
                 id="detailedAddress"
                 type="text"
                 required
-                className="px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 "
+                className="w-full  px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                 placeholder="상세주소"
                 value={formData.detailedAddress}
                 onChange={handleChange}
@@ -286,6 +354,9 @@ export const Signup = () => {
                 </span>
               </label>
             </div>
+            {errors.consentPromo && (
+              <p className="text-sm text-red-500">{errors.consentPromo}</p>
+            )}
           </div>
 
           {/* Submit Button */}
