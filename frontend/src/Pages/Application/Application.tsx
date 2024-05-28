@@ -67,7 +67,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 
 const Application = () => {
     return (
-        <div className="mx-auto mt-5 w-full lg:h-[500px] lg:w-2/3 lg:pr-0 3xl:h-[800px] 3xl:mt-10">
+        <div className="mx-auto mt-5 w-full lg:h-[500px] lg:w-2/3 lg:mt-8 lg:pr-0 3xl:h-[800px] 3xl:mt-10">
             <header className="mb-0 px-5 text-center lg:mb-5 lg:px-0">
                 <h1 className="mb-3 flex justify-start text-xl font-bold lg:text-4xl">
                     오늘 밤 11시까지 신청하면
