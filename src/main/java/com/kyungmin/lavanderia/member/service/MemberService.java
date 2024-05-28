@@ -11,10 +11,4 @@ public interface MemberService extends UserDetailsService {
 
     void checkPhoneNumber(String phoneNumber);
 
-    void sendSignupCode(String email);
-
-    void checkSignupCode(String email, String code);
-
-    void sendEmail(String email,String subject, String text);
-
 }
