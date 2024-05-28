@@ -9,9 +9,9 @@ import Home from "./Pages/home/Home";  // 수정된 부분
 
 import Login from "./Pages/auth/Login";
 import Agreement from "./Pages/auth/Agreement";
-import { Signup } from "./Pages/auth/Signup";
 import Header from "./Components/Common/Header";
-import ScrollToTop from "./Components/Common/ScrollToTop"; // ScrollToTop 컴포넌트 임포트
+import ScrollToTop from "./Components/Common/ScrollToTop";
+import Signup from "./Pages/auth/Signup"; // ScrollToTop 컴포넌트 임포트
 
 function App() {
     return (
