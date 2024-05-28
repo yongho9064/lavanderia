@@ -7,6 +7,9 @@ module.exports = {
         roboto: ["Roboto", "sans-serif"], // Using 'sans' as an example
         courgette: ["Courgette", "cursive"],
       },
+      screens: {
+        '3xl': '1600px', // 3xl 브레이크포인트 추가
+      },
     },
   },
   plugins: [

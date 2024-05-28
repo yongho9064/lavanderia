@@ -4,5 +4,4 @@ export interface ServiceCardProps {
   description: string;
   details: string;
   image?: string;
-  isHighlighted: boolean;
 }
