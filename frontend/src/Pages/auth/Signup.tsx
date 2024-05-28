@@ -1,5 +1,3 @@
-// src/pages/Signup.tsx
-
 import React, { useState, ChangeEvent, FormEvent, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -11,29 +9,8 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 import InputField from "../auth/InputField";
-
-interface FormData {
-  id: string;
-  password: string;
-  email: string;
-  name: string;
-  dob: string;
-  phone: string;
-  address: string;
-  detailedAddress: string;
-  consentPromo: string;
-  marketingConsent: boolean;
-}
-
-interface Errors {
-  id: string;
-  password: string;
-  email: string;
-  name: string;
-  dob: string;
-  phone: string;
-  consentPromo: string;
-}
+import { Errors, FormData } from "../../Typings/auth/signup";
+import Postcode from "../../Components/postcode/Postcode"; // Postcode 컴포넌트 임포트
 
 export const Signup = () => {
   const location = useLocation();
@@ -49,7 +26,7 @@ export const Signup = () => {
     address: "",
     detailedAddress: "",
     consentPromo: "",
-    marketingConsent: marketingConsent || false,
+    marketingConsent: marketingConsent ? "yse" : "no",
   });
 
   const [errors, setErrors] = useState<Errors>({
@@ -61,6 +38,8 @@ export const Signup = () => {
     phone: "",
     consentPromo: "",
   });
+
+  const [isPostcodeOpen, setIsPostcodeOpen] = useState(false); // 주소 검색창 열기 상태
 
   const idRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -175,20 +154,36 @@ export const Signup = () => {
     // }
   };
 
+  const handleAddressSelect = (address: string) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      address,
+    }));
+    setIsPostcodeOpen(false);
+  };
+
+  const handleModalClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget) {
+      setIsPostcodeOpen(false);
+    }
+  };
+
+  const title = "lavanderia"
+
   return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100">
-        <div className="flex w-full max-w-lg flex-col py-5">
+      <div className="flex min-h-screen flex-col items-center justify-center lg:bg-gray-100">
+        <div className="flex w-full max-w-lg flex-col">
           {/* Logo container aligned to the left */}
-          <div className="mb-5 px-5 flex w-full items-center sm:px-0">
+          <div className="px-5 pt-5 flex w-full items-center lg:p-0 lg:bg-gray-100 lg:mb-5">
             <Link
                 to="/"
                 className="text-2xl font-bold text-blue-500 hover:text-blue-700"
             >
-              lavanderia
+              {title}
             </Link>
           </div>
           <form
-              className="w-full max-w-lg bg-white p-6 shadow lg:rounded-lg"
+              className="w-full max-w-lg bg-white p-6 lg:rounded-lg lg:shadow"
               onSubmit={handleSignup}
           >
             <InputField
@@ -269,17 +264,30 @@ export const Signup = () => {
                 inputRef={phoneRef}
             />
 
-            <InputField
-                id="address"
-                label="주소"
-                type="text"
-                placeholder="주소"
-                value={formData.address}
-                onChange={handleChange}
-                icon={<FaHome className="ml-2 inline text-blue-400" />}
-                onFocus={() => handleFocus("address")}
-                inputRef={addressRef}
-            />
+            <div className="relative">
+              <InputField
+                  id="address"
+                  label="주소"
+                  type="text"
+                  placeholder="주소"
+                  value={formData.address}
+                  onChange={handleChange}
+                  icon={<FaHome className="ml-2 inline text-blue-400" />}
+                  onFocus={() => handleFocus("address")}
+                  inputRef={addressRef}
+                  onClick={() => setIsPostcodeOpen(true)} // 주소 입력 필드 클릭 시 모달 열기
+              />
+              {isPostcodeOpen && (
+                  <div
+                      className="fixed px-5 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50"
+                      onClick={handleModalClick}
+                  >
+                    <div className="bg-white p-4 rounded-lg w-full max-w-md">
+                      <Postcode onComplete={handleAddressSelect} />
+                    </div>
+                  </div>
+              )}
+            </div>
 
             <InputField
                 id="detailedAddress"
@@ -303,8 +311,8 @@ export const Signup = () => {
                       id="consentPromo"
                       type="radio"
                       name="consentPromo"
-                      value="Yes"
-                      checked={formData.consentPromo === "Yes"}
+                      value="yes"
+                      checked={formData.consentPromo === "yes"}
                       onChange={handleChange}
                       className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                   />
@@ -315,14 +323,12 @@ export const Signup = () => {
                       id="consentPromo"
                       type="radio"
                       name="consentPromo"
-                      value="No"
-                      checked={formData.consentPromo === "No"}
+                      value="no"
+                      checked={formData.consentPromo === "no"}
                       onChange={handleChange}
                       className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                   />
-                  <span className="ml-2 text-sm text-gray-600">
-                  동의하지 않음
-                </span>
+                  <span className="ml-2 text-sm text-gray-600">동의하지 않음</span>
                 </label>
               </div>
               {errors.consentPromo && (
@@ -342,3 +348,5 @@ export const Signup = () => {
       </div>
   );
 };
+
+export default Signup;
