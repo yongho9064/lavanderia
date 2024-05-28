@@ -11,25 +11,29 @@ import Login from "./Pages/auth/Login";
 import Agreement from "./Pages/auth/Agreement";
 import { Signup } from "./Pages/auth/Signup";
 import Header from "./Components/Common/Header";
+import ScrollToTop from "./Components/Common/ScrollToTop"; // ScrollToTop 컴포넌트 임포트
 
 function App() {
     return (
-        <Routes>
-            <Route element={<Header />}>
-                <Route path="/" element={<Home />} />
-                <Route path="application" element={<Application />} />
-                <Route path="premium" element={<Premium />} />
-                <Route path="community" element={<Community />} />
-                <Route path="servicecenter" element={<ServiceCenter />} />
-            </Route>
+        <>
+            <ScrollToTop />
+            <Routes>
+                <Route element={<Header />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="application" element={<Application />} />
+                    <Route path="premium" element={<Premium />} />
+                    <Route path="community" element={<Community />} />
+                    <Route path="servicecenter" element={<ServiceCenter />} />
+                </Route>
 
-            {/* 로그인, 회원가입 관련 */}
-            <Route path="auth">
-                <Route path="login" element={<Login />} />
-                <Route path="agreement" element={<Agreement />} />
-                <Route path="signup" element={<Signup />} />
-            </Route>
-        </Routes>
+                {/* 로그인, 회원가입 관련 */}
+                <Route path="/auth">
+                    <Route path="login" element={<Login />} />
+                    <Route path="agreement" element={<Agreement />} />
+                    <Route path="signup" element={<Signup />} />
+                </Route>
+            </Routes>
+        </>
     );
 }
 
