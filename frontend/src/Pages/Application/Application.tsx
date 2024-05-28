@@ -1,5 +1,5 @@
 import React from "react";
-import { ServiceCardProps } from "../../Typings/Application/Applicattion";
+import {ServiceCardProps} from "../../Typings/Application/Applicattion";
 import laundryWomen from "../../Assets/Img/laundry_women.png";
 import premiumLaundry from "../../Assets/Img/premium_laundry.png";
 import dailyLaundry from "../../Assets/Img/daily_laundry.png";
@@ -45,7 +45,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                                                      details,
                                                      image,
                                                  }) => (
-    <div className="flex h-full cursor-pointer flex-row items-center justify-between rounded-lg border border-gray-300 p-5 shadow-md transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg">
+    <div
+        className="flex h-full cursor-pointer flex-row items-center justify-between rounded-lg border border-gray-300 p-5 shadow-md transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg">
         <div className="mt-0 flex h-full flex-grow flex-col ">
             <h2 className="mb-2 text-xl font-bold sm:text-2xl">{title}</h2>
             <p className="mb-2 text-left text-sm text-gray-500 sm:text-base">
@@ -58,7 +59,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                 <img
                     src={image}
                     alt={title}
-                    className={`ml-4 object-contain h-24 w-24 sm:h-28 sm:w-28 2xl:w-44 3xl:h-48 3xl:w-48`}
+                    className={`ml-4 object-contain h-24 w-24 sm:h-28 sm:w-28 2xl:w-44 3xl:h-48`}
                 />
             )}
         </div>
@@ -67,7 +68,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 
 const Application = () => {
     return (
-        <div className="mx-auto mt-5 w-full lg:h-[500px] lg:w-2/3 lg:mt-8 lg:pr-0 3xl:h-[800px] 3xl:mt-10">
+        <div className="mx-auto mt-5 w-full lg:h-[500px] lg:w-2/3 lg:mt-5 lg:pr-0 3xl:h-[700px]">
             <header className="mb-0 px-5 text-center lg:mb-5 lg:px-0">
                 <h1 className="mb-3 flex justify-start text-xl font-bold lg:text-4xl">
                     오늘 밤 11시까지 신청하면
