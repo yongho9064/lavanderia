@@ -68,7 +68,7 @@ const Home = () => {
                                 <img src={step.imgSrc} alt="Home" className="mb-4 w-64" />
                             </div>
                             <div>
-                                <p className="mb-4 border-b-4 border-blue-500"></p>
+                                <p className="mb-4 border-b-4 border-blue-500 w-64"></p>
                                 <h4 className="mb-2 text-2xl">{step.title}</h4>
                                 <p className="text-sm text-gray-500">{step.description}</p>
                             </div>
