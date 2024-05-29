@@ -4,3 +4,9 @@ export interface CardsData {
     description: string;
     isReversed?: boolean;
 }
+
+export interface StepsData {
+    imgSrc: string;
+    title: string;
+    description: string;
+}
