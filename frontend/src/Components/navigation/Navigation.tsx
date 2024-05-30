@@ -5,7 +5,6 @@ import { HiMenu } from "react-icons/hi"; // 리액트 아이콘 임포트
 // Define the JSON object for navigation links
 const navLinks = [
   { path: "/application", label: "신청하기" },
-  { path: "/premium", label: "프리미엄" },
   { path: "/community", label: "커뮤니티" },
   { path: "/servicecenter", label: "고객센터" },
 ];

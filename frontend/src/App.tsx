@@ -1,17 +1,18 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "tailwindcss/tailwind.css";
-import Application from "./Pages/Application/Application";
-import Premium from "./Pages/Premium/Premium";
+import Premium from "./Pages/application/ApplicationDetails";
 import Community from "./Pages/Community/Community";
 import ServiceCenter from "./Pages/ServiceCenter/ServiceCenter";
 import Home from "./Pages/home/Home";  // 수정된 부분
 
 import Login from "./Pages/auth/Login";
 import Agreement from "./Pages/auth/Agreement";
-import Header from "./Components/Common/Header";
-import ScrollToTop from "./Components/Common/ScrollToTop";
-import Signup from "./Pages/auth/Signup"; // ScrollToTop 컴포넌트 임포트
+import Header from "./Components/common/Header";
+import ScrollToTop from "./Components/common/ScrollToTop";
+import Signup from "./Pages/auth/Signup";
+import Application from "./Pages/application/Application";
+import ApplicationDetails from "./Pages/application/ApplicationDetails"; // ScrollToTop 컴포넌트 임포트
 
 function App() {
     return (
@@ -21,7 +22,7 @@ function App() {
                 <Route element={<Header />}>
                     <Route path="/" element={<Home />} />
                     <Route path="application" element={<Application />} />
-                    <Route path="premium" element={<Premium />} />
+                    <Route path="applicationDetails" element={<ApplicationDetails />} />
                     <Route path="community" element={<Community />} />
                     <Route path="servicecenter" element={<ServiceCenter />} />
                 </Route>
