@@ -101,7 +101,7 @@ const Signup = () => {
             </div>
 
             <div className="mt-10 w-full px-5 lg:w-1/4 lg:px-0">
-                <p className="flex font-bold text-2xl mb-10 text-center">
+                <p className="flex font-bold text-xl mb-10 text-center lg:text-2xl">
                     {['이름을 입력해 주세요', '휴대폰 번호를 입력해 주세요', '이메일을 입력해 주세요', '아이디를 입력해 주세요', '비밀번호를 입력해 주세요', '비밀번호 확인을 입력해 주세요'][step - 1]}
                 </p>
                 <div className="flex flex-col gap-4">
