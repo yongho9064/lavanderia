@@ -75,8 +75,8 @@ const Login = () => {
     };
 
     return (
-        <div className="flex h-screen items-center justify-center lg:px-4">
-            <div className="flex flex-col w-full h-full items-center justify-center gap-4 rounded-lg bg-white text-center border shadow lg:h-[500px] lg:w-[400px]">
+        <div className="flex h-screen items-center justify-center">
+            <div className="flex flex-col w-full h-full items-center justify-center gap-4 rounded-lg bg-white text-center border shadow lg:h-[500px] lg:w-[400px] lg:mb-20">
                 <div className="flex w-full items-center justify-center lg:h-20">
                     <span className="font-courgette text-4xl">
                         <Link to="/">lavanderia</Link>
@@ -119,7 +119,7 @@ const Login = () => {
 
                     <label className="mb-5 flex items-center cursor-pointer">
                         <input
-                            className="form-checkbox h-5 w-5 rounded-full text-blue-500"
+                            className="h-5 w-5 rounded-full border text-blue-500 focus:ring-0 "
                             type="checkbox"
                             name="remember"
                         />
