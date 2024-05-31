@@ -5,6 +5,7 @@ import storyImage from "../../Assets/Img/home/story.png";
 import CardComponent from "../../Components/Card/CardComponent";
 import { CardsData, StepsData } from "../../Typings/Home/CardsData";
 import CardStepsData from "../../Components/Card/CardStepsData";
+import FloatingCartButton from "../../Components/floatingCart/FloatingCartButton";
 
 const Home = () => {
     const [data, setData] = useState<{ cardsData: CardsData[]; stepsData: StepsData[] }>({
@@ -107,6 +108,7 @@ const Home = () => {
                     <img src={storyImage} className="w-full" alt="Home" />
                 </div>
             </article>
+            <FloatingCartButton/>
         </section>
     );
 };

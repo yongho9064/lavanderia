@@ -2,11 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Calendar, { CalendarProps } from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Import CSS for the calendar
-import clothes_1 from "../../Assets/Img/clothes_1.png";
-import clothes_2 from "../../Assets/Img/clothes_2.png";
-import clothes_3 from "../../Assets/Img/clothes_3.png";
 import { EditFieldProps } from "../../Typings/Application/Applicattion";
-import Postcode from "../../Components/postcode/Postcode"; // Import the Postcode component
+import Postcode from "../../Components/postcode/Postcode";
 
 const EditField: React.FC<EditFieldProps> = ({ label, defaultValue }) => (
     <div className="mb-2">
@@ -15,26 +12,12 @@ const EditField: React.FC<EditFieldProps> = ({ label, defaultValue }) => (
             type="text"
             className="w-full rounded border p-2 text-gray-400"
             defaultValue={defaultValue}
+            onFocus={(e) => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })}
         />
     </div>
 );
 
-const OrderItem: React.FC<{ item: { image: string, name: string, description: string, price: string } }> = ({ item }) => (
-    <div className="mb-2 flex items-center border rounded-lg p-2">
-        <img
-            src={item.image}
-            alt="Laundry Item"
-            className="mr-4 h-16 w-16"
-        />
-        <div>
-            <p className="font-semibold">{item.name}</p>
-            <p>{item.description}</p>
-            <p>{item.price}</p>
-        </div>
-    </div>
-);
-
-const ApplicationDetails: React.FC = () => {
+const Payment: React.FC = () => {
     const location = useLocation();
     const { title } = location.state || { title: "서비스 선택" };
 
@@ -100,68 +83,14 @@ const ApplicationDetails: React.FC = () => {
         };
     }, [isPickupCalendarOpen, isDeliveryCalendarOpen]);
 
-    const orderItems = [
-        {
-            image: clothes_1,
-            name: "맞춤 세탁",
-            description: "일반 의류 다림질 항균 추가",
-            price: "30,000원"
-        },
-        {
-            image: clothes_2,
-            name: "프리미엄 세탁",
-            description: "고급 의류 다림질 항균 추가",
-            price: "50,000원"
-        },
-        {
-            image: clothes_3,
-            name: "신속 세탁",
-            description: "신속 의류 다림질 항균 추가",
-            price: "40,000원"
-        },
-        {
-            image: clothes_3,
-            name: "신속 세탁",
-            description: "신속 의류 다림질 항균 추가",
-            price: "40,000원"
-        },
-        {
-            image: clothes_3,
-            name: "신속 세탁",
-            description: "신속 의류 다림질 항균 추가",
-            price: "40,000원"
-        },
-        {
-            image: clothes_3,
-            name: "신속 세탁",
-            description: "신속 의류 다림질 항균 추가",
-            price: "40,000원"
-        },
-
-    ];
-
     return (
-        <div className="container mx-auto mt-5 w-full p-5 lg:w-2/3 lg:px-0">
+        <div className="container mx-auto w-full p-5 lg:w-2/3 lg:px-0">
             <header className="mb-5 border-b border-black pb-5">
                 <h1 className="text-xl font-bold lg:text-3xl">결제 페이지</h1>
             </header>
 
             <div className="flex flex-col lg:flex-row lg:gap-5">
-                <div className="flex flex-col gap-5 lg:w-3/4">
-                    <div className="flex flex-col rounded-lg h-2/3 border p-5 shadow-md ">
-                        <h2 className="mb-4 text-xl font-bold">주문상품</h2>
-                        <div className="overflow-auto pr-5">
-                            {orderItems.map((item, index) => (
-                                <OrderItem key={index} item={item} />
-                            ))}
-                        </div>
-
-                        <div className="mt-auto rounded bg-blue-500 p-4 text-center text-white">
-                            <p className="text-lg font-bold">총 주문금액</p>
-                            <p className="text-xl font-bold">120,000원</p>
-                        </div>
-                    </div>
-
+                <div className="flex flex-col gap-5 lg:w-3/4 mb-5 lg:mb-0">
                     <div className="flex flex-col justify-center rounded-lg h-1/3 border p-5 shadow-md">
                         <h2 className="mb-4 text-xl font-bold">수거일/배송일</h2>
                         <div className="mb-2 relative">
@@ -173,6 +102,7 @@ const ApplicationDetails: React.FC = () => {
                                 onClick={() => setIsPickupCalendarOpen(true)}
                                 readOnly
                                 placeholder="수거일을 선택해주세요"
+                                onFocus={(e) => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })}
                             />
                             {isPickupCalendarOpen && (
                                 <div className="absolute z-50" ref={pickupCalendarRef}>
@@ -192,6 +122,7 @@ const ApplicationDetails: React.FC = () => {
                                 onClick={() => setIsDeliveryCalendarOpen(true)}
                                 readOnly
                                 placeholder="배송일을 선택해주세요"
+                                onFocus={(e) => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })}
                             />
                             {isDeliveryCalendarOpen && (
                                 <div className="absolute z-50" ref={deliveryCalendarRef}>
@@ -219,6 +150,7 @@ const ApplicationDetails: React.FC = () => {
                                 onClick={handleAddressClick}
                                 readOnly
                                 placeholder="주소를 입력해주세요"
+                                onFocus={(e) => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })}
                             />
                         </div>
                         <EditField label="상세 주소" defaultValue="상세 주소를 입력해주세요" />
@@ -259,6 +191,7 @@ const ApplicationDetails: React.FC = () => {
                                     type="text"
                                     placeholder="할부개월수 입력"
                                     className="w-full rounded border p-2"
+                                    onFocus={(e) => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })}
                                 />
                             </div>
                         </div>
@@ -271,9 +204,9 @@ const ApplicationDetails: React.FC = () => {
                 </div>
             </div>
 
-            <div className="mt-10 text-center">
-                <button className="rounded-lg bg-blue-500 px-6 py-3 text-xl text-white">
-                    세탁 신청완료
+            <div className="mt-5 text-center lg:mt-10">
+                <button className="rounded-lg w-full bg-blue-500 px-6 py-3 text-xl text-white">
+                    세탁 신청하기
                 </button>
             </div>
 
@@ -291,4 +224,4 @@ const ApplicationDetails: React.FC = () => {
     );
 };
 
-export default ApplicationDetails;
+export default Payment;
