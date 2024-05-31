@@ -25,6 +25,7 @@ public class Role {
 
     @Builder
     public Role(String authorities, Member member) {
+        this.member = member;
         this.authorities = authorities;
     }
 
