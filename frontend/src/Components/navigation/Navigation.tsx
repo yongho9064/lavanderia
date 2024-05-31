@@ -26,7 +26,7 @@ const Navigation = () => {
         <div className="mx-auto flex h-auto w-full flex-col p-5 font-roboto lg:h-16 lg:w-2/3 lg:flex-row lg:items-center lg:justify-between lg:p-0">
           <div className="flex w-full items-center justify-between lg:mb-0 lg:w-auto lg:justify-start">
             <Link to="/" onClick={handleLinkClick}>
-              <h1 className="text-3xl text-blue-500">lavanderia</h1>
+              <h1 className="text-3xl text-blue-400 font-bold font-courgette">lavanderia</h1>
             </Link>
             <button
                 className="block lg:hidden"
