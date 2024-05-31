@@ -89,9 +89,9 @@ const Payment: React.FC = () => {
                 <h1 className="text-xl font-bold lg:text-3xl">결제 페이지</h1>
             </header>
 
-            <div className="flex flex-col lg:flex-row lg:gap-5">
-                <div className="flex flex-col gap-5 lg:w-3/4 mb-5 lg:mb-0">
-                    <div className="flex flex-col justify-center rounded-lg h-1/3 border p-5 shadow-md">
+            <div className="lg:mx-auto lg:w-1/2">
+                <div className="flex flex-col gap-5">
+                    <div className="flex flex-col justify-center rounded-lg border p-5 shadow-md">
                         <h2 className="mb-4 text-xl font-bold">수거일/배송일</h2>
                         <div className="mb-2 relative">
                             <label className="block font-semibold">수거일</label>
@@ -102,7 +102,7 @@ const Payment: React.FC = () => {
                                 onClick={() => setIsPickupCalendarOpen(true)}
                                 readOnly
                                 placeholder="수거일을 선택해주세요"
-                                onFocus={(e) => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+                                onFocus={(e) => e.target.scrollIntoView({behavior: 'smooth', block: 'center'})}
                             />
                             {isPickupCalendarOpen && (
                                 <div className="absolute z-50" ref={pickupCalendarRef}>
@@ -122,7 +122,7 @@ const Payment: React.FC = () => {
                                 onClick={() => setIsDeliveryCalendarOpen(true)}
                                 readOnly
                                 placeholder="배송일을 선택해주세요"
-                                onFocus={(e) => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+                                onFocus={(e) => e.target.scrollIntoView({behavior: 'smooth', block: 'center'})}
                             />
                             {isDeliveryCalendarOpen && (
                                 <div className="absolute z-50" ref={deliveryCalendarRef}>
@@ -134,13 +134,11 @@ const Payment: React.FC = () => {
                             )}
                         </div>
                     </div>
-                </div>
 
-                <div className="flex flex-col gap-5 lg:w-1/2">
-                    <div className="flex flex-col justify-center rounded-lg h-2/3 border p-5 shadow-md">
+                    <div className="flex flex-col justify-center rounded-lg border p-5 shadow-md">
                         <h2 className="mb-4 text-xl font-bold">수거/배송 정보</h2>
-                        <EditField label="이름" defaultValue="이용준" />
-                        <EditField label="연락처" defaultValue="010-3043-4930" />
+                        <EditField label="이름" defaultValue="이용준"/>
+                        <EditField label="연락처" defaultValue="010-3043-4930"/>
                         <div className="mb-2">
                             <label className="block font-semibold">주소</label>
                             <input
@@ -150,15 +148,15 @@ const Payment: React.FC = () => {
                                 onClick={handleAddressClick}
                                 readOnly
                                 placeholder="주소를 입력해주세요"
-                                onFocus={(e) => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+                                onFocus={(e) => e.target.scrollIntoView({behavior: 'smooth', block: 'center'})}
                             />
                         </div>
-                        <EditField label="상세 주소" defaultValue="상세 주소를 입력해주세요" />
-                        <EditField label="수거 장소" defaultValue="문 앞" />
-                        <EditField label="배송 장소" defaultValue="문 앞" />
+                        <EditField label="상세 주소" defaultValue="상세 주소를 입력해주세요"/>
+                        <EditField label="수거 장소" defaultValue="문 앞"/>
+                        <EditField label="배송 장소" defaultValue="문 앞"/>
                     </div>
 
-                    <div className="flex flex-col justify-center rounded-lg h-1/3 border p-5 shadow-md">
+                    <div className="flex flex-col justify-center rounded-lg border p-5 shadow-md">
                         <h2 className="mb-4 text-xl font-bold">포인트 혜택</h2>
                         <div className="mb-2 flex justify-between">
                             <p>구매적립</p>
@@ -175,11 +173,11 @@ const Payment: React.FC = () => {
                         <p className="text-right text-blue-500">최대 300점 적립</p>
                     </div>
 
-                    <div className="flex flex-col justify-center rounded-lg h-1/3 border p-5 shadow-md">
+                    <div className="flex flex-col justify-center rounded-lg border p-5 shadow-md">
                         <h2 className="mb-4 text-xl font-bold">결제수단</h2>
                         <div className="mb-2">
                             <label className="mb-2 flex items-center">
-                                <input type="radio" name="payment" className="mr-2" /> 카드 결제
+                                <input type="radio" name="payment" className="mr-2"/> 카드 결제
                             </label>
                             <div className="ml-4">
                                 <select className="mb-2 w-full rounded border p-2">
@@ -191,23 +189,24 @@ const Payment: React.FC = () => {
                                     type="text"
                                     placeholder="할부개월수 입력"
                                     className="w-full rounded border p-2"
-                                    onFocus={(e) => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+                                    onFocus={(e) => e.target.scrollIntoView({behavior: 'smooth', block: 'center'})}
                                 />
                             </div>
                         </div>
                         <div className="mb-2">
                             <label className="mb-2 flex items-center">
-                                <input type="radio" name="payment" className="mr-2" /> 계좌 이체
+                                <input type="radio" name="payment" className="mr-2"/> 계좌 이체
                             </label>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="mt-5 text-center lg:mt-10">
-                <button className="rounded-lg w-full bg-blue-500 px-6 py-3 text-xl text-white">
-                    세탁 신청하기
-                </button>
+                <div className="mt-5 text-center lg:mt-10">
+                    <button className="rounded-lg w-full bg-blue-500 px-6 py-3 text-xl text-white">
+                        세탁 신청하기
+                    </button>
+                </div>
+
             </div>
 
             {isPostcodeOpen && (
@@ -216,7 +215,7 @@ const Payment: React.FC = () => {
                     onClick={handleModalClick}
                 >
                     <div className="bg-white p-4 rounded-lg w-full max-w-md">
-                        <Postcode onComplete={handleAddressComplete} />
+                        <Postcode onComplete={handleAddressComplete}/>
                     </div>
                 </div>
             )}
