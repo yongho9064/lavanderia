@@ -41,7 +41,7 @@ public class MemberApiController {
     }
 
     @PostMapping("/check-member-id")
-    @Operation(summary = "전화번호 중복 확인", description = "전화번호 중복을 확인합니다.")
+    @Operation(summary = "멤버 아이디 중복 확인", description = "전화번호 중복을 확인합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "아이디 가입 가능", content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "400", description = "아이디 가입 불가능", content = @Content(mediaType = "application/json")),
