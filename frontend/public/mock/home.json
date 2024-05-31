@@ -47,5 +47,19 @@
       "title": "배달",
       "description": "박스나 비닐을 이용해 집앞에 세탁물을 놓아주시면 기사님이 픽업합니다."
     }
-  ]
+  ],
+  "advertisement": [
+    {
+      "imgSrc": "20230516021744012618.jpg"
+    },
+    {
+      "imgSrc": "clean01.jpg"
+    },
+    {
+      "imgSrc": "clean02.jpg"
+    },
+    {
+      "imgSrc": "clean03.jpg"
+    }
+]
 }
