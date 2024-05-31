@@ -1,5 +1,6 @@
 package com.kyungmin.lavanderia.member.data.entity;
 
+import com.kyungmin.lavanderia.address.data.entity.Address;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
@@ -10,7 +11,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -65,7 +65,7 @@ public class Member implements UserDetails {
     private long loginFailCount;  // 로그인 실패 횟수
 
     @Column(name = "LAST_LOGIN_DATE")
-    private Date lastLoginDate;   // 최근 로그인 일시
+    private LocalDateTime lastLoginDate;   // 최근 로그인 일시
 
     @Column(name = "ACC_REGISTER_DATE", updatable = false)
     private LocalDateTime accRegisterDate;    // 계정 등록 일시
@@ -74,14 +74,14 @@ public class Member implements UserDetails {
     private LocalDateTime accUpdateDate;   // 계정 수정 일시
 
     @Column(name = "ACC_DELETE_DATE")
-    private Date accDeleteDate;   // 계정 삭제 일시
+    private LocalDateTime accDeleteDate;   // 계정 삭제 일시
 
-    @OneToMany(mappedBy = "memberId")
+    @OneToMany(mappedBy = "memberId",cascade = CascadeType.ALL)
     List<Address> address; // 주소
 
 
     @Builder
-    public Member(String memberId, String memberPwd, String memberName, String memberEmail, String memberPhone, String agreeMarketingYn, String memberRole, LocalDate memberBirth){
+    public Member(String memberId, String memberPwd, String memberName, String memberEmail, String memberPhone, String agreeMarketingYn, String memberRole, LocalDate memberBirth, String memberLevel, String memberPoint, String accInactiveYn, String tempPwdYn, long accLoginCount, long loginFailCount, LocalDateTime lastLoginDate, LocalDateTime accRegisterDate, LocalDateTime accUpdateDate, LocalDateTime accDeleteDate){
         this.memberId = memberId;
         this.memberPwd = memberPwd;
         this.memberName = memberName;
@@ -90,6 +90,16 @@ public class Member implements UserDetails {
         this.memberRole = memberRole;
         this.agreeMarketingYn = agreeMarketingYn;
         this.memberBirth = memberBirth;
+        this.memberLevel = (memberLevel != null) ? memberLevel : "1";
+        this.memberPoint = (memberPoint != null) ? memberPoint : "0";
+        this.accInactiveYn = (accInactiveYn != null) ? accInactiveYn : "N";
+        this.tempPwdYn = (tempPwdYn != null) ? tempPwdYn : "N";
+        this.accLoginCount = accLoginCount;
+        this.loginFailCount = loginFailCount;
+        this.lastLoginDate = lastLoginDate;
+        this.accRegisterDate = accRegisterDate;
+        this.accUpdateDate = accUpdateDate;
+        this.accDeleteDate = accDeleteDate;
     }
 
     @PrePersist

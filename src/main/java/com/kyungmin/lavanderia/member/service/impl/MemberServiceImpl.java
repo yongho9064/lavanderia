@@ -1,5 +1,6 @@
 package com.kyungmin.lavanderia.member.service.impl;
 
+import com.kyungmin.lavanderia.member.data.dto.MemberInfoDTO;
 import com.kyungmin.lavanderia.member.data.dto.SignupDTO;
 import com.kyungmin.lavanderia.member.data.entity.Member;
 import com.kyungmin.lavanderia.member.data.repository.MemberRepository;
@@ -55,6 +56,38 @@ public class MemberServiceImpl implements MemberService {
         if (isExist) {
             throw new DuplicatePhoneNumberEx(phoneNumber);
         }
+    }
+
+    // 회원정보 조회
+    @Override
+    public MemberInfoDTO memberInfo(String memberId) {
+        Member member = findMemberByMemberId(memberId);
+
+        return MemberInfoDTO.builder()
+                .memberId(member.getMemberId())
+                .memberName(member.getMemberName())
+                .memberEmail(member.getMemberEmail())
+                .memberPhone(member.getMemberPhone())
+                .memberBirth(member.getMemberBirth())
+                .memberLevel(member.getMemberLevel())
+                .memberPoint(member.getMemberPoint())
+                .agreeMarketingYn(member.getAgreeMarketingYn())
+                .build();
+    }
+
+    @Override
+    public void memberDelete(String memberId) {
+        Member member = findMemberByMemberId(memberId);
+        memberRepository.delete(member);
+    }
+
+    // 회원 아이디로 회원 조회
+    Member findMemberByMemberId(String memberId) {
+        Optional<Member> member = memberRepository.findMemberByMemberId(memberId);
+        if (member.isEmpty()) {
+            throw new UsernameNotFoundException(memberId + "회원을 찾을 수 없습니다.");
+        }
+        return member.get();
     }
 
     @Override

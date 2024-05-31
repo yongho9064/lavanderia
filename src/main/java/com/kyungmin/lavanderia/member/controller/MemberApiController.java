@@ -1,5 +1,7 @@
 package com.kyungmin.lavanderia.member.controller;
 
+import com.kyungmin.lavanderia.address.data.dto.AddressInsertDTO;
+import com.kyungmin.lavanderia.member.data.dto.MemberInfoDTO;
 import com.kyungmin.lavanderia.member.data.dto.SignupDTO;
 import com.kyungmin.lavanderia.member.exception.DuplicateMemberIdEx;
 import com.kyungmin.lavanderia.member.exception.DuplicatePhoneNumberEx;
@@ -14,6 +16,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +40,36 @@ public class MemberApiController {
 
         HttpStatus httpStatus = HttpStatus.CREATED;
         String result = "회원 가입 완료";
+
+        return response(httpStatus, result);
+    }
+
+    @PostMapping("/member-info")
+    @Operation(summary = "회원 정보 확인", description = "토큰을 주면 회원 정보를 반환합니다")
+    public MemberInfoDTO memberInfo() {
+
+        String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        return memberService.memberInfo(memberId);
+    }
+
+    @PostMapping("/member-delete")
+    @Operation(summary = "회원 삭제", description = "토큰을 주면 회원을 삭제합니다.")
+    public ResponseEntity<String> memberDelete() {
+
+        HttpStatus httpStatus;
+        String result;
+
+        String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        try {
+            memberService.memberDelete(memberId);
+            httpStatus = HttpStatus.OK;
+            result = "회원 삭제 완료";
+        } catch (UsernameNotFoundException e) {
+            httpStatus = HttpStatus.BAD_REQUEST;
+            result = e.getMessage();
+        }
 
         return response(httpStatus, result);
     }
@@ -76,7 +110,7 @@ public class MemberApiController {
 
         try {
             memberService.checkPhoneNumber(phoneNumber);
-            httpStatus = HttpStatus.CREATED;
+            httpStatus = HttpStatus.OK;
             result = "가입 가능한 번호입니다";
         } catch (DuplicatePhoneNumberEx e) {
             httpStatus = HttpStatus.BAD_REQUEST;

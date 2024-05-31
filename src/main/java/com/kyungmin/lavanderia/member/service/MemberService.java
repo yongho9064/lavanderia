@@ -1,5 +1,6 @@
 package com.kyungmin.lavanderia.member.service;
 
+import com.kyungmin.lavanderia.member.data.dto.MemberInfoDTO;
 import com.kyungmin.lavanderia.member.data.dto.SignupDTO;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -11,4 +12,7 @@ public interface MemberService extends UserDetailsService {
 
     void checkPhoneNumber(String phoneNumber);
 
+    MemberInfoDTO memberInfo(String memberId);
+
+    void memberDelete(String memberId);
 }
