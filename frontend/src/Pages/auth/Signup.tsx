@@ -5,19 +5,19 @@ interface FormData {
     name: string;
     phone: string;
     email: string;
-    username: string;
+    userId: string;
     password: string;
     confirmPassword: string;
 }
 
-const fieldNames: (keyof FormData)[] = ['name', 'phone', 'email', 'username', 'password', 'confirmPassword'];
+const fieldNames: (keyof FormData)[] = ['name', 'phone', 'email', 'userId', 'password', 'confirmPassword'];
 
 const Signup = () => {
     const [formData, setFormData] = useState<FormData>({
         name: '',
-        phone: '010',
+        phone: '010 ',
         email: '',
-        username: '',
+        userId: '',
         password: '',
         confirmPassword: '',
     });
@@ -28,36 +28,68 @@ const Signup = () => {
     const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
     useEffect(() => {
-        if (inputRefs.current[step - 1]) {
-            inputRefs.current[step - 1]?.focus();
+        const currentInput = inputRefs.current[step - 1];
+        if (currentInput) {
+            currentInput.focus();
+            currentInput.scrollIntoView({ behavior: 'smooth' });
         }
     }, [step]);
+
+    const getErrorMessage = (id: keyof FormData) => {
+        switch (id) {
+            case 'name':
+                return '이름을 입력해주세요';
+            case 'phone':
+                return '휴대폰 번호를 입력해주세요';
+            case 'email':
+                return '이메일을 입력해주세요';
+            case 'userId':
+                return '아이디를 입력해주세요';
+            case 'password':
+                return '비밀번호를 입력해주세요';
+            case 'confirmPassword':
+                return '비밀번호 확인을 입력해주세요';
+            default:
+                return '';
+        }
+    };
+
+    const getInvalidMessage = (id: keyof FormData) => {
+        switch (id) {
+            case 'name':
+                return '유효한 이름을 입력해주세요';
+            case 'phone':
+                return '유효한 휴대폰 번호를 입력해주세요';
+            case 'email':
+                return '유효한 이메일을 입력해주세요';
+            case 'userId':
+                return '유효한 아이디를 입력해주세요';
+            case 'password':
+                return '비밀번호는 최소 8자 이상이어야 해요';
+            case 'confirmPassword':
+                return '비밀번호가 일치하지 않습니다';
+            default:
+                return '';
+        }
+    };
 
     const validateInput = (id: keyof FormData, value: string) => {
         const newErrors: { [key: string]: string } = { ...errors };
         const patterns: { [key in keyof FormData]?: RegExp } = {
-            name: /^[가-힣a-zA-Z]{2,}$/,
-            phone: /^010[0-9]{8}$/,
+            name: /^[가-힣]{2,}$/,
+            phone: /^010 \d{4} \d{4}$/,
             email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-            username: /^[a-zA-Z0-9]{4,}$/,
+            userId: /^[a-zA-Z0-9]{4,}$/,
         };
 
         if (!value.trim()) {
-            newErrors[id] = `${id === 'name' ? '이름' :
-                id === 'phone' ? '휴대폰 번호' :
-                    id === 'email' ? '이메일' :
-                        id === 'username' ? '아이디' :
-                            id === 'password' ? '비밀번호' : '비밀번호 확인'}을 입력해주세요`;
+            newErrors[id] = getErrorMessage(id);
         } else if (patterns[id] && !patterns[id]!.test(value.trim())) {
-            newErrors[id] = `유효한 ${id === 'name' ? '이름' :
-                id === 'phone' ? '휴대폰 번호' :
-                    id === 'email' ? '이메일' :
-                        id === 'username' ? '아이디' :
-                            id === 'password' ? '비밀번호' : '비밀번호 확인'}을 입력해주세요`;
+            newErrors[id] = getInvalidMessage(id);
         } else if (id === 'password' && value.length < 8) {
-            newErrors.password = '비밀번호는 최소 8자 이상이어야 해요';
+            newErrors.password = getInvalidMessage(id);
         } else if (id === 'confirmPassword' && value !== formData.password) {
-            newErrors.confirmPassword = '비밀번호가 일치하지 않습니다';
+            newErrors.confirmPassword = getInvalidMessage(id);
         } else {
             delete newErrors[id];
         }
@@ -71,16 +103,71 @@ const Signup = () => {
         const currentStepId = fieldNames[step - 1];
 
         if (validateInput(currentStepId, formData[currentStepId])) {
-            setStep(step + 1);
+            if (step === fieldNames.length) {
+                handleSubmit().catch(console.error); // Catch and log any error
+            } else {
+                setStep(step + 1);
+            }
         } else {
             inputRefs.current[step - 1]?.focus();
         }
     };
 
+    const handleSubmit = async () => {
+        try {
+            const cleanedFormData = {
+                ...formData,
+                phone: formData.phone.split(' ').join(''),
+            };
+
+            console.log('Form Data to be submitted:', cleanedFormData);
+
+            const response = await fetch('your-api-endpoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(cleanedFormData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            console.log('Success:', result);
+            // Handle success (e.g., redirect to another page, show a success message, etc.)
+        } catch (error) {
+            console.error('Error:', error);
+            // Handle error (e.g., show an error message, etc.)
+        }
+    };
+
+    const handlePhoneChange = (value: string) => {
+        // Remove any non-digit characters
+        const cleaned = value.replace(/\D/g, '');
+
+        let formatted = '';
+        if (cleaned.length <= 3) {
+            formatted = cleaned;
+        } else if (cleaned.length <= 7) {
+            formatted = `${cleaned.slice(0, 3)} ${cleaned.slice(3)}`;
+        } else {
+            formatted = `${cleaned.slice(0, 3)} ${cleaned.slice(3, 7)} ${cleaned.slice(7, 11)}`;
+        }
+
+        setFormData({ ...formData, phone: formatted });
+        validateInput('phone', formatted);
+    };
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
-        setFormData({ ...formData, [id]: value });
-        validateInput(id as keyof FormData, value);
+        if (id === 'phone') {
+            handlePhoneChange(value);
+        } else {
+            setFormData({ ...formData, [id]: value });
+            validateInput(id as keyof FormData, value);
+        }
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -93,7 +180,7 @@ const Signup = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center">
-            <div className="w-full h-28 pt-10 hidden items-center justify-center lg:flex">
+            <div className="w-full h-20 pt-15 hidden items-center justify-center lg:flex">
                 <h1 className="text-black w-2/3 h-full items-center border-b border-black text-3xl lg:flex">
                     <Link to="/" className="hidden lg:block lg:text-blue-500 lg:mr-5">lavanderia</Link>
                     <span className="font-bold text-2xl">회원가입</span>
@@ -111,11 +198,7 @@ const Signup = () => {
                                 className={`absolute left-0 transition-all duration-200 ${isFocused[field] || formData[field] ? '-top-6 text-sm text-gray-500' : 'top-3 text-lg text-gray-400 font-bold'}`}
                                 htmlFor={field}
                             >
-                                {field === 'name' ? '이름' :
-                                    field === 'phone' ? '휴대폰 번호' :
-                                        field === 'email' ? '이메일' :
-                                            field === 'username' ? '아이디' :
-                                                field === 'password' ? '비밀번호' : '비밀번호 확인'}
+                                {getErrorMessage(field)}
                             </label>
                             <input
                                 className={`w-full border-b pl-0 font-bold text-xl border-0 border-gray-300 outline-none focus:ring-0 focus:border-gray-300 mb-2 ${errors[field] ? 'border-red-500' : ''}`}
@@ -123,7 +206,10 @@ const Signup = () => {
                                 id={field}
                                 ref={(el) => (inputRefs.current[index] = el)}
                                 value={formData[field]}
-                                onFocus={() => setIsFocused({ ...isFocused, [field]: true })}
+                                onFocus={() => {
+                                    setIsFocused({ ...isFocused, [field]: true });
+                                    inputRefs.current[index]?.scrollIntoView({ behavior: 'smooth' });
+                                }}
                                 onBlur={() => setIsFocused({ ...isFocused, [field]: false })}
                                 onChange={handleChange}
                                 onKeyDown={handleKeyDown}
