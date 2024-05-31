@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import Logo from "../../Components/common/Logo";
 
 const Login = () => {
     const [formData, setFormData] = useState({ userId: "", password: "" });
@@ -79,7 +80,7 @@ const Login = () => {
             <div className="flex flex-col w-full h-full items-center justify-center gap-4 rounded-lg bg-white text-center border shadow lg:h-[500px] lg:w-[400px] lg:mb-20">
                 <div className="flex w-full items-center justify-center lg:h-20">
                     <span className="font-courgette text-4xl">
-                        <Link to="/">lavanderia</Link>
+                        <Logo/>
                     </span>
                 </div>
 
