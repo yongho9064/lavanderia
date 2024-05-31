@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { HiMenu } from "react-icons/hi"; // 리액트 아이콘 임포트
+import { HiMenu } from "react-icons/hi";
+import Logo from "../common/Logo"; // 리액트 아이콘 임포트
 
 // Define the JSON object for navigation links
 const navLinks = [
@@ -25,9 +26,7 @@ const Navigation = () => {
       <div className="sticky top-0 z-50 bg-white shadow">
         <div className="mx-auto flex h-auto w-full flex-col p-5 font-roboto lg:h-16 lg:w-2/3 lg:flex-row lg:items-center lg:justify-between lg:p-0">
           <div className="flex w-full items-center justify-between lg:mb-0 lg:w-auto lg:justify-start">
-            <Link to="/" onClick={handleLinkClick}>
-              <h1 className="text-3xl text-blue-400 font-bold font-courgette">lavanderia</h1>
-            </Link>
+            <Logo handleLinkClick={handleLinkClick} />
             <button
                 className="block lg:hidden"
                 onClick={() => setMenuOpen(!menuOpen)}
