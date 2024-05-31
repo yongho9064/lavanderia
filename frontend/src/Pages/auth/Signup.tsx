@@ -147,7 +147,7 @@ const Signup = () => {
         // Remove any non-digit characters
         const cleaned = value.replace(/\D/g, '');
 
-        let formatted = '';
+        let formatted: string;
         if (cleaned.length <= 3) {
             formatted = cleaned;
         } else if (cleaned.length <= 7) {
