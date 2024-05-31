@@ -1,14 +1,21 @@
 package com.kyungmin.lavanderia.member.data.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -31,11 +38,11 @@ public class Member implements UserDetails {
     @Column(name = "MEMBER_EMAIL")
     private String memberEmail; // 멤버 이메일
 
-    @Column(name = "MEMBER_ROLE")
-    private String memberRole; // 멤버 권한
-
     @Column(name = "MEMBER_PHONE")
     private String memberPhone; // 멤버 전화번호
+
+    @Column(name = "MEMBER_BIRTH")
+    private LocalDate memberBirth; // 멤버 생일
 
     @Column(name = "MEMBER_LEVEL")
     private String memberLevel; // 멤버 레벨
@@ -61,39 +68,49 @@ public class Member implements UserDetails {
     @Column(name = "LAST_LOGIN_DATE")
     private Date lastLoginDate;   // 최근 로그인 일시
 
-    @Column(name = "ACC_REGISTER_DATE")
-    private Date accRegisterDate;    // 계정 등록 일시
+    @Column(name = "ACC_REGISTER_DATE", updatable = false)
+    private LocalDateTime accRegisterDate;    // 계정 등록 일시
 
     @Column(name = "ACC_UPDATE_DATE")
-    private Date accUpdateDate;   // 계정 수정 일시
+    private LocalDateTime accUpdateDate;   // 계정 수정 일시
 
     @Column(name = "ACC_DELETE_DATE")
     private Date accDeleteDate;   // 계정 삭제 일시
 
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+    List<Role> roles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "memberId")
+    List<Address> address; // 주소
 
     @Builder
-    public Member(String memberId, String memberPwd, String memberName, String memberEmail, String memberPhone, String agreeMarketingYn, String memberRole){
+    public Member(String memberId, String memberPwd, String memberName, String memberEmail, String memberPhone, String agreeMarketingYn, List<Role> memberRole, LocalDate memberBirth){
         this.memberId = memberId;
         this.memberPwd = memberPwd;
         this.memberName = memberName;
         this.memberEmail = memberEmail;
         this.memberPhone = memberPhone;
-        this.memberRole = memberRole;
         this.agreeMarketingYn = agreeMarketingYn;
+        this.memberBirth = memberBirth;
+        this.roles = roles;
     }
 
+    @PrePersist
+    protected void onCreate() {
+        LocalDateTime now = LocalDateTime.now();
+        accRegisterDate = now;
+        accUpdateDate = now;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> collection = new ArrayList<>();
 
-        collection.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return memberRole;
-            }
-        });
-        return collection;
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getAuthorities()));
+        }
+         return authorities;
     }
 
     @Override

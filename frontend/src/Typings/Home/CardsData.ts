@@ -10,3 +10,7 @@ export interface StepsData {
     title: string;
     description: string;
 }
+
+export interface Advertisement {
+    imgSrc: string;
+}
