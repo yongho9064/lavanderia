@@ -121,7 +121,7 @@ const Home = () => {
                         배달</p>
                 </div>
                 {/* 카드 */}
-                <div className="grid grid-cols-1  lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     {data.stepsData.map((step, index) => (
                         <CardStepsData
                             key={index}
