@@ -59,6 +59,12 @@ const Home = () => {
         }
     };
 
+    useEffect(() => {
+        const interval = setInterval(handleNext, 5000);
+
+        return () => clearInterval(interval);
+    }, [data.advertisement.length]);
+
     return (
         <section className="mt-4 font-roboto">
             {/* 광고 */}
@@ -68,21 +74,21 @@ const Home = () => {
                         <img
                             src={getAdvertisementImageUrl(data.advertisement[currentImageIndex].imgSrc)}
                             alt="Ad"
-                            className="w-full"
+                            className="w-full h-56 sm:h-96"
                         />
                     )}
                 </div>
-                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 rounded-2xl flex space-x-4"
-                     style={{background: '#2c323b'}}>
+                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-4">
+                    <div className="bg-[#2c323b] rounded-2xl opacity-30 absolute inset-0"></div>
                     <button
                         onClick={handlePrevious}
-                        className="px-4 py-2   text-white"
+                        className="relative px-2 py-1 sm:px-2 sm:py-2 text-white text-sm sm:text-base"
                     >
                         <FaAngleLeft/>
                     </button>
                     <button
                         onClick={handleNext}
-                        className="px-4 py-2   text-white"
+                        className="relative px-6 py-1 sm:px-6 sm:py-2 text-white text-sm sm:text-base"
                     >
                         <FaAngleRight/>
                     </button>
@@ -92,9 +98,9 @@ const Home = () => {
             {/* 첫 번쨰 소개글 */}
             <article className="m-auto max-w-5xl">
                 <div className="mt-16 sm:mt-40 flex flex-col sm:flex-row items-center sm:justify-between pb-20">
-                    <div className="sm:w-1/2 sm:mr-10 text-center sm:text-left">
+                    <div className="sm:w-1/2 sm:mr-10 text-center sm:text-left sm:p-4">
                         <h4 className="mb-4 text-2xl text-blue-500">D A I L Y W A S H</h4>
-                        <h1 className="mb-4 text-4xl">
+                        <h1 className="mb-4 text-2xl sm:text-3x">
                             귀찮은 세탁을 간편하게
                             <br/>
                             모두를 위한 편리한
@@ -115,7 +121,7 @@ const Home = () => {
                         배달</p>
                 </div>
                 {/* 카드 */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1  lg:grid-cols-3 gap-4">
                     {data.stepsData.map((step, index) => (
                         <CardStepsData
                             key={index}
@@ -130,7 +136,7 @@ const Home = () => {
 
             {/* 세 번째 소개글 */}
             <article className="m-auto max-w-5xl">
-                <div className="mt-60 flex flex-col items-center justify-between p-4">
+                <div className="mt-40 flex flex-col items-center justify-between p-4">
                     {data.cardsData.map((card, index) => (
                         <CardComponent
                             key={index}
@@ -144,14 +150,14 @@ const Home = () => {
             </article>
 
             {/* 네 번쨰 소개글 */}
-            <article className="m-auto max-w-5xl">
-                <div className="mt-40">
-                    <h4 className="text-3xl text-center sm:text-left">
+            <article className="m-auto max-w-5xl p-4 sm:p-0">
+                <div className="mt-10 sm:mt-40">
+                    <h4 className="text-lg sm:text-3xl  sm:text-left leading-relaxed sm:leading-snug">
                         세탁으로 부터 찾는 나의 시간,
                         <br/>
                         이제 <strong className="text-blue-500">라벤데리아에</strong> 맡기세요
                     </h4>
-                    <img src={storyImage} className="w-full" alt="Home"/>
+                    <img src={storyImage} className="w-full mt-4 sm:mt-8 object-cover" alt="Home"/>
                 </div>
             </article>
             <FloatingCartButton/>
