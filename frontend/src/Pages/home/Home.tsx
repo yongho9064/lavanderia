@@ -150,7 +150,7 @@ const Home = () => {
             </article>
 
             {/* 네 번쨰 소개글 */}
-            <article className="m-auto max-w-5xl p-4 sm:p-0">
+            <article className="m-auto max-w-5xl p-4 sm:p-0 ml-4">
                 <div className="mt-10 sm:mt-40">
                     <h4 className="text-lg sm:text-3xl  sm:text-left leading-relaxed sm:leading-snug">
                         세탁으로 부터 찾는 나의 시간,
