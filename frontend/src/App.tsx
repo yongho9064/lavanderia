@@ -14,7 +14,9 @@ import Signup from "./Pages/auth/Signup";
 import Application from "./Pages/application/Application";
 import Payment from "./Pages/application/Payment";
 import Cart from "./Pages/application/Cart";
-import { AuthProvider } from "./Context"; // ScrollToTop 컴포넌트 임포트
+import { AuthProvider } from "./Context";
+import ProtectedRoute from "./Components/common/ProtectedRoute";
+import NotFound from "./Components/common/NotFound";
 
 function App() {
   return (
@@ -30,12 +32,17 @@ function App() {
           <Route path="cart" element={<Cart />} />
         </Route>
 
-        {/* 로그인, 회원가입 관련 */}
-        <Route path="/auth">
-          <Route path="login" element={<Login />} />
-          <Route path="agreement" element={<Agreement />} />
-          <Route path="signup" element={<Signup />} />
+        {/* 로그인, 회원가입 관련 보호된 라우트 */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/auth">
+            <Route path="login" element={<Login />} />
+            <Route path="agreement" element={<Agreement />} />
+            <Route path="signup" element={<Signup />} />
+          </Route>
         </Route>
+
+        {/* NotFound 라우트 추가 */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>
   );
