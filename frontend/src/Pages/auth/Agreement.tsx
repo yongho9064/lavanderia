@@ -1,6 +1,7 @@
 import React, { useState, MouseEvent, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AgreementJoin } from "../../Typings/auth/Agreements";
+import Logo from "../../Components/common/Logo";
 
 const Agreement = () => {
     const [allIsChecked, setAllIsChecked] = useState(false);
@@ -71,13 +72,8 @@ const Agreement = () => {
                     handleSubmit();
                 }}
             >
-                <div className="mb-5 flex w-full items-center">
-                    <Link
-                        to="/"
-                        className="text-2xl font-bold text-blue-500 hover:text-blue-700"
-                    >
-                        lavanderia
-                    </Link>
+                <div className="mb-5 flex w-full items-center border-b border-gray-400 pb-2">
+                    <Logo/>
                 </div>
                 <div className="mb-4">
                     <label className="flex items-center">
@@ -87,7 +83,7 @@ const Agreement = () => {
                             checked={allIsChecked}
                             value="all"
                             name="agreement"
-                            className="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500"
+                            className="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
                         />
                         <span className="ml-2 text-sm text-gray-700">모두 동의합니다.</span>
                     </label>
@@ -106,7 +102,7 @@ const Agreement = () => {
                                     value={item.value}
                                     checked={item.checked}
                                     name={item.name}
-                                    className="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500"
+                                    className="h-5 w-5 border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
                                 />
                                 <span className="ml-2 text-sm font-medium text-gray-700">
                   {item.children}

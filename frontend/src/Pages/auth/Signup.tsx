@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import Logo from "../../Components/common/Logo";
 
 interface FormData {
     name: string;
@@ -147,7 +148,7 @@ const Signup = () => {
         // Remove any non-digit characters
         const cleaned = value.replace(/\D/g, '');
 
-        let formatted = '';
+        let formatted: string;
         if (cleaned.length <= 3) {
             formatted = cleaned;
         } else if (cleaned.length <= 7) {
@@ -182,8 +183,8 @@ const Signup = () => {
         <div className="min-h-screen flex flex-col items-center">
             <div className="w-full h-20 pt-15 hidden items-center justify-center lg:flex">
                 <h1 className="text-black w-2/3 h-full items-center border-b border-black text-3xl lg:flex">
-                    <Link to="/" className="hidden lg:block lg:text-blue-500 lg:mr-5">lavanderia</Link>
-                    <span className="font-bold text-2xl">회원가입</span>
+                    <Logo/>
+                    <span className="ml-5 font-bold text-2xl">회원가입</span>
                 </h1>
             </div>
 

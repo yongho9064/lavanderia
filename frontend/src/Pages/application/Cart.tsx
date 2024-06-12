@@ -94,13 +94,16 @@ const Cart: React.FC = () => {
         </div>
 
         <div className="w-full lg:w-1/3 flex flex-col justify-between">
-          <div className="rounded-lg border h-auto p-5 shadow-md mb-5 flex-grow">
-            <h2 className="mb-4 text-xl font-bold">상품 내역</h2>
-            <div className="text-end text-black">
+          <div className="flex flex-col justify-between rounded-lg border h-auto p-5 shadow-md mb-5 flex-grow">
+            <h2 className="mb-4 text-xl font-bold border-b border-gray-600 pb-2">상품 내역</h2>
+            <div className="text-start text-black">
               {Object.entries(itemCounts).map(([name, count]) => (
-                <p key={name} className="text-sm font-bold">{name} x {count}</p>
+                <p key={name} className="text-lg text-gray-500 font-bold">{name} x {count}</p>
               ))}
-              <p className="text-xl font-bold mt-4">총 금액: {totalAmount.toLocaleString()}원</p>
+              <div className="flex justify-between">
+                <p className="text-2xl font-bold mt-4">총 결제금액: </p>
+                <p className="text-2xl font-bold mt-4">{totalAmount.toLocaleString()}원</p>
+              </div>
             </div>
           </div>
 

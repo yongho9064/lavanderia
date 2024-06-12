@@ -4,7 +4,7 @@ import ShoppingCart from '../../Assets/Img/laundry-basket.png'; // Ensure the co
 
 const FloatingCartButton = () => {
     return (
-        <div className="fixed bottom-6 right-6 flex flex-col items-center lg:bottom-10 lg:right-20">
+        <div className="fixed bottom-6 right-6 flex flex-col items-center lg:bottom-10 lg:right-20 3xl:right-28">
             <Link to="/cart" className="flex flex-col items-center transition-transform duration-300 hover:-translate-y-2">
                 <div className="bg-blue-400 p-4 rounded-full shadow-sm flex items-center justify-center" style={{ boxShadow: '0 2px 4px rgba(0, 0, 0, 0.6)' }}>
                     <img className="h-10 w-10 lg:h-16 lg:w-16" src={ShoppingCart} alt="Check Laundry" />

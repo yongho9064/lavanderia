@@ -1,8 +1,11 @@
 package com.kyungmin.lavanderia.product.data.entity;
 
+import com.kyungmin.lavanderia.order.data.entity.Order;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,5 +33,8 @@ public class Product {
 
     @Column(name = "PRODUCT_IMAGE")
     private String productImage; // 상품 이미지
+
+    @OneToMany(mappedBy = "product")
+    private List<Order> orderList;
 
 }

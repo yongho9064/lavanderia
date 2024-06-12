@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class JWTUtil {
@@ -27,8 +29,9 @@ public class JWTUtil {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("memberId", String.class);
     }
 
-    public String getRole(String token) {
-        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("role", String.class);
+    public List<String> getRole(String token) {
+        String roles = Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("roles", String.class);
+        return Arrays.asList(roles.split(","));
     }
 
     public Boolean isExpired(String token) {
@@ -39,11 +42,14 @@ public class JWTUtil {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("category", String.class);
     }
 
-    public String createJwt(String category, String memberId, String role, Long expiredMs) {
+    public String createJwt(String category, String memberId, List<String> roles, Long expiredMs) {
+
+        String rolesStr = String.join(",", roles);
+
         return Jwts.builder()
                 .claim("category", category)
                 .claim("memberId", memberId)
-                .claim("role", role)
+                .claim("roles", rolesStr)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiredMs))
                 .signWith(secretKey)
