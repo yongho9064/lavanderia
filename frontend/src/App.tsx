@@ -13,31 +13,32 @@ import ScrollToTop from "./Components/common/ScrollToTop";
 import Signup from "./Pages/auth/Signup";
 import Application from "./Pages/application/Application";
 import Payment from "./Pages/application/Payment";
-import Cart from "./Pages/application/Cart"; // ScrollToTop 컴포넌트 임포트
+import Cart from "./Pages/application/Cart";
+import { AuthProvider } from "./Context"; // ScrollToTop 컴포넌트 임포트
 
 function App() {
-    return (
-        <>
-            <ScrollToTop />
-            <Routes>
-                <Route element={<Header />}>
-                    <Route path="/" element={<Home />} />
-                    <Route path="application" element={<Application />} />
-                    <Route path="Payment" element={<Payment />} />
-                    <Route path="community" element={<Community />} />
-                    <Route path="servicecenter" element={<ServiceCenter />} />
-                    <Route path="cart" element={<Cart/>} />
-                </Route>
+  return (
+    <AuthProvider>
+      <ScrollToTop />
+      <Routes>
+        <Route element={<Header />}>
+          <Route path="/" element={<Home />} />
+          <Route path="application" element={<Application />} />
+          <Route path="Payment" element={<Payment />} />
+          <Route path="community" element={<Community />} />
+          <Route path="servicecenter" element={<ServiceCenter />} />
+          <Route path="cart" element={<Cart />} />
+        </Route>
 
-                {/* 로그인, 회원가입 관련 */}
-                <Route path="/auth">
-                    <Route path="login" element={<Login />} />
-                    <Route path="agreement" element={<Agreement />} />
-                    <Route path="signup" element={<Signup />} />
-                </Route>
-            </Routes>
-        </>
-    );
+        {/* 로그인, 회원가입 관련 */}
+        <Route path="/auth">
+          <Route path="login" element={<Login />} />
+          <Route path="agreement" element={<Agreement />} />
+          <Route path="signup" element={<Signup />} />
+        </Route>
+      </Routes>
+    </AuthProvider>
+  );
 }
 
 export default App;
