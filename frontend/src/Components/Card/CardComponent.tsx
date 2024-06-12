@@ -1,4 +1,3 @@
-// CardComponent.tsx
 import React from 'react';
 
 interface CardComponentProps {
@@ -8,30 +7,23 @@ interface CardComponentProps {
     isReversed?: boolean;
 }
 
-const CardComponent: React.FC<CardComponentProps> = ({ imgSrc, title, description, isReversed = false }) => {
+const CardComponent: React.FC<CardComponentProps> = ({ imgSrc, title, description  }) => {
+    const formattedDescription = description.split('\n').map((line, index) => (
+        <React.Fragment key={index}>
+            {line}
+            <br />
+        </React.Fragment>
+    ));
+
     return (
-        <div className={`mb-16 ${isReversed ? 'ml-auto' : 'mr-auto'}`}>
-            {isReversed ? (
-                <>
-                    <div>
-                        <h4 className="mb-4  text-2xl sm:text-right text-center">{title}</h4>
-                        <p className="mb-4 text-base text-gray-500">{description}</p>
-                    </div>
-                    <div>
-                        <img src={imgSrc} className={`sm:w-96 w-full  ${isReversed ? 'ml-auto' : ''}`} alt={title} />
-                    </div>
-                </>
-            ) : (
-                <>
-                    <div>
-                        <img src={imgSrc} className="sm:w-96 w-full" alt={title} />
-                    </div>
-                    <div>
-                        <h4 className="mb-4 mt-4 text-2xl sm:text-left text-center">{title}</h4>
-                        <p className="text-base text-gray-500">{description}</p>
-                    </div>
-                </>
-            )}
+        <div className={`mb-16 flex  flex-col sm:flex-row `}>
+            <div className="sm:w-1/2 flex justify-center">
+                <img src={imgSrc} className="w-full sm:w-96" alt={title} />
+            </div>
+            <div className="sm:w-1/2 flex flex-col justify-center  sm:text-left md:ml-4">
+                <h4 className="mb-4 text-2xl mt-4 sm:mt-0">{title}</h4>
+                <p className="text-base text-gray-500">{formattedDescription}</p>
+            </div>
         </div>
     );
 };
