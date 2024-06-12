@@ -61,8 +61,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setRefreshToken("");
     window.localStorage.removeItem("accessToken");
     window.localStorage.removeItem("refreshToken");
+
     window.sessionStorage.removeItem("accessToken");
     window.sessionStorage.removeItem("refreshToken");
+
+    window.localStorage.removeItem("rememberMe"); // rememberMe 값 제거
   };
 
   const refreshAccessToken = async (refreshToken: string) => {

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiMenu } from "react-icons/hi";
 import { AuthContext } from "../../Context"; // 리액트 아이콘 임포트
 
@@ -10,21 +10,30 @@ const navLinks = [
   { path: "/servicecenter", label: "고객센터" },
 ];
 
-
 const Navigation = () => {
-  const {isLoggedIn} = useContext(AuthContext);
+  const { isLoggedIn, logout } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleLinkClick = () => {
     setMenuOpen(false);
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   const authLinks = isLoggedIn
-    ? [{ path: "/mypage", label: "마이페이지" }]
+    ? [
+      { path: "/mypage", label: "마이페이지" },
+      { path: "/", label: "로그아웃", onClick: handleLogout },
+    ]
     : [
       { path: "/auth/login", label: "로그인" },
       { path: "/auth/agreement", label: "회원가입" },
     ];
+
   return (
     <div className="sticky top-0 z-50 bg-white shadow">
       <div className="mx-auto flex h-auto w-full flex-col p-5 font-roboto lg:h-16 lg:w-2/3 lg:flex-row lg:items-center lg:justify-between lg:p-0">
@@ -66,13 +75,22 @@ const Navigation = () => {
             {authLinks.map((link) => (
               <React.Fragment key={link.path}>
                 <li className="mt-1 lg:m-1.5 w-full lg:w-auto">
-                  <Link
-                    to={link.path}
-                    className="block py-2 text-black lg:text-black text-lg lg:text-base"
-                    onClick={handleLinkClick}
-                  >
-                    {link.label}
-                  </Link>
+                  {link.onClick ? (
+                    <button
+                      className="block py-2 text-black lg:text-black text-lg lg:text-base"
+                      onClick={link.onClick}
+                    >
+                      {link.label}
+                    </button>
+                  ) : (
+                    <Link
+                      to={link.path}
+                      className="block py-2 text-black lg:text-black text-lg lg:text-base"
+                      onClick={handleLinkClick}
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
                 <li className="lg:hidden">
                   <hr className="w-full border-t border-gray-200" />
