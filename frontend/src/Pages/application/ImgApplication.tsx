@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FloatingCartButton from "../../Components/floatingCart/FloatingCartButton";
 
-const ApplicationDetails: React.FC = () => {
+const ImgApplication: React.FC = () => {
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
     const [amount, setAmount] = useState<number | null>(null);
 
@@ -70,4 +70,4 @@ const ApplicationDetails: React.FC = () => {
     );
 };
 
-export default ApplicationDetails;
+export default ImgApplication;

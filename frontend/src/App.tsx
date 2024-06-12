@@ -17,6 +17,8 @@ import Cart from "./Pages/application/Cart";
 import { AuthProvider } from "./Context";
 import ProtectedRoute from "./Components/common/ProtectedRoute";
 import NotFound from "./Components/common/NotFound";
+import ApplicationDetail from "./Pages/application/ApplicationDetail";
+import ImgApplication from "./Pages/application/ImgApplication";
 
 function App() {
   return (
@@ -25,7 +27,12 @@ function App() {
       <Routes>
         <Route element={<Header />}>
           <Route path="/" element={<Home />} />
+
           <Route path="application" element={<Application />} />
+
+          <Route path="applicationDetail" element={<ApplicationDetail/>}/>
+          <Route path="imgApplication" element={<ImgApplication/>}/>
+
           <Route path="Payment" element={<Payment />} />
           <Route path="community" element={<Community />} />
           <Route path="servicecenter" element={<ServiceCenter />} />
