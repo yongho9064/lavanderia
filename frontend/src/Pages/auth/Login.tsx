@@ -44,18 +44,14 @@ const Login = () => {
 
 
     // 하드 코딩 테스트 버전
+    // 나중에 서버쪽으로 리프레쉬 토큰 넘겨서 재로그인 하는 방식으로 변경하기
     if (formData.userId === "user" && formData.password === "1234") {
       try {
-        // 하드코딩된 성공 케이스
         const accessToken = "hardcoded-access-token";
         const refreshToken = "hardcoded-refresh-token";
 
-        login(accessToken, refreshToken);  // Context의 login 메소드 호출
-        if (rememberMe) {
-          window.localStorage.setItem("rememberMe", "true");
-        } else {
-          window.localStorage.setItem("rememberMe", "false");
-        }
+        login(accessToken, refreshToken, rememberMe);  // Context의 login 메소드 호출
+
         navigate("/"); // 로그인 후 홈으로 이동
       } catch (error) {
         setError("로그인 중 오류가 발생했습니다.");
@@ -64,7 +60,7 @@ const Login = () => {
     } else {
       setError("아이디 또는 비밀번호가 일치하지 않습니다.");
     }
-  };
+  }
 
   const handleCheckboxChange = () => {
     setRememberMe((prevRememberMe) => !prevRememberMe);

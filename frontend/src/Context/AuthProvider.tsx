@@ -1,11 +1,12 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
+import axios from "axios";
 
 // Context 생성
 interface AuthContextType {
   isLoggedIn: boolean;
   accessToken: string;
   refreshToken: string;
-  login: (accessToken: string, refreshToken: string) => void;
+  login: (accessToken: string, refreshToken: string, rememberMe: boolean) => void;
   logout: () => void;
 }
 
@@ -23,24 +24,25 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-// Provider 컴포넌트 생성
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
 
   useEffect(() => {
     const storedAccessToken = window.localStorage.getItem("accessToken") || window.sessionStorage.getItem("accessToken");
     const storedRefreshToken = window.localStorage.getItem("refreshToken") || window.sessionStorage.getItem("refreshToken");
+
     if (storedAccessToken && storedRefreshToken) {
       setAccessToken(storedAccessToken);
       setRefreshToken(storedRefreshToken);
       setIsLoggedIn(true);
+    } else if (storedRefreshToken) {
+      refreshAccessToken(storedRefreshToken);
     }
   }, []);
 
-  const login = (accessToken: string, refreshToken: string) => {
+  const login = (accessToken: string, refreshToken: string, rememberMe: boolean) => {
     setIsLoggedIn(true);
     setAccessToken(accessToken);
     setRefreshToken(refreshToken);
@@ -61,6 +63,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     window.localStorage.removeItem("refreshToken");
     window.sessionStorage.removeItem("accessToken");
     window.sessionStorage.removeItem("refreshToken");
+  };
+
+  const refreshAccessToken = async (refreshToken: string) => {
+    try {
+      const response = await axios.post("/refresh-token", { refreshToken });
+      const { accessToken: newAccessToken, refreshToken: newRefreshToken } = response.data;
+      setAccessToken(newAccessToken);
+      setRefreshToken(newRefreshToken);
+      window.localStorage.setItem("accessToken", newAccessToken);
+      window.localStorage.setItem("refreshToken", newRefreshToken);
+      setIsLoggedIn(true);
+    } catch (error) {
+      console.error("Failed to refresh access token:", error);
+      logout();
+    }
   };
 
   return (
