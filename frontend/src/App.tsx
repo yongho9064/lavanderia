@@ -14,33 +14,38 @@ import Signup from "./Pages/auth/Signup";
 import Application from "./Pages/application/Application";
 import Payment from "./Pages/application/Payment";
 import Cart from "./Pages/application/Cart";
-import ApplicationDetails from "./Pages/application/ApplicationDetails"; // ScrollToTop 컴포넌트 임포트
+import { AuthProvider } from "./Context";
+import ProtectedRoute from "./Components/common/ProtectedRoute";
+import NotFound from "./Components/common/NotFound";
 
 function App() {
-    return (
-        <>
-            <ScrollToTop />
-            <Routes>
-                <Route element={<Header />}>
-                    <Route path="/" element={<Home />} />
-                    <Route path="application" element={<Application />} />
-                    <Route path="applicationDetails" element={<ApplicationDetails
-                    />} />
-                    <Route path="Payment" element={<Payment />} />
-                    <Route path="community" element={<Community />} />
-                    <Route path="servicecenter" element={<ServiceCenter />} />
-                    <Route path="cart" element={<Cart/>} />
-                </Route>
+  return (
+    <AuthProvider>
+      <ScrollToTop />
+      <Routes>
+        <Route element={<Header />}>
+          <Route path="/" element={<Home />} />
+          <Route path="application" element={<Application />} />
+          <Route path="Payment" element={<Payment />} />
+          <Route path="community" element={<Community />} />
+          <Route path="servicecenter" element={<ServiceCenter />} />
+          <Route path="cart" element={<Cart />} />
+        </Route>
 
-                {/* 로그인, 회원가입 관련 */}
-                <Route path="/auth">
-                    <Route path="login" element={<Login />} />
-                    <Route path="agreement" element={<Agreement />} />
-                    <Route path="signup" element={<Signup />} />
-                </Route>
-            </Routes>
-        </>
-    );
+        {/* 로그인, 회원가입 관련 보호된 라우트 */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/auth">
+            <Route path="login" element={<Login />} />
+            <Route path="agreement" element={<Agreement />} />
+            <Route path="signup" element={<Signup />} />
+          </Route>
+        </Route>
+
+        {/* NotFound 라우트 추가 */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AuthProvider>
+  );
 }
 
 export default App;
