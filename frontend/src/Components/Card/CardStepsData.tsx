@@ -9,21 +9,17 @@ interface CardComponentProps {
 
 const CardStepsData: React.FC<CardComponentProps> = ({title, description, imgSrc}) => {
     return (
-        <div>
-            <div className='mr-4 p-4'>
-                <div>
-                    <img
-                        src={imgSrc}
-                        alt="Home" className="mb-4 sm:w-64 w-96"/>
-                </div>
-                <div className='text-center sm:text-left'>
-                    <p className="mb-4 border-b-4 border-blue-500 sm:w-64"></p>
-                    <h4 className="mb-2 text-2xl">{title}</h4>
-                    <p className="text-sm text-gray-500">{description}</p>
-                </div>
-            </div>
+    <div className="p-4 flex flex-col  items-center text-center">
+        <img src={imgSrc} alt={title} className="mb-4 md:h-96 w-full md:w-full sm:w-auto lg:h-56 object-cover"/>
+        <div className="w-full md:w-full  sm:w-64">
+            <p className="mb-4 border-b-4 border-blue-500  "></p>
+            <h4 className="mb-2 text-left text-2xl">{title}</h4>
+            <p className="text-sm text-left text-gray-500">{description}</p>
         </div>
-    );
+    </div>
+
+)
+    ;
 };
 
 export default CardStepsData;
