@@ -66,15 +66,15 @@ const Home = () => {
     }, [data.advertisement.length]);
 
     return (
-        <section className="mt-4 font-roboto">
+        <section className="font-Nanum bg-gray-100">
             {/* 광고 */}
-            <article className="relative">
-                <div>
+            <article className="relative mt-2">
+                <div className='m-auto max-w-6xl'>
                     {data.advertisement.length > 0 && (
                         <img
                             src={getAdvertisementImageUrl(data.advertisement[currentImageIndex].imgSrc)}
                             alt="Ad"
-                            className="w-full h-56 sm:h-96"
+                            className="w-full h-56 sm:h-96 rounded-b"
                         />
                     )}
                 </div>
@@ -96,7 +96,7 @@ const Home = () => {
             </article>
 
             {/* 첫 번쨰 소개글 */}
-            <article className="m-auto max-w-5xl">
+            <article className="m-auto max-w-6xl">
                 <div className="mt-16 sm:mt-40 flex flex-col sm:flex-row items-center sm:justify-between pb-20">
                     <div className="sm:w-1/2 sm:mr-10 text-center sm:text-left sm:p-4">
                         <h4 className="mb-4 text-2xl text-blue-500">D A I L Y W A S H</h4>
@@ -108,12 +108,12 @@ const Home = () => {
                             세탁 서비스
                         </h1>
                     </div>
-                    <img src={gitImage} alt="dailywash" className="h-90 w-80 rounded-2xl sm:w-1/2"/>
+                    <img src={gitImage} alt="dailywash" className="h-90 w-80 rounded-2xl sm:w-1/2 m-4"/>
                 </div>
             </article>
 
             {/* 두 번째 소개글 */}
-            <article className="m-auto max-w-5xl">
+            <article className="m-auto max-w-6xl">
                 <div className="text-center  mb-16 mt-16">
                     <h1 className="text-3xl text-blue-500">All In One</h1>
                     <h1 className="text-3xl">Laundry Service</h1>
@@ -135,8 +135,8 @@ const Home = () => {
 
 
             {/* 세 번째 소개글 */}
-            <article className="m-auto max-w-5xl">
-                <div className="mt-40 flex flex-col items-center justify-between p-4">
+            <article className="m-auto max-w-6xl">
+                <div className="mt-40 flex flex-col text-left items-center justify-between">
                     {data.cardsData.map((card, index) => (
                         <CardComponent
                             key={index}
@@ -150,8 +150,8 @@ const Home = () => {
             </article>
 
             {/* 네 번쨰 소개글 */}
-            <article className="m-auto max-w-5xl p-4 sm:p-0 ml-4">
-                <div className="mt-10 sm:mt-40">
+            <article className="m-auto max-w-6xl p-4">
+                <div className="mt-10 sm:ml-4 sm:mr-4">
                     <h4 className="text-lg sm:text-3xl  sm:text-left leading-relaxed sm:leading-snug">
                         세탁으로 부터 찾는 나의 시간,
                         <br/>

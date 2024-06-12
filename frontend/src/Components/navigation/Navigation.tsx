@@ -23,8 +23,8 @@ const Navigation = () => {
   };
 
   return (
-      <div className="sticky top-0 z-50 bg-white shadow">
-        <div className="mx-auto flex h-auto w-full flex-col p-5 font-roboto lg:h-16 lg:w-2/3 lg:flex-row lg:items-center lg:justify-between lg:p-0">
+      <div className="sticky top-0 font-roboto font-semibold z-50 bg-white shadow text-base">
+        <div className="mx-auto flex h-auto w-full flex-col p-5 lg:h-16 lg:w-2/3 lg:flex-row lg:items-center lg:justify-between lg:p-0">
           <div className="flex w-full items-center justify-between lg:mb-0 lg:w-auto lg:justify-start">
             <Logo handleLinkClick={handleLinkClick} />
             <button
