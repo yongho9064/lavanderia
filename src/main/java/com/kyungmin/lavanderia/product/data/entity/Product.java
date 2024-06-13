@@ -1,5 +1,6 @@
 package com.kyungmin.lavanderia.product.data.entity;
 
+import com.kyungmin.lavanderia.cart.data.entity.Cart;
 import com.kyungmin.lavanderia.order.data.entity.Order;
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,5 +37,8 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<Order> orderList;
+
+    @OneToMany(mappedBy = "product")
+    private List<Cart> cartList;
 
 }

@@ -35,6 +35,21 @@ const Navigation = () => {
     ];
 
   return (
+      <div className="sticky top-0 font-roboto font-semibold z-50 bg-white shadow text-base">
+        <div className="mx-auto flex h-auto w-full flex-col p-5 lg:h-16 lg:w-2/3 lg:flex-row lg:items-center lg:justify-between lg:p-0">
+          <div className="flex w-full items-center justify-between lg:mb-0 lg:w-auto lg:justify-start">
+            <Logo handleLinkClick={handleLinkClick} />
+            <button
+                className="block lg:hidden"
+                onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <HiMenu className="w-6 h-6 text-black" /> {/* 리액트 아이콘 사용 */}
+            </button>
+          </div>
+          <div
+              className={`w-full flex-col gap-0 ${
+                  menuOpen ? "flex" : "hidden"
+              } lg:flex lg:w-auto lg:flex-row lg:items-center lg:justify-between lg:gap-20`}
     <div className="sticky top-0 z-50 bg-white shadow">
       <div className="mx-auto flex h-auto w-full flex-col p-5 font-roboto lg:h-16 lg:w-2/3 lg:flex-row lg:items-center lg:justify-between lg:p-0">
         <div className="flex w-full items-center justify-between lg:mb-0 lg:w-auto lg:justify-start">

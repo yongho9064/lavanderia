@@ -33,7 +33,6 @@ public class MemberServiceImpl implements MemberService {
                 .memberPhone(signupDto.getMemberPhone())
                 .agreeMarketingYn(signupDto.getAgreeMarketingYn())
                 .memberBirth(signupDto.getMemberBirth())
-                .memberRole("ROLE_USER")
                 .build();
         memberRepository.save(member);
     }

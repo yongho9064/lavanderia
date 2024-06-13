@@ -4,7 +4,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        roboto: ["Roboto", "sans-serif"], // Using 'sans-serif' as an example
+        roboto: ["Roboto", "SCDream"],
+        Gugi:["Gugi"],
+        Nanum:["Gothic Coding"],
         courgette: ["Courgette", "cursive"],
       },
       screens: {
