@@ -81,18 +81,18 @@ const Home: React.FC = () => {
                                 <img
                                     src={getAdvertisementImageUrl(data.advertisement[currentImageIndex].imgSrc)}
                                     alt="Advertisement"
-                                    className="w-full object-cover rounded-b"
+                                    className="w-full object-cover"
                                 />
                             </div>
                             <button
                                 onClick={handlePrevious}
-                                className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white px-1 py-1 rounded"
+                                className="absolute left-2 top-2/4 transform -translate-y-1/2  text-white px-1 py-1 rounded-3xl"
                             >
                                 <FaAngleLeft/>
                             </button>
                             <button
                                 onClick={handleNext}
-                                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-1 py-1 rounded"
+                                className="absolute right-2 top-1/2 transform -translate-y-1/2  text-white px-1 py-1 rounded-3xl"
                             >
                                 <FaAngleRight/>
                             </button>
@@ -158,9 +158,9 @@ const Home: React.FC = () => {
                     <h4 className="text-lg sm:text-3xl  sm:text-left leading-relaxed sm:leading-snug">
                         세탁으로 부터 찾는 나의 시간,
                         <br/>
-                        이제 <strong className="font-bold">하루 세탁</strong> 맡기세요
+                        이제 <strong className="font-bold">하루 세탁</strong>에 맡기세요
                     </h4>
-                    <img src={storyImage} className="w-full mt-4 sm:mt-8 object-cover" alt="Home"/>
+                    <img src={storyImage} className="w-full mt-4 sm:mt-8 object-cover h-full" alt="Home"/>
                 </div>
             </article>
         </section>
