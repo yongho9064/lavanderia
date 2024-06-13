@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect,  useState} from 'react';
+import { useSwipeable } from 'react-swipeable';
 import gitImage from "../../Assets/Img/home/af9e0e944df57d63d4eec5a60a89cfb2.gif";
 import storyImage from "../../Assets/Img/home/story.png";
 import CardComponent from "../../Components/Card/CardComponent";
-import {Advertisement, CardsData, StepsData} from "../../Typings/Home/CardsData";
+import { Advertisement, CardsData, StepsData } from "../../Typings/Home/CardsData";
 import CardStepsData from "../../Components/Card/CardStepsData";
-import { FaAngleRight } from "react-icons/fa6";
-import { FaAngleLeft } from "react-icons/fa6";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 
-const Home = () => {
+const Home: React.FC = () => {
     const [data, setData] = useState<{ cardsData: CardsData[]; stepsData: StepsData[]; advertisement: Advertisement[] }>({
         cardsData: [],
         stepsData: [],
@@ -23,6 +23,7 @@ const Home = () => {
     const handlePrevious = () => {
         setCurrentImageIndex((prevIndex) => (prevIndex - 1 + data.advertisement.length) % data.advertisement.length);
     }
+
 
     useEffect(() => {
         fetch('/mock/home.json')
@@ -60,37 +61,43 @@ const Home = () => {
 
     useEffect(() => {
         const interval = setInterval(handleNext, 5000);
-
         return () => clearInterval(interval);
     }, [data.advertisement.length]);
 
+    const handlers = useSwipeable({
+        onSwipeStart: handleNext,
+        onSwipedRight: handlePrevious,
+    });
+
     return (
-        <section className="font-roboto">
+        <section className="font-roboto sm:max-w-2xl m-auto">
             {/* 광고 */}
-            <article className="relative mt-2">
-                <div className='m-auto max-w-7xl'>
+            <article className="relative">
+                <div className="m-auto max-w-7xl" {...handlers}>
                     {data.advertisement.length > 0 && (
-                        <img
-                            src={getAdvertisementImageUrl(data.advertisement[currentImageIndex].imgSrc)}
-                            alt="Ad"
-                            className="w-full h-56 sm:h-96 rounded-b"
-                        />
+                        <div className="relative">
+                            <div
+                                className={`transition-transform duration-500  transform translate-x-0`}>
+                                <img
+                                    src={getAdvertisementImageUrl(data.advertisement[currentImageIndex].imgSrc)}
+                                    alt="Advertisement"
+                                    className="w-full object-cover rounded-b"
+                                />
+                            </div>
+                            <button
+                                onClick={handlePrevious}
+                                className="absolute left-0 top-1/2 transform -translate-y-1/2  text-white px-4 py-2 rounded"
+                            >
+                                <FaAngleLeft/>
+                            </button>
+                            <button
+                                onClick={handleNext}
+                                className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white px-4 py-2 rounded"
+                            >
+                                <FaAngleRight/>
+                            </button>
+                        </div>
                     )}
-                </div>
-                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-4">
-                    <div className="bg-[#2c323b] rounded-2xl opacity-30 absolute inset-0"></div>
-                    <button
-                        onClick={handlePrevious}
-                        className="relative px-2 py-1 sm:px-2 sm:py-2 text-white text-sm sm:text-base"
-                    >
-                        <FaAngleLeft/>
-                    </button>
-                    <button
-                        onClick={handleNext}
-                        className="relative px-6 py-1 sm:px-6 sm:py-2 text-white text-sm sm:text-base"
-                    >
-                        <FaAngleRight/>
-                    </button>
                 </div>
             </article>
 
@@ -99,7 +106,7 @@ const Home = () => {
                 <div className="mt-16 sm:mt-40 flex flex-col sm:flex-row items-center sm:justify-between pb-20">
                     <div className="sm:w-1/2 sm:mr-10 text-center sm:text-left sm:p-4">
                         <h4 className="mb-4 text-2xl text-blue-500">D A I L Y W A S H</h4>
-                        <h1 className="mb-4 text-2xl sm:text-3x">
+                        <h1 className="mb-4 text-2xl sm:text-3xl">
                             귀찮은 세탁을 간편하게
                             <br/>
                             모두를 위한 편리한
@@ -116,8 +123,7 @@ const Home = () => {
                 <div className="text-center  mb-16 mt-16">
                     <h1 className="text-3xl text-blue-500">All In One</h1>
                     <h1 className="text-3xl">Laundry Service</h1>
-                    <p className="mt-4 text-base text-gray-500">수거부터 세탁, 새벽까지
-                        배달</p>
+                    <p className="mt-4 text-base text-gray-500">수거부터 세탁, 새벽까지 배달</p>
                 </div>
                 {/* 카드 */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -131,7 +137,6 @@ const Home = () => {
                     ))}
                 </div>
             </article>
-
 
             {/* 세 번째 소개글 */}
             <article className="m-auto max-w-7xl">
