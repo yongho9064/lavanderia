@@ -44,10 +44,10 @@ const Navigation = () => {
 
   return (
     <div className="sticky top-0 z-50 bg-white shadow">
-      <div className="mx-auto flex h-auto w-full flex-col p-5  lg:h-16 lg:w-2/3 lg:flex-row lg:items-center lg:justify-between lg:p-0">
+      <div className="mx-auto flex h-auto w-full flex-col p-5 lg:h-16 lg:w-2/3 lg:flex-row lg:items-center lg:justify-between lg:p-0">
         <div className="flex w-full items-center justify-between lg:mb-0 lg:w-auto lg:justify-start">
           <Link to="/" onClick={handleLinkClick}>
-            <h1 className="text-3xl font-semibold font-Gugi">세탁 하루</h1>
+            <h1 className="text-3xl font-semibold font-Gugi">하루 세탁</h1>
           </Link>
           <button
             className="block lg:hidden"
