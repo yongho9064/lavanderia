@@ -27,8 +27,8 @@ function App() {
         <Route element={<Header />}>
           <Route path="/" element={<Home />} />
           <Route path="application" element={<Application />} />
-          <Route path="application/applicationDetail" element={<ApplicationDetail />} />
-          <Route path="application/imgApplication" element={<ImgApplication />} />
+          <Route path="applicationDetail" element={<ApplicationDetail />} />
+          <Route path="imgApplication" element={<ImgApplication />} />
           <Route path="Payment" element={<Payment />} />
           <Route path="community" element={<Community />} />
           <Route path="servicecenter" element={<ServiceCenter />} />
