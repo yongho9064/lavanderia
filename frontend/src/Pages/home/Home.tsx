@@ -120,13 +120,13 @@ const Home: React.FC = () => {
 
             {/* 두 번째 소개글 */}
             <article className="m-auto max-w-7xl">
-                <div className="text-center  mb-16 mt-16">
+                <div className="text-center mb-16 mt-16">
                     <h1 className="text-3xl text-blue-500">All In One</h1>
                     <h1 className="text-3xl">Laundry Service</h1>
                     <p className="mt-4 text-base text-gray-500">수거부터 세탁, 새벽까지 배달</p>
                 </div>
                 {/* 카드 */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                     {data.stepsData.map((step, index) => (
                         <CardStepsData
                             key={index}
@@ -137,7 +137,6 @@ const Home: React.FC = () => {
                     ))}
                 </div>
             </article>
-
             {/* 세 번째 소개글 */}
             <article className="m-auto max-w-7xl">
                 <div className="mt-32 flex flex-col  items-center justify-between">
