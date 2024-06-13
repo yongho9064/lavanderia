@@ -18,6 +18,7 @@ import { AuthProvider } from "./Context";
 import Payment from "./Pages/application/Payment";
 import ProtectedRoute from "./Components/route/ProtectedRoute";
 import RestrictedRoute from "./Components/route/RestrictedRoute";
+import NotFound from "./Components/common/NotFound";
 
 function App() {
   return (
@@ -47,6 +48,8 @@ function App() {
           <Route path="agreement" element={<Agreement />} />
           <Route path="signup" element={<Signup />} />
         </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>
   );
