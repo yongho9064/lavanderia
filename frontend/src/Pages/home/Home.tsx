@@ -107,8 +107,9 @@ const Home: React.FC = () => {
                     <div className="sm:w-1/2 sm:mr-10 text-center sm:text-left sm:p-4">
                         <h4 className="mb-4 text-2xl text-blue-500">D A I L Y W A S H</h4>
                         <h1 className="mb-4 text-2xl sm:text-3xl">
-                            귀찮은 세탁을 간편하게
+                            귀찮은 세탁을
                             <br/>
+                            간편하게
                             모두를 위한 편리한
                             <br/>
                             세탁 서비스
