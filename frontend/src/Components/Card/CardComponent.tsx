@@ -16,7 +16,7 @@ const CardComponent: React.FC<CardComponentProps> = ({ imgSrc, title, descriptio
     ));
 
     return (
-        <div className={`mb-16 flex  flex-col sm:flex-row p-4 `}>
+        <div className={`mb-16 flex w-full flex-col sm:flex-row p-4 `}>
             <div className="sm:w-1/2 flex justify-center">
                 <img src={imgSrc} className="w-full sm:w-96" alt={title} />
             </div>
