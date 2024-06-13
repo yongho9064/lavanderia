@@ -1,6 +1,7 @@
 package com.kyungmin.lavanderia.member.data.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "TBL_ROLE")
 public class Role {
 
@@ -21,12 +24,6 @@ public class Role {
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
-    private Member member;
-
-    @Builder
-    public Role(String authorities, Member member) {
-        this.member = member;
-        this.authorities = authorities;
-    }
+    private Member memberId;
 
 }

@@ -1,11 +1,9 @@
 package com.kyungmin.lavanderia.member.data.entity;
 
 import com.kyungmin.lavanderia.address.data.entity.Address;
+import com.kyungmin.lavanderia.cart.data.entity.Cart;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -77,14 +75,18 @@ public class Member implements UserDetails {
     @Column(name = "ACC_DELETE_DATE")
     private LocalDateTime accDeleteDate;   // 계정 삭제 일시
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "memberId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<Role> roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "memberId",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "memberId", cascade = CascadeType.ALL)
     List<Address> address; // 주소
 
+    @OneToMany(mappedBy = "memberId", cascade = CascadeType.ALL)
+    List<Cart> cart; // 장바구니
+
     @Builder
-    public Member(String memberId, String memberPwd, String memberName, String memberEmail, String memberPhone, String agreeMarketingYn, List<Role> memberRole, LocalDate memberBirth, String memberLevel, String memberPoint, String accInactiveYn, String tempPwdYn, long accLoginCount, long loginFailCount, LocalDateTime lastLoginDate, LocalDateTime accRegisterDate, LocalDateTime accUpdateDate, LocalDateTime accDeleteDate){
+    public Member(String memberId, String memberPwd, String memberName, String memberEmail, String memberPhone, String agreeMarketingYn, List<Role> roles, LocalDate memberBirth, String memberLevel,
+                  String memberPoint, String accInactiveYn, String tempPwdYn, long accLoginCount, long loginFailCount, LocalDateTime lastLoginDate, LocalDateTime accRegisterDate, LocalDateTime accUpdateDate, LocalDateTime accDeleteDate){
         this.memberId = memberId;
         this.memberPwd = memberPwd;
         this.memberName = memberName;
