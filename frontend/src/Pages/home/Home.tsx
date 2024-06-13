@@ -86,13 +86,13 @@ const Home: React.FC = () => {
                             </div>
                             <button
                                 onClick={handlePrevious}
-                                className="absolute left-0 top-1/2 transform -translate-y-1/2  text-white px-4 py-2 rounded"
+                                className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white px-1 py-1 rounded"
                             >
                                 <FaAngleLeft/>
                             </button>
                             <button
                                 onClick={handleNext}
-                                className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white px-4 py-2 rounded"
+                                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white px-1 py-1 rounded"
                             >
                                 <FaAngleRight/>
                             </button>
