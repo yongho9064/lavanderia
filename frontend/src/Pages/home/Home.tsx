@@ -158,7 +158,7 @@ const Home: React.FC = () => {
                     <h4 className="text-lg sm:text-3xl  sm:text-left leading-relaxed sm:leading-snug">
                         세탁으로 부터 찾는 나의 시간,
                         <br/>
-                        이제 <strong className="text-blue-500">라벤데리아에</strong> 맡기세요
+                        이제 <strong className="font-bold">하루 세탁</strong> 맡기세요
                     </h4>
                     <img src={storyImage} className="w-full mt-4 sm:mt-8 object-cover" alt="Home"/>
                 </div>
