@@ -1,10 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "tailwindcss/tailwind.css";
-import Premium from "./Pages/application/Payment";
 import Community from "./Pages/Community/Community";
 import ServiceCenter from "./Pages/ServiceCenter/ServiceCenter";
-import Home from "./Pages/home/Home";  // 수정된 부분
+import Home from "./Pages/home/Home";
 
 import Login from "./Pages/auth/Login";
 import Agreement from "./Pages/auth/Agreement";
@@ -12,11 +11,13 @@ import Header from "./Components/common/Header";
 import ScrollToTop from "./Components/common/ScrollToTop";
 import Signup from "./Pages/auth/Signup";
 import Application from "./Pages/application/Application";
-import Payment from "./Pages/application/Payment";
+import ApplicationDetail from "./Pages/application/ApplicationDetail";
+import ImgApplication from "./Pages/application/ImgApplication";
 import Cart from "./Pages/application/Cart";
 import { AuthProvider } from "./Context";
-import ProtectedRoute from "./Components/common/ProtectedRoute";
-import NotFound from "./Components/common/NotFound";
+import Payment from "./Pages/application/Payment";
+import ProtectedRoute from "./Components/route/ProtectedRoute";
+import RestrictedRoute from "./Components/route/RestrictedRoute";
 
 function App() {
   return (
@@ -26,23 +27,26 @@ function App() {
         <Route element={<Header />}>
           <Route path="/" element={<Home />} />
           <Route path="application" element={<Application />} />
+          <Route path="application/applicationDetail" element={<ApplicationDetail />} />
+          <Route path="application/imgApplication" element={<ImgApplication />} />
           <Route path="Payment" element={<Payment />} />
           <Route path="community" element={<Community />} />
           <Route path="servicecenter" element={<ServiceCenter />} />
-          <Route path="cart" element={<Cart />} />
+          <Route
+            path="cart"
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
         </Route>
 
-        {/* 로그인, 회원가입 관련 보호된 라우트 */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/auth">
-            <Route path="login" element={<Login />} />
-            <Route path="agreement" element={<Agreement />} />
-            <Route path="signup" element={<Signup />} />
-          </Route>
+        <Route path="/auth" element={<RestrictedRoute />}>
+          <Route path="login" element={<Login />} />
+          <Route path="agreement" element={<Agreement />} />
+          <Route path="signup" element={<Signup />} />
         </Route>
-
-        {/* NotFound 라우트 추가 */}
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>
   );

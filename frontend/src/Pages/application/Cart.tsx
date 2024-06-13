@@ -78,7 +78,7 @@ const Cart: React.FC = () => {
   return (
     <div className="container mx-auto mt-5 w-full p-5 lg:w-2/3 lg:px-0">
       <header className="mb-5 border-b border-black pb-5">
-        <h1 className="text-xl font-bold lg:text-3xl">장바구니</h1>
+        <h1 className="text-xl font-bold lg:text-3xl">세탁물 확인</h1>
       </header>
 
       <div className="flex flex-col lg:flex-row lg:gap-5 bg-white">

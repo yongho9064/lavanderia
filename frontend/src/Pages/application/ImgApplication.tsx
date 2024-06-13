@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import FloatingCartButton from "../../Components/floatingCart/FloatingCartButton";
 
-const ApplicationDetails: React.FC = () => {
+const ImgApplication: React.FC = () => {
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
     const [amount, setAmount] = useState<number | null>(null);
 
@@ -65,9 +64,8 @@ const ApplicationDetails: React.FC = () => {
             <button onClick={handleAddToBasket} className="w-full px-6 py-3 bg-green-500 text-white rounded">
                 세탁물 바구니에 추가
             </button>
-            <FloatingCartButton/>
         </div>
     );
 };
 
-export default ApplicationDetails;
+export default ImgApplication;

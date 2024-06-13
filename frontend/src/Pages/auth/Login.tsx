@@ -99,8 +99,8 @@ const Login = () => {
       <div
         className="flex flex-col w-full h-full items-center justify-center gap-4 rounded-lg bg-white text-center border shadow lg:h-[500px] lg:w-[400px] lg:mb-20">
         <div className="flex w-full items-center justify-center lg:h-20">
-                    <span className="font-courgette text-4xl">
-                        <Link to="/">lavanderia</Link>
+                    <span className="font-Gugi text-4xl">
+                        <Link to="/">하루 세탁</Link>
                     </span>
         </div>
 
