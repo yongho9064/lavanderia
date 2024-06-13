@@ -5,7 +5,6 @@ import premiumLaundry from "../../Assets/Img/premium_laundry.png";
 import dailyLaundry from "../../Assets/Img/daily_laundry.png";
 import clothesRepair from "../../Assets/Img/clothes_repair.png";
 import clothesCollectionBox from "../../Assets/Img/clothes_collection_box.png";
-import FloatingCartButton from "../../Components/floatingCart/FloatingCartButton";
 
 const services = [
     {
@@ -84,7 +83,6 @@ const Application = () => {
                   ))}
               </div>
           </div>
-          <FloatingCartButton/>
       </div>
     );
 };

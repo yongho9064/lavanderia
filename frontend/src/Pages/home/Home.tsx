@@ -6,7 +6,6 @@ import {Advertisement, CardsData, StepsData} from "../../Typings/Home/CardsData"
 import CardStepsData from "../../Components/Card/CardStepsData";
 import { FaAngleRight } from "react-icons/fa6";
 import { FaAngleLeft } from "react-icons/fa6";
-import FloatingCartButton from "../../Components/floatingCart/FloatingCartButton";
 
 const Home = () => {
     const [data, setData] = useState<{ cardsData: CardsData[]; stepsData: StepsData[]; advertisement: Advertisement[] }>({
@@ -160,7 +159,6 @@ const Home = () => {
                     <img src={storyImage} className="w-full mt-4 sm:mt-8 object-cover" alt="Home"/>
                 </div>
             </article>
-            <FloatingCartButton/>
         </section>
     );
 };
