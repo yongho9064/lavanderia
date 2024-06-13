@@ -14,7 +14,7 @@ const CardStepsData: React.FC<CardComponentProps> = ({title, description, imgSrc
         <div className="w-full md:w-full  sm:w-64">
             <p className="mb-4 border-b-4 border-blue-500  "></p>
             <h4 className="mb-2 text-left text-2xl">{title}</h4>
-            <p className="text-sm text-left text-gray-500">{description}</p>
+            <p className="2xl:text-sm text-left lg:text-2xl md:text-2xl text-gray-500">{description}</p>
         </div>
     </div>
 

@@ -66,10 +66,10 @@ const Home = () => {
     }, [data.advertisement.length]);
 
     return (
-        <section className="font-Nanum bg-gray-100">
+        <section className="font-roboto">
             {/* 광고 */}
             <article className="relative mt-2">
-                <div className='m-auto max-w-6xl'>
+                <div className='m-auto max-w-7xl'>
                     {data.advertisement.length > 0 && (
                         <img
                             src={getAdvertisementImageUrl(data.advertisement[currentImageIndex].imgSrc)}
@@ -96,7 +96,7 @@ const Home = () => {
             </article>
 
             {/* 첫 번쨰 소개글 */}
-            <article className="m-auto max-w-6xl">
+            <article className="m-auto max-w-7xl">
                 <div className="mt-16 sm:mt-40 flex flex-col sm:flex-row items-center sm:justify-between pb-20">
                     <div className="sm:w-1/2 sm:mr-10 text-center sm:text-left sm:p-4">
                         <h4 className="mb-4 text-2xl text-blue-500">D A I L Y W A S H</h4>
@@ -113,7 +113,7 @@ const Home = () => {
             </article>
 
             {/* 두 번째 소개글 */}
-            <article className="m-auto max-w-6xl">
+            <article className="m-auto max-w-7xl">
                 <div className="text-center  mb-16 mt-16">
                     <h1 className="text-3xl text-blue-500">All In One</h1>
                     <h1 className="text-3xl">Laundry Service</h1>
@@ -135,8 +135,8 @@ const Home = () => {
 
 
             {/* 세 번째 소개글 */}
-            <article className="m-auto max-w-6xl">
-                <div className="mt-40 flex flex-col text-left items-center justify-between">
+            <article className="m-auto max-w-7xl">
+                <div className="mt-32 flex flex-col  items-center justify-between">
                     {data.cardsData.map((card, index) => (
                         <CardComponent
                             key={index}
@@ -150,7 +150,7 @@ const Home = () => {
             </article>
 
             {/* 네 번쨰 소개글 */}
-            <article className="m-auto max-w-6xl p-4">
+            <article className="m-auto max-w-7xl p-4">
                 <div className="mt-10 sm:ml-4 sm:mr-4">
                     <h4 className="text-lg sm:text-3xl  sm:text-left leading-relaxed sm:leading-snug">
                         세탁으로 부터 찾는 나의 시간,
