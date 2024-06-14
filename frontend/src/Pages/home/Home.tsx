@@ -103,7 +103,7 @@ const Home: React.FC = () => {
 
             {/* 첫 번쨰 소개글 */}
             <article className="m-auto max-w-7xl">
-                <div className="mt-16 sm:mt-40 pb-20">
+                <div className="mt-20 sm:mt-20 pb-20">
                     <div className="sm:w-1/2 m-auto text-center sm:text-left sm:p-4">
                         <h4 className="mb-4 text-2xl text-center text-blue-500">D A I L Y W A S H</h4>
                         <h1 className="mb-4 text-2xl w-full text-center  sm:text-3xl">
