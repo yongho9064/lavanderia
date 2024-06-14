@@ -103,19 +103,18 @@ const Home: React.FC = () => {
 
             {/* 첫 번쨰 소개글 */}
             <article className="m-auto max-w-7xl">
-                <div className="mt-16 sm:mt-40 flex flex-col sm:flex-row items-center sm:justify-between pb-20">
-                    <div className="sm:w-1/2 sm:mr-10 text-center sm:text-left sm:p-4">
-                        <h4 className="mb-4 text-2xl text-blue-500">D A I L Y W A S H</h4>
-                        <h1 className="mb-4 text-2xl sm:text-3xl">
-                            귀찮은 세탁을
+                <div className="mt-16 sm:mt-40 pb-20">
+                    <div className="sm:w-1/2 m-auto text-center sm:text-left sm:p-4">
+                        <h4 className="mb-4 text-2xl text-center text-blue-500">D A I L Y W A S H</h4>
+                        <h1 className="mb-4 text-2xl w-full text-center  sm:text-3xl">
+                            귀찮은 세탁을 간편
                             <br/>
-                            간편하게
-                            모두를 위한 편리한
+                            하게 모두를 위한
                             <br/>
-                            세탁 서비스
+                            편리한 세탁 서비스
                         </h1>
                     </div>
-                    <img src={gitImage} alt="dailywash" className="h-90 w-80 rounded-2xl sm:w-1/2 m-4"/>
+                    <img src={gitImage} alt="dailywash" className="h-90   p-4 rounded-3xl sm:w-full "/>
                 </div>
             </article>
 
