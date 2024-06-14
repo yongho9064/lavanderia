@@ -46,17 +46,17 @@ const services = [
 
 const Application = () => {
     return (
-      <div className="mx-auto mt-5 w-full lg:h-[500px] lg:w-2/3 lg:mt-5 lg:pr-0 3xl:h-[700px]">
-          <header className="mb-0 px-5 text-center lg:mb-5 lg:px-0">
-              <h1 className="mb-3 flex justify-start text-xl font-bold lg:text-3xl">
+      <div className="mx-auto mt-5 w-full">
+          <header className="mb-0 px-5 text-center">
+              <h1 className="mb-3 flex justify-start text-xl font-bold ">
                   오늘 밤 11시까지 신청하면
               </h1>
-              <span className="flex justify-start text-sm font-bold lg:text-xl">
+              <span className="flex justify-start text-sm font-bold ">
                     04/29(월) 아침 7시까지 배송완료!
                 </span>
           </header>
 
-          <div className="grid h-full grid-cols-1 gap-x-5 gap-y-5 p-5 sm:grid-cols-2 lg:p-0">
+          <div className="grid h-full grid-cols-1 gap-x-5 gap-y-5 p-5 ">
               <div className="col-span-1 flex flex-col gap-5">
                   {services.slice(0, 2).map((service) => (
                     <ServiceCard
