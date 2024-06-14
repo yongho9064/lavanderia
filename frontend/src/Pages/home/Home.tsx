@@ -70,7 +70,7 @@ const Home: React.FC = () => {
     });
 
     return (
-        <section className="font-roboto sm:max-w-2xl m-auto">
+        <section className="font-roboto m-auto">
             {/* 광고 */}
             <article className="relative">
                 <div className="m-auto max-w-7xl" {...handlers}>

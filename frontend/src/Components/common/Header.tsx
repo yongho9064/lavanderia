@@ -4,7 +4,7 @@ import Navigation from "../navigation/Navigation";
 
 const Header = () => {
     return (
-        <header className='m-auto max-w-2xl'>
+        <header className='m-auto max-w-xl'>
             <Navigation />
             <Outlet />
         </header>
