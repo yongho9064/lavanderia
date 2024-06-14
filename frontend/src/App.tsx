@@ -19,6 +19,7 @@ import ProtectedRoute from "./Components/route/ProtectedRoute";
 import RestrictedRoute from "./Components/route/RestrictedRoute";
 import MyPage from "./Pages/auth/MyPage";
 import SecondhandProduct from "./Pages/secondhand/SecondhandProduct";
+import PostDetail from "./Pages/community/PostDetail";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
 
           {/* 로그인 불필요 페이지 */}
           <Route path="community" element={<Community />} />
+          <Route path="community/:postId" element={<PostDetail/>} /> {/* Add PostDetail route */}
           <Route path="secondhand" element={<SecondhandProduct />} />
           <Route path="servicecenter" element={<ServiceCenter />} />
         </Route>
