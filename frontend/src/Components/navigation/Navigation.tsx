@@ -14,7 +14,7 @@ const Navigation: React.FC = () => {
 
   return (
     <div className="sticky top-0 z-50 bg-white shadow text-base">
-      <div className="mx-auto flex h-16 w-full flex-row items-center justify-between p-5">
+      <div className="flex h-16 w-full items-center justify-between px-7">
         <div className="flex w-1/6 items-center justify-start">
           <FiBell className="h-6 w-6 text-black" />
         </div>

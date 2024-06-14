@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useRef, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context";
+import Logo from "../../Components/common/Logo";
 
 const Login = () => {
   const { login } = useContext(AuthContext); // authContext에서 login 함수 가져오기
@@ -99,9 +100,7 @@ const Login = () => {
       <div
         className="flex flex-col w-full h-full items-center justify-center gap-4 rounded-lg bg-white text-center border shadow lg:h-[500px] lg:w-[400px] lg:mb-20">
         <div className="flex w-full items-center justify-center lg:h-20">
-                    <span className="font-Gugi text-4xl">
-                        <Link to="/">하루 세탁</Link>
-                    </span>
+            <Logo/>
         </div>
 
         <form className="w-full max-w-xs" onSubmit={handleSubmit}>
