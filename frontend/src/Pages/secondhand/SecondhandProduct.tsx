@@ -1,11 +1,14 @@
-import React from "react";
+import React from 'react';
+import GoogleMaps from './GoogleMaps';
 
-const SecondhandProduct = () => {
-  return (
-    <div>
-      중고상품
-    </div>
-  );
+const SecondhandProduct: React.FC = () => {
+
+
+    return (
+        <div>
+            <GoogleMaps/>
+        </div>
+    );
 };
 
 export default SecondhandProduct;
