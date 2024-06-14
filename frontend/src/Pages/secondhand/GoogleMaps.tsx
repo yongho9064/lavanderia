@@ -114,7 +114,7 @@ const GoogleMaps: React.FC = () => {
                                 <p className='text-base font-extralight'>{item.description}</p>
                                 <p className='text-lg font-bold '>{item.price.toLocaleString()}원</p>
                                 <p className='text-sm mb-1'>{item.city} {item.region} {item.subregion}</p>
-                                <p className='text-sm text-gray-500'>관심 77 · 채팅 84</p>
+                                <p className='text-sm text-gray-500'>관심 77 · 찜 78 · 채팅 84</p>
                             </Link>
                         </li>
                     ))}
