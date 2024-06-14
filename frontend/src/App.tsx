@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "tailwindcss/tailwind.css";
-import Community from "./Pages/Community/Community";
+import Community from "./Pages/community/Community";
 import ServiceCenter from "./Pages/ServiceCenter/ServiceCenter";
 import Home from "./Pages/home/Home";
 import Login from "./Pages/auth/Login";
