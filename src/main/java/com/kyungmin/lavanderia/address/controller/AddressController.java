@@ -26,11 +26,8 @@ public class AddressController {
     private final AddressService addressService;
 
     @PostMapping("/address-insert")
-    @Operation(summary = "주소 추가", description = "주소를 추가합니다")
+    @Operation(summary = "주소 추가", description = "주소 정보를 받아 추가합니다")
     public ResponseEntity<String> addressInsert(@RequestBody AddressInsertDTO addressInsertDTO) {
-
-        System.out.println(addressInsertDTO.getAddress());
-        System.out.println(addressInsertDTO.getAddressDetail());
 
         HttpStatus httpStatus;
         String result;
@@ -50,7 +47,7 @@ public class AddressController {
     }
 
     @PostMapping("/address-update")
-    @Operation(summary = "주소 수정", description = "주소를 수정합니다")
+    @Operation(summary = "주소 수정", description = "주소 정보를 받아 수정합니다")
     public ResponseEntity<String> addressUpdate(@RequestBody AddressDTO addressUpdateDTO) {
 
         HttpStatus httpStatus;
@@ -71,7 +68,7 @@ public class AddressController {
     }
 
     @PostMapping("/address-delete")
-    @Operation(summary = "주소 삭제", description = "주소를 삭제합니다")
+    @Operation(summary = "주소 삭제", description = "주소 아이디를 받아 주소를 삭제합니다")
     public ResponseEntity<String> addressDelete(@RequestBody int addressId) {
 
         HttpStatus httpStatus;
