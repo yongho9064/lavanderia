@@ -26,3 +26,4 @@ INSERT INTO TBL_MEMBER (MEMBER_ID, MEMBER_PWD, MEMBER_NAME, MEMBER_EMAIL, MEMBER
 VALUES ('user', '$2a$10$HdOg00x3nTNCO06RwdeiA.dsWWJlWLHpx9jM8qVnQp35H3cxjDfCy', 'User One', 'user1@example.com', '123456789', 'level1', '100', 'Y', 'N', 'N', 5, 0, '2024-05-31', '2024-05-31', '2024-05-31', NULL),
        ('admin', '$2a$10$HdOg00x3nTNCO06RwdeiA.dsWWJlWLHpx9jM8qVnQp35H3cxjDfCy', 'User Two', 'user2@example.com', '987654321', 'level2', '200', 'Y', 'N', 'N', 10, 2, '2024-05-30', '2024-05-30',
         '2024-05-31', NULL);
+

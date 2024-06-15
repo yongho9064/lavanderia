@@ -4,11 +4,12 @@ export interface Comment {
   content: string;
 }
 
+
 export interface Post {
-  id: number;
-  author: string;
+  communityId: number;
+  memberId: string;
+  title: string;
   content: string;
-  date: string;
-  link?: string;
-  comments: Comment[];
+  viewCount: number;
+  category: string;
 }
