@@ -63,7 +63,7 @@ const ItemDetail: React.FC = () => {
             <p className='text-lg font-bold mb-1'>{item.price.toLocaleString()}원</p>
             <p>
                 년식 2020년 6월 입니다. 현재도 사용중 인데 전혀 문제 없고요 앞,뒤 타이어 교체 했습니다. 킬로수 현재 5289인데 계속 올라갈예정 입니다.
-                사용감 많으니 막 타실분만 부탁드립니다. 슬슬 자전거랑 이별할라고 정리 합니다.
+                사용감 많으니 막 타실분만 부탁드립니다. 슬슬 자전거랑 이별할라고 정리 합니다!.
             </p>
             <p className='text-sm text-gray-500 mt-1'>관심 77 · 찜 78 · 채팅 84</p>
             <div className='flex items-center justify-between'>
