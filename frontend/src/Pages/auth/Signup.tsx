@@ -180,16 +180,17 @@ const Signup = () => {
     const isButtonDisabled = !!errors[fieldNames[step - 1]];
 
     return (
-        <div className="min-h-screen flex flex-col items-center">
-            <div className="w-full h-20 pt-15 hidden items-center justify-center lg:flex">
-                <h1 className="text-black w-2/3 h-full items-center border-b border-black text-3xl lg:flex">
+        <div className="min-h-screen max-w-2xl m-auto flex flex-col items-center lg: border">
+            <Logo/>
+            <div className="w-full h-20 pt-15 hidden items-center justify-center">
+                <h1 className="text-black w-2/3 h-full items-center border-b border-black text-3xl">
                     <Logo/>
                     <span className="ml-5 font-bold text-2xl">회원가입</span>
                 </h1>
             </div>
 
-            <div className="mt-10 w-full px-5 lg:w-1/4 lg:px-0">
-                <p className="flex font-bold text-xl mb-10 text-center lg:text-2xl">
+            <div className="mt-10 w-full px-5">
+                <p className="flex font-bold text-xl mb-10 text-center">
                     {['이름을 입력해 주세요', '휴대폰 번호를 입력해 주세요', '이메일을 입력해 주세요', '아이디를 입력해 주세요', '비밀번호를 입력해 주세요', '비밀번호 확인을 입력해 주세요'][step - 1]}
                 </p>
                 <div className="flex flex-col gap-4">

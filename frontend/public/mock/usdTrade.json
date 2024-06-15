@@ -42,5 +42,14 @@
     "city": "양주시",
     "region": "경기도",
     "subregion": "덕계동"
+  },
+  {
+    "id": 6,
+    "name": "Lamp",
+    "description": "A bright lamp",
+    "price": 15,
+    "city": "양주시",
+    "region": "경기도",
+    "subregion": "광사동"
   }
 ]
