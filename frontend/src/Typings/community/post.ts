@@ -11,5 +11,6 @@ export interface Post {
   title: string;
   content: string;
   viewCount: number;
+  image:string
   category: string;
 }
