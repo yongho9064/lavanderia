@@ -1,5 +1,6 @@
 package com.kyungmin.lavanderia.member.service.impl;
 
+import com.kyungmin.lavanderia.global.util.email.service.EmailService;
 import com.kyungmin.lavanderia.member.data.dto.MemberInfoDTO;
 import com.kyungmin.lavanderia.member.data.dto.SignupDTO;
 import com.kyungmin.lavanderia.member.data.entity.Member;
@@ -21,7 +22,9 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
+    // 회원가입
     @Override
     public void signup(SignupDTO signupDto) {
 
@@ -35,25 +38,35 @@ public class MemberServiceImpl implements MemberService {
                 .memberBirth(signupDto.getMemberBirth())
                 .build();
         memberRepository.save(member);
+
+        emailService.sendSignupCode(signupDto.getMemberEmail());
     }
 
+    // 회원 아이디 중복 체크
     @Override
     public void checkMemberId(String memberId) {
 
         boolean isExist = memberRepository.existsById(memberId);
-
         if (isExist) {
             throw new DuplicateMemberIdEx(memberId);
         }
     }
 
+    // 회원 전화번호 중복 체크
     @Override
     public void checkPhoneNumber(String phoneNumber) {
 
         boolean isExist = memberRepository.existsByMemberPhone(phoneNumber);
-
         if (isExist) {
             throw new DuplicatePhoneNumberEx(phoneNumber);
+        }
+    }
+
+    @Override
+    public void checkEmail(String email) {
+        boolean isExist = memberRepository.existsByMemberEmail(email);
+        if (isExist) {
+            throw new DuplicatePhoneNumberEx(email);
         }
     }
 
@@ -78,6 +91,16 @@ public class MemberServiceImpl implements MemberService {
     public void memberDelete(String memberId) {
         Member member = findMemberByMemberId(memberId);
         memberRepository.delete(member);
+    }
+
+    // 이메일 인증 후 활성화 상태로 변경
+    @Override
+    public void checkSignupCode(String email, String token) {
+        emailService.checkSignupCode(email, token);
+        Member member = memberRepository.findMemberByMemberEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(email + "회원을 찾을 수 없습니다."));
+        member.setAccInactiveYn("N");
+        memberRepository.save(member);
     }
 
     // 회원 아이디로 회원 조회

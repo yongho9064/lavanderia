@@ -23,62 +23,10 @@ public class EmailController {
 
     private final EmailService emailService;
 
+//    private ResponseEntity<String> response(HttpStatus httpStatus,String result) {
+//        return ResponseEntity.status(httpStatus)
+//                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
+//                .body(result);
+//    }
 
-    @PostMapping("/send-signup-code")
-    @Operation(summary = "이메일 인증코드 전송", description = "이메일 인증코드를 전송합니다.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "이메일 인증코드 전송 완료", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "400", description = "이메일 인증코드 전송 실패", content = @Content(mediaType = "application/json")),
-    })
-    public ResponseEntity<String> sendSignupCode(@RequestBody String email) {
-
-        HttpStatus httpStatus;
-        String result;
-
-        try {
-            emailService.sendSignupCode(email);
-            httpStatus = HttpStatus.CREATED;
-            result = "이메일 전송 완료";
-        } catch (EmailSendFailedEx e) {
-            httpStatus = HttpStatus.BAD_REQUEST;
-            result = "이메일 전송 실패";
-        } catch (Exception e) {
-            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-            result = "예상치 못한 오류가 발생했습니다";
-        }
-
-        return response(httpStatus, result);
-    }
-
-    @GetMapping("/verify-signup-code")
-    @Operation(summary = "이메일 인증코드 검사", description = "이메일 인증코드를 검사합니다.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "이메일 인증코드 인증 성공", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "400", description = "이메일 인증코드 인증 실패", content = @Content(mediaType = "application/json")),
-    })
-    public ResponseEntity<String> checkSignupCode(@ModelAttribute CheckTokenDTO checkTokenDTO) {
-
-        HttpStatus httpStatus;
-        String result;
-
-        try {
-            emailService.checkSignupCode(checkTokenDTO.getEmail(), checkTokenDTO.getToken());
-            httpStatus = HttpStatus.CREATED;
-            result = "이메일 인증 성공";
-        } catch (EmailAuthenticationFailedEx e) {
-            httpStatus = HttpStatus.BAD_REQUEST;
-            result = "이메일 인증 실패";
-        } catch (Exception e) {
-            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-            result = "예상치 못한 오류가 발생했습니다";
-        }
-
-        return response(httpStatus, result);
-    }
-
-    private ResponseEntity<String> response(HttpStatus httpStatus,String result) {
-        return ResponseEntity.status(httpStatus)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
-                .body(result);
-    }
 }
