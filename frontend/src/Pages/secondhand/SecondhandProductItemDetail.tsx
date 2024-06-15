@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import {FaLocationDot} from "react-icons/fa6";
+
 
 interface Item {
     id: number;
@@ -17,6 +18,7 @@ interface Item {
 const ItemDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [item, setItem] = useState<Item | null>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchItem = async () => {
@@ -32,6 +34,10 @@ const ItemDetail: React.FC = () => {
         };
         fetchItem();
     }, [id]);
+
+    const handleBuyClick = () => {
+        navigate(`/secondhand/${id}/secpmhandChat`);
+    }
 
     const getImageUrl = (imageUrl: string) => {
         try {
@@ -60,6 +66,19 @@ const ItemDetail: React.FC = () => {
                 사용감 많으니 막 타실분만 부탁드립니다. 슬슬 자전거랑 이별할라고 정리 합니다.
             </p>
             <p className='text-sm text-gray-500 mt-1'>관심 77 · 찜 78 · 채팅 84</p>
+            <div className='flex items-center justify-between'>
+                <button
+                    className='mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded w-full  '
+                >
+                    구매하기
+                </button>
+
+                <button
+                    className='mt-4 bg-amber-500 text-white font-bold py-2 px-4 rounded w-full  '
+                    onClick={handleBuyClick}>
+                    하루톡
+                </button>
+            </div>
         </div>
     );
 };

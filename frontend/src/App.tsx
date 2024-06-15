@@ -21,6 +21,7 @@ import MyPage from "./Pages/auth/MyPage";
 import SecondhandProduct from "./Pages/secondhand/SecondhandProduct";
 import PostDetail from "./Pages/community/PostDetail";
 import SecondhandProductItemDetail from "./Pages/secondhand/SecondhandProductItemDetail";
+import SecpmdhandChat from "./Pages/secondhand/SecpmdhandChat";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path="community/:postId" element={<PostDetail/>} /> {/* Add PostDetail route */}
           <Route path="secondhand" element={<SecondhandProduct />} />
           <Route path="secondhand/:id" element={<SecondhandProductItemDetail />} />
+          <Route path="secondhand/:id/secpmhandChat" element={<SecpmdhandChat />} />
           <Route path="servicecenter" element={<ServiceCenter />} />
         </Route>
 
