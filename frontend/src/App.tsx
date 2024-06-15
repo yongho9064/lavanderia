@@ -41,7 +41,7 @@ function App() {
             <Route path="mypage" element={<MyPage />} />
           </Route>
 
-          {/* 로그인 불필요 페이지 */}
+          {/* 로그인 불필요 페이지! */}
           <Route path="community" element={<Community />} />
           <Route path="community/:postId" element={<PostDetail/>} /> {/* Add PostDetail route */}
           <Route path="secondhand" element={<SecondhandProduct />} />

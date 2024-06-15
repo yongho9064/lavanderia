@@ -66,7 +66,7 @@ const SecpmdhandChat: React.FC = () => {
                 </div>
                 <div className="mb-4 flex justify-end">
                 <p className="bg-red-200 rounded-lg p-2">
-                    제품문의 드려요~
+                    제품문의 드려요~~
                 </p>
                 </div>
                 <div className="mb-4 flex justify-end">
