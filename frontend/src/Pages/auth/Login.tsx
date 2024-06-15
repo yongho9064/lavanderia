@@ -32,38 +32,18 @@ const Login = () => {
 
     // 서버랑 연결 필요
     if (isUsernameValid && isPasswordValid) {
-        try {
-          console.log(formData)
-            const response = await axios.post("/signin", { memberId: formData.memberId, memberPwd: formData.memberPwd });
-            console.log(response.data)
-            const accessToken = response.data.token;
-            login(accessToken, rememberMe);  // Context의 login 메소드 호출
-            navigate('/'); // 로그인 후 홈으로 이동
-        } catch (error) {
-            setError("아이디 또는 비밀번호가 일치하지 않습니다.");
-            console.error("Error:", error);
-        }
+      try {
+        const response = await axios.post("/signin", { memberId: formData.memberId, memberPwd: formData.memberPwd });
+        const access = response.headers['access'];
+
+        login(access, rememberMe);  // Context의 login 메소드 호출
+        navigate('/'); // 로그인 후 홈으로 이동
+      } catch (error) {
+        setError("아이디 또는 비밀번호가 일치하지 않습니다.");
+        console.error("Error:", error);
+      }
     }
-
-
-    // 하드 코딩 테스트 버전
-    // 나중에 서버쪽으로 리프레쉬 토큰 넘겨서 재로그인 하는 방식으로 변경하기
-    // if (formData.userId === "user" && formData.password === "1234") {
-    //   try {
-    //     const accessToken = "hardcoded-access-token";
-    //     const refreshToken = "hardcoded-refresh-token";
-    //
-    //     login(accessToken, refreshToken, rememberMe);  // Context의 login 메소드 호출
-    //
-    //     navigate("/"); // 로그인 후 홈으로 이동
-    //   } catch (error) {
-    //     setError("로그인 중 오류가 발생했습니다.");
-    //     console.error("Error:", error);
-    //   }
-    // } else {
-    //   setError("아이디 또는 비밀번호가 일치하지 않습니다.");
-    // }
-  }
+  };
 
   const handleCheckboxChange = () => {
     setRememberMe((prevRememberMe) => !prevRememberMe);
@@ -91,7 +71,7 @@ const Login = () => {
       if (value.trim() !== "") {
         setError("");
       }
-      if (name === "userId" && passwordInputRef.current !== null) {
+      if (name === "memberId" && passwordInputRef.current !== null) {
         passwordInputRef.current.focus();
       }
     }
@@ -102,7 +82,7 @@ const Login = () => {
       <div
         className="flex flex-col w-full h-full items-center justify-center gap-4 rounded-lg bg-white text-center border shadow lg:h-[500px] lg:w-[400px] lg:mb-20">
         <div className="flex w-full items-center justify-center lg:h-20">
-            <Logo/>
+          <Logo/>
         </div>
 
         <form className="w-full max-w-xs" onSubmit={handleSubmit}>

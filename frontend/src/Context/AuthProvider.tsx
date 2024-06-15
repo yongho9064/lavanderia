@@ -4,14 +4,14 @@ import axios from "axios";
 // Context 생성
 interface AuthContextType {
   isLoggedIn: boolean;
-  accessToken: string;
-  login: (accessToken: string, rememberMe: boolean) => void;
+  access: string;
+  login: (access: string, rememberMe: boolean) => void;
   logout: () => void;
 }
 
 const defaultAuthContext: AuthContextType = {
   isLoggedIn: false,
-  accessToken: '',
+  access: '',
   login: () => {},
   logout: () => {}
 };
@@ -24,54 +24,53 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [accessToken, setAccessToken] = useState("");
+  const [access, setAccess] = useState("");
 
   useEffect(() => {
-    const storedAccessToken = window.localStorage.getItem("accessToken") || window.sessionStorage.getItem("accessToken");
-    const storedRefreshToken = window.localStorage.getItem("refreshToken") || window.sessionStorage.getItem("refreshToken");
+    const storedAccess = window.localStorage.getItem("access") || window.sessionStorage.getItem("access");
 
-    if (storedAccessToken && storedRefreshToken) {
-      setAccessToken(storedAccessToken);
+    if (storedAccess) {
+      setAccess(storedAccess);
       setIsLoggedIn(true);
     }
   }, []);
 
-  const login = (accessToken: string, rememberMe: boolean) => {
+  const login = (access: string, rememberMe: boolean) => {
     setIsLoggedIn(true);
-    setAccessToken(accessToken);
+    setAccess(access);
     if (rememberMe) {
-      window.localStorage.setItem("accessToken", accessToken);
+      window.localStorage.setItem("access", access);
     } else {
-      window.sessionStorage.setItem("accessToken", accessToken);
+      window.sessionStorage.setItem("access", access);
     }
   };
 
   const logout = () => {
     setIsLoggedIn(false);
-    setAccessToken("");
-    window.localStorage.removeItem("accessToken");
-
-    window.sessionStorage.removeItem("accessToken");
-
-    window.localStorage.removeItem("rememberMe"); // rememberMe 값 제거
+    setAccess("");
+    window.localStorage.removeItem("access");
+    window.sessionStorage.removeItem("access");
   };
 
-  // // 로그인
-  // const refreshAccessToken = async (refreshToken: string) => {
-  //   try {
-  //     const response = await axios.post("/refresh-token", { refreshToken });
-  //     const { accessToken: newAccessToken, refreshToken: newRefreshToken } = response.data;
-  //     setAccessToken(newAccessToken);
-  //     window.localStorage.setItem("accessToken", newAccessToken);
-  //     setIsLoggedIn(true);
-  //   } catch (error) {
-  //     console.error("Failed to refresh access token:", error);
-  //     logout();
-  //   }
-  // };
+  const refreshAccessToken = async (refreshToken: string) => {
+    try {
+      const response = await axios.post("/refresh-token", { refreshToken });
+      const { access: newAccess } = response.data;
+      setAccess(newAccess);
+      if (window.localStorage.getItem("access")) {
+        window.localStorage.setItem("access", newAccess);
+      } else {
+        window.sessionStorage.setItem("access", newAccess);
+      }
+      setIsLoggedIn(true);
+    } catch (error) {
+      console.error("Failed to refresh access token:", error);
+      logout();
+    }
+  };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, accessToken, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, access, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
