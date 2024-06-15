@@ -75,6 +75,7 @@ public class Member implements UserDetails {
     @Column(name = "ACC_DELETE_DATE")
     private LocalDateTime accDeleteDate;   // 계정 삭제 일시
 
+
     @OneToMany(mappedBy = "memberId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<Role> roles = new ArrayList<>();
 
@@ -96,7 +97,7 @@ public class Member implements UserDetails {
         this.memberBirth = memberBirth;
         this.memberLevel = (memberLevel != null) ? memberLevel : "1";
         this.memberPoint = (memberPoint != null) ? memberPoint : "0";
-        this.accInactiveYn = (accInactiveYn != null) ? accInactiveYn : "N";
+        this.accInactiveYn = (accInactiveYn != null) ? accInactiveYn : "Y";
         this.tempPwdYn = (tempPwdYn != null) ? tempPwdYn : "N";
         this.accLoginCount = accLoginCount;
         this.loginFailCount = loginFailCount;
@@ -152,6 +153,7 @@ public class Member implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return !accInactiveYn.equals("Y");
     }
+
 }

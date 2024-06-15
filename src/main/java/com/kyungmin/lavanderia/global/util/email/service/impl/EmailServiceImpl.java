@@ -3,6 +3,7 @@ package com.kyungmin.lavanderia.global.util.email.service.impl;
 import com.kyungmin.lavanderia.global.util.email.service.EmailService;
 import com.kyungmin.lavanderia.member.exception.EmailAuthenticationFailedEx;
 import com.kyungmin.lavanderia.member.exception.EmailSendFailedEx;
+import com.kyungmin.lavanderia.member.service.MemberService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class EmailServiceImpl implements EmailService {
     private final RedisTemplate<String, Object> redisTemplate;
     private final JavaMailSender javaMailSender;
 
-
+    // 회원가입 이메일 전송
     @Override
     public void sendSignupCode(String email) {
 
@@ -40,6 +41,7 @@ public class EmailServiceImpl implements EmailService {
         sendEmailUtil(email, subject, text);
     }
 
+    // 회원가입 이메일 인증
     @Override
     public void checkSignupCode(String email, String token) {
 
@@ -53,6 +55,7 @@ public class EmailServiceImpl implements EmailService {
         }
     }
 
+    // 이메일 전송
     public void sendEmailUtil(String email, String subject, String text){
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -67,6 +70,7 @@ public class EmailServiceImpl implements EmailService {
         }
     }
 
+    // 이메일 인증 url을 포함한 이메일 템플릿을 로드
     private String loadEmailTemplate(String link) {
         try {
             ClassPathResource resource = new ClassPathResource("/static/verification-email.html");

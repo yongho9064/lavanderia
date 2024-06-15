@@ -12,7 +12,11 @@ public interface MemberService extends UserDetailsService {
 
     void checkPhoneNumber(String phoneNumber);
 
+    void checkEmail(String email);
+
     MemberInfoDTO memberInfo(String memberId);
 
     void memberDelete(String memberId);
+
+    void checkSignupCode(String email, String token);
 }
