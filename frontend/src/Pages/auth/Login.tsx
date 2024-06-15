@@ -6,7 +6,7 @@ import Logo from "../../Components/common/Logo";
 
 const Login = () => {
   const { login } = useContext(AuthContext); // authContext에서 login 함수 가져오기
-  const [formData, setFormData] = useState({ userId: "", password: "" });
+  const [formData, setFormData] = useState({ memberId: "", memberPwd: "" });
   const [error, setError] = useState("");
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -15,8 +15,8 @@ const Login = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevent the default form submission behavior
 
-    const isUsernameValid = formData.userId.trim() !== "";
-    const isPasswordValid = formData.password.trim() !== "";
+    const isUsernameValid = formData.memberId.trim() !== "";
+    const isPasswordValid = formData.memberPwd.trim() !== "";
 
     if (!isUsernameValid) {
       setError("아이디를 입력해주세요");
@@ -31,37 +31,19 @@ const Login = () => {
     setError("");
 
     // 서버랑 연결 필요
-    // if (isUsernameValid && isPasswordValid) {
-    //     try {
-    //         const response = await axios.post("/signin", { userId: formData.userId, password: formData.password });
-    //         const token = response.data.token;
-    //         login(token);  // Context의 login 메소드 호출
-    //         navigate('/'); // 로그인 후 홈으로 이동
-    //     } catch (error) {
-    //         setError("아이디 또는 비밀번호가 일치하지 않습니다.");
-    //         console.error("Error:", error);
-    //     }
-    // }
-
-
-    // 하드 코딩 테스트 버전
-    // 나중에 서버쪽으로 리프레쉬 토큰 넘겨서 재로그인 하는 방식으로 변경하기
-    if (formData.userId === "user" && formData.password === "1234") {
+    if (isUsernameValid && isPasswordValid) {
       try {
-        const accessToken = "hardcoded-access-token";
-        const refreshToken = "hardcoded-refresh-token";
+        const response = await axios.post("/signin", { memberId: formData.memberId, memberPwd: formData.memberPwd });
+        const access = response.headers['access'];
 
-        login(accessToken, refreshToken, rememberMe);  // Context의 login 메소드 호출
-
-        navigate("/"); // 로그인 후 홈으로 이동
+        login(access, rememberMe);  // Context의 login 메소드 호출
+        navigate('/'); // 로그인 후 홈으로 이동
       } catch (error) {
-        setError("로그인 중 오류가 발생했습니다.");
+        setError("아이디 또는 비밀번호가 일치하지 않습니다.");
         console.error("Error:", error);
       }
-    } else {
-      setError("아이디 또는 비밀번호가 일치하지 않습니다.");
     }
-  }
+  };
 
   const handleCheckboxChange = () => {
     setRememberMe((prevRememberMe) => !prevRememberMe);
@@ -89,7 +71,7 @@ const Login = () => {
       if (value.trim() !== "") {
         setError("");
       }
-      if (name === "userId" && passwordInputRef.current !== null) {
+      if (name === "memberId" && passwordInputRef.current !== null) {
         passwordInputRef.current.focus();
       }
     }
@@ -100,7 +82,7 @@ const Login = () => {
       <div
         className="flex flex-col w-full h-full items-center justify-center gap-4 rounded-lg bg-white text-center border shadow lg:h-[500px] lg:w-[400px] lg:mb-20">
         <div className="flex w-full items-center justify-center lg:h-20">
-            <Logo/>
+          <Logo/>
         </div>
 
         <form className="w-full max-w-xs" onSubmit={handleSubmit}>
@@ -108,18 +90,18 @@ const Login = () => {
             <input
               className={`h-12 w-full border ${error.includes("아이디") ? "border-red-400" : "border-gray-300"} p-3 placeholder-gray-400 placeholder:text-base rounded-t`}
               type="text"
-              name="userId"
+              name="memberId"
               placeholder="아이디 입력"
-              value={formData.userId}
+              value={formData.memberId}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
             />
             <input
               className={`h-12 w-full border ${error.includes("비밀번호") || error.includes("일치하지 않습니다.") ? "border-red-400" : "border-gray-300"} p-3 placeholder-gray-400 placeholder:text-base rounded-b`}
               type="password"
-              name="password"
+              name="memberPwd"
               placeholder="비밀번호 8자~20자"
-              value={formData.password}
+              value={formData.memberPwd}
               onChange={handleChange}
               ref={passwordInputRef}
             />

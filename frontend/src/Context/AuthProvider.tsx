@@ -4,16 +4,14 @@ import axios from "axios";
 // Context 생성
 interface AuthContextType {
   isLoggedIn: boolean;
-  accessToken: string;
-  refreshToken: string;
-  login: (accessToken: string, refreshToken: string, rememberMe: boolean) => void;
+  access: string;
+  login: (access: string, rememberMe: boolean) => void;
   logout: () => void;
 }
 
 const defaultAuthContext: AuthContextType = {
   isLoggedIn: false,
-  accessToken: '',
-  refreshToken: '',
+  access: '',
   login: () => {},
   logout: () => {}
 };
@@ -26,56 +24,44 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [accessToken, setAccessToken] = useState("");
-  const [refreshToken, setRefreshToken] = useState("");
+  const [access, setAccess] = useState("");
 
   useEffect(() => {
-    const storedAccessToken = window.localStorage.getItem("accessToken") || window.sessionStorage.getItem("accessToken");
-    const storedRefreshToken = window.localStorage.getItem("refreshToken") || window.sessionStorage.getItem("refreshToken");
+    const storedAccess = window.localStorage.getItem("access") || window.sessionStorage.getItem("access");
 
-    if (storedAccessToken && storedRefreshToken) {
-      setAccessToken(storedAccessToken);
-      setRefreshToken(storedRefreshToken);
+    if (storedAccess) {
+      setAccess(storedAccess);
       setIsLoggedIn(true);
-    } else if (storedRefreshToken) {
-      refreshAccessToken(storedRefreshToken);
     }
   }, []);
 
-  const login = (accessToken: string, refreshToken: string, rememberMe: boolean) => {
+  const login = (access: string, rememberMe: boolean) => {
     setIsLoggedIn(true);
-    setAccessToken(accessToken);
-    setRefreshToken(refreshToken);
+    setAccess(access);
     if (rememberMe) {
-      window.localStorage.setItem("accessToken", accessToken);
-      window.localStorage.setItem("refreshToken", refreshToken);
+      window.localStorage.setItem("access", access);
     } else {
-      window.sessionStorage.setItem("accessToken", accessToken);
-      window.sessionStorage.setItem("refreshToken", refreshToken);
+      window.sessionStorage.setItem("access", access);
     }
   };
 
   const logout = () => {
     setIsLoggedIn(false);
-    setAccessToken("");
-    setRefreshToken("");
-    window.localStorage.removeItem("accessToken");
-    window.localStorage.removeItem("refreshToken");
-
-    window.sessionStorage.removeItem("accessToken");
-    window.sessionStorage.removeItem("refreshToken");
-
-    window.localStorage.removeItem("rememberMe"); // rememberMe 값 제거
+    setAccess("");
+    window.localStorage.removeItem("access");
+    window.sessionStorage.removeItem("access");
   };
 
   const refreshAccessToken = async (refreshToken: string) => {
     try {
       const response = await axios.post("/refresh-token", { refreshToken });
-      const { accessToken: newAccessToken, refreshToken: newRefreshToken } = response.data;
-      setAccessToken(newAccessToken);
-      setRefreshToken(newRefreshToken);
-      window.localStorage.setItem("accessToken", newAccessToken);
-      window.localStorage.setItem("refreshToken", newRefreshToken);
+      const { access: newAccess } = response.data;
+      setAccess(newAccess);
+      if (window.localStorage.getItem("access")) {
+        window.localStorage.setItem("access", newAccess);
+      } else {
+        window.sessionStorage.setItem("access", newAccess);
+      }
       setIsLoggedIn(true);
     } catch (error) {
       console.error("Failed to refresh access token:", error);
@@ -84,7 +70,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, accessToken, refreshToken, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, access, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

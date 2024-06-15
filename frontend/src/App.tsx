@@ -50,8 +50,6 @@ function App() {
           <Route path="servicecenter" element={<ServiceCenter />} />
         </Route>
 
-
-
         {/* 로그인시 접근 제한 페이지 */}
         <Route path="/auth" element={<RestrictedRoute />}>
           <Route path="login" element={<Login />} />

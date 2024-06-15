@@ -48,4 +48,28 @@
     "subregion": "덕계동",
     "imgUrl": "trade01.jpg"
   }
+
+,
+  {
+    "id": 6,
+    "name": "일본식 카레",
+    "description": "진한 카레 팔아요",
+    "price": 15,
+    "city": "양주시",
+    "region": "경기도",
+    "subregion": "광사동",
+    "imgUrl": "trade01.jpg"
+  }
+
+,
+  {
+    "id": 6,
+    "name": "일본식 카레",
+    "description": "진한 카레 팔아요",
+    "price": 15,
+    "city": "양주시",
+    "region": "경기도",
+    "subregion": "광사동",
+    "imgUrl": "trade01.jpg"
+  }
 ]

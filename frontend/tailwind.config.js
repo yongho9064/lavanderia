@@ -5,8 +5,6 @@ module.exports = {
     extend: {
       fontFamily: {
         roboto: ["Roboto", "SCDream"],
-        Gugi:["Gugi"],
-        Nanum:["Gothic Coding"],
         courgette: ["Courgette", "cursive"],
       },
       screens: {
