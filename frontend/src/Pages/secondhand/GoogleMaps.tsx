@@ -99,9 +99,9 @@ const GoogleMaps: React.FC = () => {
     }
 
     return (
-        <div className='pl-6 max-w-2xl mx-auto'>
-            <h1 className="flex items-center mb-4">
-                <FaLocationDot className="text-red-600 mr-2" />  {address.region} {address.city} {address.subregion}
+        <div className='max-w-2xl mx-auto pr-5 pl-5'>
+            <h1 className="flex items-center mb-2  mt-2">
+                <FaLocationDot className="text-red-600" />  {address.region} {address.city} {address.subregion}
             </h1>
             {filteredItems.length > 0 ? (
                 <ul className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-4'>
@@ -110,11 +110,11 @@ const GoogleMaps: React.FC = () => {
                             <Link to={`/secondhand/${item.id}`} className='block'>
                                 <img src={getImageUrl(item.imgUrl)} alt={item.name}
                                      className='w-full  object-cover rounded-lg mb-2'/>
-                                <h2 className='text-sm font-semibold '>{item.name}</h2>
-                                <p className='text-base font-extralight'>{item.description}</p>
-                                <p className='text-lg font-bold '>{item.price.toLocaleString()}원</p>
+                                <h2 className='text-sm font-semibold mb-1'>{item.name}</h2>
+                                <p className='text-base font-extralight  mb-1'>{item.description}</p>
+                                <p className='text-lg font-bold mb-1'>{item.price.toLocaleString()}원</p>
                                 <p className='text-sm mb-1'>{item.city} {item.region} {item.subregion}</p>
-                                <p className='text-sm text-gray-500'>관심 77 · 찜 78 · 채팅 84</p>
+                                <p className='text-sm text-gray-500'>관심 77 · 채팅 84</p>
                             </Link>
                         </li>
                     ))}

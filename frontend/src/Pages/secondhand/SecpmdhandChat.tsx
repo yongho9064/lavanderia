@@ -60,7 +60,11 @@ const SecpmdhandChat: React.FC = () => {
                     <div className="text-sm text-gray-700 flex items-start">
                         <img src={sponge} alt="avatar" className="w-6 h-6 rounded-full mr-2"/>
                         <p className="bg-gray-200 rounded-lg p-2">
-                            안녕하세요. 스위티에요. 만나서 반가워요~ 궁금하신 점은 무엇이든지 물어보세요!
+                            안녕하세요. 스위티에요.
+                            <br/>
+                            만나서 반가워요~
+                            <br/>
+                            궁금하신 점은 무엇이든지 물어보세요!
                         </p>
                     </div>
                 </div>

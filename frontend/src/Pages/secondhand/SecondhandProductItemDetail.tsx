@@ -57,7 +57,7 @@ const ItemDetail: React.FC = () => {
             <h1 className="flex items-center mb-4">
                 <FaLocationDot className="text-red-600 mr-2"/> {item.region} {item.city} {item.subregion}
             </h1>
-            <img src={getImageUrl(item.imgUrl)} alt={item.name} className='w-full object-cover border'/>
+            <img src={getImageUrl(item.imgUrl)} alt={item.name} className='p-6 w-full object-cover border mb-2'/>
             <h2 className='text-2xl font-semibold mt-1'>{item.name}</h2>
             <p className='text-base mt-1'>{item.description}</p>
             <p className='text-lg font-bold mb-1'>{item.price.toLocaleString()}원</p>
@@ -66,15 +66,15 @@ const ItemDetail: React.FC = () => {
                 사용감 많으니 막 타실분만 부탁드립니다. 슬슬 자전거랑 이별할라고 정리 합니다!.
             </p>
             <p className='text-sm text-gray-500 mt-1'>관심 77 · 찜 78 · 채팅 84</p>
-            <div className='flex items-center justify-between'>
+            <div className='flex items-center justify-between mt-1'>
                 <button
-                    className='mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded w-full  '
+                    className='mt-4 bg-red-500 text-white  w-11/12 font-bold py-2 px-4 rounded'
                 >
                     구매하기
                 </button>
 
                 <button
-                    className='mt-4 bg-amber-500 text-white font-bold py-2 px-4 rounded w-full  '
+                    className='mt-4 bg-amber-500 text-white font-bold py-2 px-4 rounded w-11/12  ml-4'
                     onClick={handleBuyClick}>
                     하루톡
                 </button>
