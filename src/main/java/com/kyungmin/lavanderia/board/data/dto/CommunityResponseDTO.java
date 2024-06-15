@@ -17,6 +17,7 @@ public class CommunityResponseDTO {
     private String content;
     private Integer viewCount;
     private String category;
+    private String image;
 
     public CommunityResponseDTO(Community community) {
         this.communityId = community.getCommunityId();
@@ -25,5 +26,6 @@ public class CommunityResponseDTO {
         this.content = community.getContent();
         this.viewCount = community.getViewCount();
         this.category = community.getCategory();
+        this.image = community.getImage();
     }
 }
