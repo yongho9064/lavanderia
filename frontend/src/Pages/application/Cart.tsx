@@ -108,7 +108,7 @@ const Cart: React.FC = () => {
 
           <div className="w-full flex flex-col justify-between">
             <div className="flex flex-col justify-between rounded-lg border h-auto p-5 shadow-md mb-3 flex-grow">
-              <h2 className="mb-3 text-lg font-bold border-b border-gray-600 pb-2">상품 내역</h2>
+              <h2 className="mb-3  font-bold border-b border-gray-600 pb-2">상품 내역</h2>
               <div className="text-start text-black">
                 {orderItems.map(item => (
                     <p key={item.name} className="text-sm text-gray-500 mb-1 font-bold">{item.name} x {item.quantity}</p>
