@@ -24,6 +24,7 @@ import SecondhandProductItemDetail from "./Pages/secondhand/SecondhandProductIte
 import SecpmdhandChat from "./Pages/secondhand/SecpmdhandChat";
 import SecondhandBuy from "./Pages/secondhand/SecondhandBuy";
 import SecondhandDeliveryBuy from "./Pages/secondhand/SecondhandDeliveryBuy";
+import FloatingUpButton from './Components/floatingCart/FloatingUpButton'
 
 function App() {
   return (

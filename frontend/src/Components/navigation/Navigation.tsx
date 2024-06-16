@@ -2,6 +2,7 @@ import React from "react";
 import { FiBell, FiUser, FiShoppingCart } from "react-icons/fi";
 import Logo from "../common/Logo";
 import useProtectedNavigation from "../../hooks/useProtectedNavigation";
+import FloatingUpButton from '../floatingCart/FloatingUpButton'
 
 const navLinks = [
   { path: "/application", label: "신청하기", protected: true },
@@ -49,6 +50,8 @@ const Navigation: React.FC = () => {
           ))}
         </ul>
       </div>
+
+      <FloatingUpButton/>
     </div>
   );
 };
