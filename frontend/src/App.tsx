@@ -22,6 +22,8 @@ import SecondhandProduct from "./Pages/secondhand/SecondhandProduct";
 import PostDetail from "./Pages/community/PostDetail";
 import SecondhandProductItemDetail from "./Pages/secondhand/SecondhandProductItemDetail";
 import SecpmdhandChat from "./Pages/secondhand/SecpmdhandChat";
+import SecondhandBuy from "./Pages/secondhand/SecondhandBuy";
+import SecondhandDeliveryBuy from "./Pages/secondhand/SecondhandDeliveryBuy";
 
 function App() {
   return (
@@ -47,6 +49,8 @@ function App() {
           <Route path="secondhand" element={<SecondhandProduct />} />
           <Route path="secondhand/:id" element={<SecondhandProductItemDetail />} />
           <Route path="secondhand/:id/secpmhandChat" element={<SecpmdhandChat />} />
+          <Route path="secondhand/:id/secondhandBuy" element={<SecondhandBuy />} />
+          <Route path="secondhand/:id/SecondhandDeliveryBuy" element={<SecondhandDeliveryBuy />} />
           <Route path="servicecenter" element={<ServiceCenter />} />
         </Route>
 
