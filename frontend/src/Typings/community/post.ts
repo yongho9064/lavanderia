@@ -2,6 +2,7 @@ export interface Comment {
   id: number;
   author: string;
   content: string;
+  avatar: string
 }
 
 
@@ -13,4 +14,5 @@ export interface Post {
   viewCount: number;
   image:string
   category: string;
+  avatar: string
 }
