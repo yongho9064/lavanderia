@@ -72,6 +72,7 @@ const Community = () => {
               <div className="bg-gray-200 w-10 h-10 rounded-full"></div>
               <div className="ml-3">
                 <div className="font-bold">{post.memberId}</div>
+                <div className="text-gray-500 text-sm">{post.category} - {new Date(post.createdAt).toLocaleDateString()}</div>
               </div>
             </div>
             <div className="font-bold text-xl">{post.title}</div>

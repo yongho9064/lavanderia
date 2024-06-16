@@ -1,6 +1,6 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { Post, Comment } from '../../Typings/community/post';
+import React from 'react'
+import { useLocation } from 'react-router-dom'
+import { Post, Comment } from '../../Typings/community/post'
 
 // 임시 댓글 데이터
 const commentsData: { [key: number]: Comment[] } = {
@@ -51,15 +51,15 @@ const commentsData: { [key: number]: Comment[] } = {
     { id: 3, author: 'User26', content: '감사합니다.', avatar: 'https://via.placeholder.com/40' },
     { id: 4, author: 'User27', content: '좋아요!', avatar: 'https://via.placeholder.com/40' }
   ]
-};
+}
 
 const PostDetail: React.FC = () => {
-  const location = useLocation();
-  const post: Post = location.state.post;
-  const comments: Comment[] = commentsData[post.communityId] || [];
+  const location = useLocation()
+  const post: Post = location.state.post
+  const comments: Comment[] = commentsData[post.communityId] || []
 
   if (!post) {
-    return <div>Post not found</div>;
+    return <div>Post not found</div>
   }
 
   return (
@@ -76,7 +76,7 @@ const PostDetail: React.FC = () => {
         </div>
         <div className="mb-4">
           <div className="mb-2 font-bold text-2xl">{post.title}</div>
-          {post.image && <img src={post.image} alt={post.title} className="max-w-full h-auto rounded mb-4" />}
+          <img src={post.image} alt={post.title} className="w-full h-auto rounded mb-4" />
           <div className="mb-2">{post.content}</div>
           <div className="text-gray-500 text-sm">조회수: {post.viewCount}</div>
         </div>
@@ -109,7 +109,7 @@ const PostDetail: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PostDetail;
+export default PostDetail
