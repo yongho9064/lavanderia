@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import Logo from "../../Components/common/Logo";
 
@@ -92,7 +92,7 @@ const Signup = () => {
             memberPhone: /^010 \d{4} \d{4}$/,
             memberEmail: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
             memberId: /^[a-zA-Z0-9]{4,}$/,
-            memberBirth: /^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/
+            memberBirth: /^(19|20)\d{2}-(0\d|1[0-2])-(0\d|[12]\d|3[01])$/
         };
 
         if (!value.trim()) {
@@ -138,7 +138,9 @@ const Signup = () => {
             const response = await axios.post('/signup', cleanedFormData);
 
             if (response.status !== 200) {
-                throw new Error('Network response was not ok');
+                console.error(`Error: Received status code ${response.status}`);
+                // 추가적인 에러 처리를 여기에 추가할 수 있습니다.
+                return; // 필요에 따라 이후 코드를 실행하지 않도록 리턴할 수 있습니다.
             }
 
             console.log('Success:', response.data);
@@ -186,15 +188,12 @@ const Signup = () => {
 
     return (
       <div className="min-h-screen max-w-2xl m-auto flex flex-col items-center lg: border">
-          <Logo/>
-          <div className="w-full h-20 pt-15 hidden items-center justify-center">
-              <h1 className="text-black w-2/3 h-full items-center border-b border-black text-3xl">
-                  <Logo/>
-                  <span className="ml-5 font-bold text-2xl">회원가입</span>
-              </h1>
+
+          <div className="flex w-full h-16  justify-center items-center">
+              <Logo/>
           </div>
 
-          <div className="mt-10 w-full px-5">
+          <div className="mt-5 w-full px-5">
               <p className="flex font-bold text-xl mb-10 text-center">
                   {['이름을 입력해 주세요', '휴대폰 번호를 입력해 주세요', '이메일을 입력해 주세요', '아이디를 입력해 주세요', '비밀번호를 입력해 주세요', '비밀번호 확인을 입력해 주세요', '생년월일을 입력해 주세요'][step - 1]}
               </p>

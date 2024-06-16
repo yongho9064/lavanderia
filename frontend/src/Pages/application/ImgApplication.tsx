@@ -34,7 +34,7 @@ const ImgApplication: React.FC = () => {
     };
 
     return (
-      <div className="mx-auto mt-5 w-full lg:h-[500px] lg:w-2/3 lg:mt-5 lg:pr-0 3xl:h-[700px]">
+      <div className="mx-auto mt-5 w-full px-5">
           <h1 className="text-2xl font-bold mb-5">세탁 신청 상세</h1>
 
           <div className="mb-5">
@@ -49,7 +49,7 @@ const ImgApplication: React.FC = () => {
                   <button className="px-4 py-2 bg-blue-500 text-white rounded">파일 선택</button>
                   <span className="ml-4">{selectedFiles.length > 0 ? `${selectedFiles.length}개 파일 선택됨` : '선택된 파일 없음'}</span>
               </div>
-              <div className="mt-3 flex flex-wrap ">
+              <div className="mt-3 flex justify-center flex-wrap ">
                   {selectedFiles.map((file, index) => (
                     <img
                       key={index}
