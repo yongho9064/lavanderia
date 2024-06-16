@@ -47,7 +47,7 @@ const SecpmdhandChat: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col h-screen p-4 bg-gray-100">
+        <div className="flex flex-col p-4 bg-gray-100">
             <div className="flex items-center mb-4">
                 <img src={sponge} alt="avatar" className="w-10 h-10 rounded-full mr-2"/>
                 <div className="flex flex-col">
@@ -55,12 +55,16 @@ const SecpmdhandChat: React.FC = () => {
                     <span className="text-xs text-gray-500">하루톡</span>
                 </div>
             </div>
-            <div className="flex-grow overflow-y-auto bg-white p-4 rounded-lg shadow-inner mb-4">
-                <div className="mb-4">
+            <div className="flex-grow overflow-y-auto bg-white rounded-lg shadow-inner">
+                <div className="">
                     <div className="text-sm text-gray-700 flex items-start">
                         <img src={sponge} alt="avatar" className="w-6 h-6 rounded-full mr-2"/>
                         <p className="bg-gray-200 rounded-lg p-2">
-                            안녕하세요. 스위티에요. 만나서 반가워요~ 궁금하신 점은 무엇이든지 물어보세요!
+                            안녕하세요. 스위티에요.
+                            <br/>
+                            만나서 반가워요~
+                            <br/>
+                            궁금하신 점은 무엇이든지 물어보세요!
                         </p>
                     </div>
                 </div>
