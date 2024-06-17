@@ -4,7 +4,9 @@ import com.kyungmin.lavanderia.global.util.email.service.EmailService;
 import com.kyungmin.lavanderia.member.data.dto.MemberInfoDTO;
 import com.kyungmin.lavanderia.member.data.dto.SignupDTO;
 import com.kyungmin.lavanderia.member.data.entity.Member;
+import com.kyungmin.lavanderia.member.data.entity.Role;
 import com.kyungmin.lavanderia.member.data.repository.MemberRepository;
+import com.kyungmin.lavanderia.member.data.repository.RoleRepository;
 import com.kyungmin.lavanderia.member.exception.DuplicateMemberIdEx;
 import com.kyungmin.lavanderia.member.exception.DuplicatePhoneNumberEx;
 import com.kyungmin.lavanderia.member.service.MemberService;
@@ -21,6 +23,7 @@ import java.util.Optional;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
+    private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final EmailService emailService;
 
@@ -37,8 +40,14 @@ public class MemberServiceImpl implements MemberService {
                 .agreeMarketingYn(signupDto.getAgreeMarketingYn())
                 .memberBirth(signupDto.getMemberBirth())
                 .build();
-        memberRepository.save(member);
 
+        Role role = Role.builder()
+                .authorities("ROLE_USER")
+                .memberId(member)
+                .build();
+
+        roleRepository.save(role);
+        memberRepository.save(member);
         emailService.sendSignupCode(signupDto.getMemberEmail());
     }
 
@@ -101,6 +110,13 @@ public class MemberServiceImpl implements MemberService {
                 .orElseThrow(() -> new UsernameNotFoundException(email + "회원을 찾을 수 없습니다."));
         member.setAccInactiveYn("N");
         memberRepository.save(member);
+
+        Role role = Role.builder().
+                authorities("ROLE_USER")
+                .memberId(member)
+                .build();
+
+        roleRepository.save(role);
     }
 
     // 회원 아이디로 회원 조회
