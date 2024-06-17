@@ -1,30 +1,35 @@
 import axios from 'axios';
 
 interface AddressComponent {
-    long_name: string;
-    short_name: string;
-    types: string[];
+    address_name: string;
+    region_1depth_name: string;
+    region_2depth_name: string;
+    region_3depth_name: string;
 }
 
-interface GeocodeResult {
-    results: {
-        address_components: AddressComponent[];
-        formatted_address: string;
+interface KakaoGeocodeResult {
+    documents: {
+        address: AddressComponent;
     }[];
 }
 
 const reverseGeocode = async (latitude: number, longitude: number, apiKey: string): Promise<{ city: string; region: string; subregion: string }> => {
     if (!apiKey) {
-        throw new Error('Google Maps API key is missing.');
+        throw new Error('Kakao Maps API key is missing.');
     }
 
     try {
-        const response = await axios.get<GeocodeResult>(
-          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`
+        const response = await axios.get<KakaoGeocodeResult>(
+          `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${longitude}&y=${latitude}`,
+          {
+              headers: {
+                  Authorization: `KakaoAK ${apiKey}`
+              }
+          }
         );
 
-        if (!response.data.results || response.data.results.length === 0) {
-            console.error('No results found')
+        if (!response.data.documents || response.data.documents.length === 0) {
+            console.error('not Fonid')
         }
 
         let city = 'Unknown City';
@@ -32,37 +37,22 @@ const reverseGeocode = async (latitude: number, longitude: number, apiKey: strin
         let subregion = 'Unknown Subregion';
 
         // 결과 배열을 순회하며 필요한 주소 구성 요소 찾기
-        for (const result of response.data.results) {
-            const addressComponents = result.address_components;
-            let foundCity = false;
-            let foundRegion = false;
-            let foundSubregion = false;
+        for (const document of response.data.documents) {
+            const address = document.address;
+            console.log("Address Component:", address);
 
-            for (const component of addressComponents) {
-                // 우편번호와 'Korea'는 제외
-                if (component.types.includes("postal_code") || component.long_name.includes("Korea")) continue;
-                console.log("Address Component:", component);
-
-                // 시/군/구 정보를 설정
-                if ((component.types.includes("locality") || component.types.includes("administrative_area_level_2")) && !foundCity) {
-                    city = component.long_name;
-                    foundCity = true;
-                }
-                // 도/시 정보를 설정
-                else if (component.types.includes("administrative_area_level_1") && !foundRegion) {
-                    region = component.long_name;
-                    foundRegion = true;
-                }
-                // 하위 지역 정보를 설정
-                else if ((component.types.includes("sublocality") || component.types.includes("neighborhood")) && !foundSubregion) {
-                    subregion = component.long_name;
-                    foundSubregion = true;
-                }
-                console.log(component.long_name);  // 디버깅용 로그
+            if (address.region_1depth_name) {
+                region = address.region_1depth_name;
+            }
+            if (address.region_2depth_name) {
+                city = address.region_2depth_name;
+            }
+            if (address.region_3depth_name) {
+                subregion = address.region_3depth_name;
             }
 
-            // 필요한 모든 구성 요소를 찾은 경우 순회 중단
-            if (foundCity && foundRegion && foundSubregion) {
+            // 모든 구성 요소를 찾았으면 순회 중단
+            if (region !== 'Unknown Region' && city !== 'Unknown City' && subregion !== 'Unknown Subregion') {
                 break;
             }
         }
