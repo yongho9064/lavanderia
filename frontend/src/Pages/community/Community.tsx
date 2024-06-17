@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Post } from '../../Typings/community/post'
+import { decryptToken } from '../../Utils/auth/crypto'
 
 const tabs = [
   { name: '전체', active: true },
@@ -18,12 +19,21 @@ const Community = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const access = localStorage.getItem('access')
+        const encryptedAccess = localStorage.getItem('access');
+        if (!encryptedAccess) {
+          throw new Error('Access token not found');
+        }
+
+        const access = decryptToken(encryptedAccess);
+        if (!access) {
+          throw new Error('Failed to decrypt access token');
+        }
+
         const response = await axios.get('/community/', {
           headers: {
-            access: access
+            Authorization: access
           }
-        })
+        });
 
         setPosts(response.data)
       } catch (error) {
