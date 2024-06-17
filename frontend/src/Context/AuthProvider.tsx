@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 import axios from "axios";
+import { authenticateAccess } from '../Utils/auth/tokenService';
+import { decryptToken, encryptToken } from '../Utils/auth/crypto'
 
 // Context 생성
 interface AuthContextType {
@@ -27,47 +29,50 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [access, setAccess] = useState("");
 
   useEffect(() => {
-    const storedAccess = window.localStorage.getItem("access") || window.sessionStorage.getItem("access");
+    const encryptedAccess = window.localStorage.getItem("access");
+    const rememberMe = window.localStorage.getItem("rememberMe");
 
-    // 리멤버미로 바꾸기
-    if (storedAccess) {
-      setAccess(storedAccess);
-      setIsLoggedIn(true);
+    if (encryptedAccess && rememberMe) {
+      console.log(encryptedAccess)
+      const storedAccess = decryptToken(encryptedAccess);
+      console.log(storedAccess)
+      if (storedAccess) {
+        authenticateAccessToken(storedAccess);
+      } else {
+        logout();
+      }
     }
   }, []);
+
+  const authenticateAccessToken = async (token: string) => {
+    try {
+      const data = await authenticateAccess(token);
+      const newAccess = data.access || token;
+      setAccess(newAccess); // 새로운 액세스 토큰이 있으면 설정하고, 없으면 기존 토큰 유지
+      setIsLoggedIn(true);
+      if (window.localStorage.getItem("rememberMe") && data.access) {
+        window.localStorage.setItem("access", encryptToken(newAccess));
+      }
+    } catch (error) {
+      console.error("Failed to authenticate or refresh access token:", error);
+      // logout();
+    }
+  };
 
   const login = (access: string, rememberMe: boolean) => {
     setIsLoggedIn(true);
     setAccess(access);
     if (rememberMe) {
-      window.localStorage.setItem("access", access);
-    } else {
-      window.sessionStorage.setItem("access", access);
+      window.localStorage.setItem("access", encryptToken(access));
+      window.localStorage.setItem("rememberMe", "true");
     }
   };
 
   const logout = () => {
-    setIsLoggedIn(false);
-    setAccess("");
-    window.localStorage.removeItem("access");
-    window.sessionStorage.removeItem("access");
-  };
-
-  const refreshAccessToken = async (refreshToken: string) => {
-    try {
-      const response = await axios.post("/refresh-token", { refreshToken });
-      const { access: newAccess } = response.data;
-      setAccess(newAccess);
-      if (window.localStorage.getItem("access")) {
-        window.localStorage.setItem("access", newAccess);
-      } else {
-        window.sessionStorage.setItem("access", newAccess);
-      }
-      setIsLoggedIn(true);
-    } catch (error) {
-      console.error("Failed to refresh access token:", error);
-      logout();
-    }
+      setIsLoggedIn(false);
+      setAccess("");
+      window.localStorage.removeItem("access");
+      window.localStorage.removeItem("rememberMe");
   };
 
   return (

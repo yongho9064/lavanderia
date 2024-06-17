@@ -18,6 +18,7 @@ export const authenticateAccess = async (accessToken: string): Promise<any> => {
     // 액세스토큰 인증 성공시 반환값
     return response.data;
   } catch (error: any) {
+    console.log(error)
     if (error.response && error.response.statusText === "Unauthorized") {
       try {
         const reissueResponse = await axios.post("/reissue");
