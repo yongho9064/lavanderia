@@ -138,12 +138,6 @@ const Signup = () => {
 
             const response = await axios.post('/signup', cleanedFormData);
 
-            if (response.status !== 200) {
-                console.error(`Error: Received status code ${response.status}`);
-                // 추가적인 에러 처리를 여기에 추가할 수 있습니다.
-                return; // 필요에 따라 이후 코드를 실행하지 않도록 리턴할 수 있습니다.
-            }
-
             console.log('Success:', response.data);
             window.alert('로그인 성공! 이메일 인증을 진행해 주세요.');
             navigate('/'); // 홈으로 네비게이트
