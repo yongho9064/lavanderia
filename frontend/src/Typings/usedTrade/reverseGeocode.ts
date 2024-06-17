@@ -9,6 +9,7 @@ interface AddressComponent {
 interface GeocodeResult {
     results: {
         address_components: AddressComponent[];
+        formatted_address: string;
     }[];
 }
 
@@ -18,14 +19,12 @@ const reverseGeocode = async (latitude: number, longitude: number, apiKey: strin
     }
 
     try {
-        // Geocoding API 호출하여 위도와 경도를 사용해 주소를 역지오코딩
         const response = await axios.get<GeocodeResult>(
           `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`
         );
 
-        // 결과 배열이 없거나 비어있는 경우 처리
         if (!response.data.results || response.data.results.length === 0) {
-            console.log('error getting geocode results.');
+            console.error('No results found')
         }
 
         let city = 'Unknown City';
@@ -34,21 +33,36 @@ const reverseGeocode = async (latitude: number, longitude: number, apiKey: strin
 
         // 결과 배열을 순회하며 필요한 주소 구성 요소 찾기
         for (const result of response.data.results) {
-            // 주소는 많기 떄문에 배열을 선택해서 가져오면 오류남 코드 수정
             const addressComponents = result.address_components;
+            let foundCity = false;
+            let foundRegion = false;
+            let foundSubregion = false;
+
             for (const component of addressComponents) {
+                // 우편번호와 'Korea'는 제외
+                if (component.types.includes("postal_code") || component.long_name.includes("Korea")) continue;
                 console.log("Address Component:", component);
-                if (component.types.includes("locality") && component.long_name !== '대한민국') {
+
+                // 시/군/구 정보를 설정
+                if ((component.types.includes("locality") || component.types.includes("administrative_area_level_2")) && !foundCity) {
                     city = component.long_name;
-                } else if (component.types.includes("administrative_area_level_1") && component.short_name !== '대한민국') {
-                    region = component.short_name;
-                } else if ((component.types.includes("sublocality") || component.types.includes("neighborhood")) && component.long_name !== '대한민국') {
-                    subregion = component.long_name;
+                    foundCity = true;
                 }
+                // 도/시 정보를 설정
+                else if (component.types.includes("administrative_area_level_1") && !foundRegion) {
+                    region = component.long_name;
+                    foundRegion = true;
+                }
+                // 하위 지역 정보를 설정
+                else if ((component.types.includes("sublocality") || component.types.includes("neighborhood")) && !foundSubregion) {
+                    subregion = component.long_name;
+                    foundSubregion = true;
+                }
+                console.log(component.long_name);  // 디버깅용 로그
             }
 
             // 필요한 모든 구성 요소를 찾은 경우 순회 중단
-            if (city !== 'Unknown City' && region !== 'Unknown Region' && subregion !== 'Unknown Subregion') {
+            if (foundCity && foundRegion && foundSubregion) {
                 break;
             }
         }

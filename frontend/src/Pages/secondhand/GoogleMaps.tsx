@@ -99,7 +99,7 @@ const GoogleMaps: React.FC = () => {
     }
 
     return (
-      <div className='max-w-2xl mx-auto pr-5 pl-5'>
+      <div className='max-w-6xl m-auto p-5'>
           <h1 className="flex items-center mb-2 mt-2">
               <FaLocationDot className="text-red-600" />  {address.region} {address.city} {address.subregion}
           </h1>
