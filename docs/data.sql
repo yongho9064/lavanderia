@@ -38,3 +38,6 @@ INSERT INTO TBL_COMMUNITY (COMMUNITY_ID, CREATED_AT, UPDATED_AT, CATEGORY, CONTE
 INSERT INTO TBL_COMMUNITY (COMMUNITY_ID, CREATED_AT, UPDATED_AT, CATEGORY, CONTENT, IMAGE, TITLE, VIEW_COUNT, MEMBER_ID) VALUES (8, '2024-06-16 19:59:02.752668', null, '후기', '별로에요', 'https://storage.googleapis.com/download/storage/v1/b/lavanderia_img/o/75d87d45-c719-4ae3-84ce-20c9a445ba91?generation=1718535542807840&alt=media', '이제품 약간 별로네요', 0, 'admin');
 INSERT INTO TBL_COMMUNITY (COMMUNITY_ID, CREATED_AT, UPDATED_AT, CATEGORY, CONTENT, IMAGE, TITLE, VIEW_COUNT, MEMBER_ID) VALUES (9, '2024-06-16 20:00:42.984266', null, '패션', 'ㅇㅇ?', 'https://storage.googleapis.com/download/storage/v1/b/lavanderia_img/o/254d8219-b2b4-40b2-adc2-3f82c4939385?generation=1718535643040469&alt=media', '어떤가요?', 0, 'user');
 INSERT INTO TBL_COMMUNITY (COMMUNITY_ID, CREATED_AT, UPDATED_AT, CATEGORY, CONTENT, IMAGE, TITLE, VIEW_COUNT, MEMBER_ID) VALUES (10, '2024-06-16 20:01:36.642996', null, '패션', 'ㅇㅇ', 'https://storage.googleapis.com/download/storage/v1/b/lavanderia_img/o/e3a30213-c3bd-448a-93ac-51b4bebc7b6b?generation=1718535696702326&alt=media', '심플', 0, 'admin');
+
+INSERT INTO TBL_ROLE (ROLE_ID, AUTHORITIES, MEMBER_ID) VALUES (1, 'ROLE_USER', 'user');
+INSERT INTO TBL_ROLE (ROLE_ID, AUTHORITIES, MEMBER_ID) VALUES (2, 'ROLE_ADMIN', 'admin');
