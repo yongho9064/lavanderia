@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from '../../Context';
+import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   return (
     <div>
-      마이페이지
+      <h1>My Page</h1>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

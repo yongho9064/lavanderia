@@ -84,12 +84,12 @@ const Payment: React.FC = () => {
     }, [isPickupCalendarOpen, isDeliveryCalendarOpen]);
 
     return (
-        <div className="container mx-auto w-full p-5 lg:w-2/3 lg:px-0">
+        <div className="container mx-auto w-full p-5">
             <header className="mb-5 border-b border-black pb-5">
-                <h1 className="text-xl font-bold lg:text-3xl">결제 페이지</h1>
+                <h1 className="text-xl font-bold">결제 페이지</h1>
             </header>
 
-            <div className="lg:mx-auto lg:w-1/2">
+            <div className="lg:mx-auto">
                 <div className="flex flex-col gap-5">
                     <div className="flex flex-col justify-center rounded-lg border p-5 shadow-md">
                         <h2 className="mb-4 text-xl font-bold">수거일/배송일</h2>

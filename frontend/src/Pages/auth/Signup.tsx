@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Logo from "../../Components/common/Logo";
 
@@ -18,6 +18,7 @@ const fieldNames: (keyof FormData)[] = ['memberName', 'memberPhone', 'memberEmai
 
 const Signup = () => {
     const location = useLocation();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState<FormData>({
         memberName: '',
@@ -137,17 +138,19 @@ const Signup = () => {
 
             const response = await axios.post('/signup', cleanedFormData);
 
-            if (response.status !== 200) {
-                console.error(`Error: Received status code ${response.status}`);
-                // 추가적인 에러 처리를 여기에 추가할 수 있습니다.
-                return; // 필요에 따라 이후 코드를 실행하지 않도록 리턴할 수 있습니다.
-            }
-
             console.log('Success:', response.data);
-            // Handle success (e.g., redirect to another page, show a success message, etc.)
+            window.alert('로그인 성공! 이메일 인증을 진행해 주세요.');
+            navigate('/'); // 홈으로 네비게이트
+
         } catch (error) {
-            console.error('Error:', error);
-            // Handle error (e.g., show an error message, etc.)
+            if (axios.isAxiosError(error)) {
+                console.error('Axios Error:', error.message);
+                if (error.response) {
+                    console.error('Server responded with:', error.response.data);
+                }
+            } else {
+                console.error('Unexpected Error:', error);
+            }
         }
     };
 
@@ -188,9 +191,8 @@ const Signup = () => {
 
     return (
       <div className="min-h-screen max-w-2xl m-auto flex flex-col items-center lg: border">
-
           <div className="flex w-full h-16  justify-center items-center">
-              <Logo/>
+              <Logo />
           </div>
 
           <div className="mt-5 w-full px-5">

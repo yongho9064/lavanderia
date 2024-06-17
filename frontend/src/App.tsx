@@ -25,6 +25,7 @@ import SecpmdhandChat from "./Pages/secondhand/SecpmdhandChat";
 import SecondhandBuy from "./Pages/secondhand/SecondhandBuy";
 import SecondhandDeliveryBuy from "./Pages/secondhand/SecondhandDeliveryBuy";
 import FloatingUpButton from './Components/floatingCart/FloatingUpButton'
+import CommunityWrite from './Pages/community/CommunityWrite'
 
 function App() {
   return (
@@ -45,8 +46,13 @@ function App() {
           </Route>
 
           {/* 로그인 불필요 페이지! */}
+          
+          {/*커뮤니티*/}
           <Route path="community" element={<Community />} />
           <Route path="community/:postId" element={<PostDetail/>} /> {/* Add PostDetail route */}
+          <Route path="/community/write" element={<CommunityWrite />} />
+          
+          {/*중고장터*/}
           <Route path="secondhand" element={<SecondhandProduct />} />
           <Route path="secondhand/:id" element={<SecondhandProductItemDetail />} />
           <Route path="secondhand/:id/secpmhandChat" element={<SecpmdhandChat />} />
