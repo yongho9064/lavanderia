@@ -41,12 +41,6 @@ public class MemberServiceImpl implements MemberService {
                 .memberBirth(signupDto.getMemberBirth())
                 .build();
 
-        Role role = Role.builder()
-                .authorities("ROLE_USER")
-                .memberId(member)
-                .build();
-
-        roleRepository.save(role);
         memberRepository.save(member);
         emailService.sendSignupCode(signupDto.getMemberEmail());
     }
