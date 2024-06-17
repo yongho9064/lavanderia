@@ -29,6 +29,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     const storedAccess = window.localStorage.getItem("access") || window.sessionStorage.getItem("access");
 
+    // 리멤버미로 바꾸기
     if (storedAccess) {
       setAccess(storedAccess);
       setIsLoggedIn(true);
