@@ -5,10 +5,10 @@ import reverseGeocode from '../../Typings/usedTrade/reverseGeocode';
 import axios from 'axios';
 import { FaLocationDot } from 'react-icons/fa6';
 
-const GOOGLE_MAPS_API_KEY: string = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || '';
+const KAKAO_MAPS_API_KEY: string = process.env.REACT_APP_KAKAO_MAPS_API_KEY || '';
 
-if (!GOOGLE_MAPS_API_KEY) {
-    throw new Error('Google Maps API key is missing. Please add REACT_APP_GOOGLE_MAPS_API_KEY to your .env file.');
+if (!KAKAO_MAPS_API_KEY) {
+    throw new Error('Kakao Maps API key is missing. Please add REACT_APP_KAKAO_MAPS_API_KEY to your .env file.');
 }
 
 interface Item {
@@ -48,7 +48,7 @@ const GoogleMaps: React.FC = () => {
     // 사용자의 위치가 변경되었을 때 역지오코딩 수행
     useEffect(() => {
         if (location.latitude && location.longitude) {
-            reverseGeocode(location.latitude, location.longitude, GOOGLE_MAPS_API_KEY)
+            reverseGeocode(location.latitude, location.longitude, KAKAO_MAPS_API_KEY)
               .then(address => {
                   setAddress(address);
               })
