@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 
 
@@ -15,9 +15,10 @@ interface Item {
 }
 
 const SecondhandBuy = () => {
+    const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
     const [item, setItem] = useState<Item | null>(null);
-    const [selectedMethod, setSelectedMethod] = useState<string>('택배로 받기'); // Default selection
+    const [selectedMethod, setSelectedMethod] = useState<string>('택배로 받기');
 
     useEffect(() => {
         const fetchItem = async () => {
@@ -51,6 +52,10 @@ const SecondhandBuy = () => {
         setSelectedMethod(method);
     };
 
+    const handlePaymentCLick = () => {
+        navigate(`/secondhand/${id}/secondPayment`, { state: { item, selectedMethod } });
+    }
+
     return (
         <div className="p-4">
             <h3 className="text-xl mb-4 font-bold">거래방법 선택하기</h3>
@@ -81,7 +86,7 @@ const SecondhandBuy = () => {
                     <h2 className="text-xl font-bold mb-1">{item.price.toLocaleString()}원</h2>
                     <p className='text-gray-500 text-sm mb-2'>배송비 무료</p>
                 </div>
-                <button className="bg-red-500 text-white  p-2 w-full text-lg">다음</button>
+                <button className="bg-red-500 text-white  p-2 w-full text-lg" onClick={handlePaymentCLick}>다음</button>
             </div>
         </div>
     );
