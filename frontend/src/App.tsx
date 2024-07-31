@@ -24,9 +24,9 @@ import SecondhandProductItemDetail from "./Pages/secondhand/SecondhandProductIte
 import SecpmdhandChat from "./Pages/secondhand/SecpmdhandChat";
 import SecondhandBuy from "./Pages/secondhand/SecondhandBuy";
 import SecondhandDeliveryBuy from "./Pages/secondhand/SecondhandDeliveryBuy";
-import FloatingUpButton from './Components/floating/FloatingUpButton'
 import CommunityWrite from './Pages/community/CommunityWrite'
 import Find from "./Pages/auth/Find";
+import SecondPayment from "./Pages/secondhand/SecondPayment";
 
 function App() {
   return (
@@ -60,6 +60,7 @@ function App() {
           <Route path="secondhand/:id/secondhandBuy" element={<SecondhandBuy />} />
           <Route path="secondhand/:id/SecondhandDeliveryBuy" element={<SecondhandDeliveryBuy />} />
           <Route path="servicecenter" element={<ServiceCenter />} />
+          <Route path="secondhand/:id/secondPayment" element={<SecondPayment/>}/>
         </Route>
 
         {/* 로그인시 접근 제한 페이지 */}
