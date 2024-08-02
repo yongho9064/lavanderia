@@ -66,7 +66,7 @@ const ImportPayment: React.FC = () => {
 
     return (
         <div>
-            <button onClick={requestPay}>카카오페이로 결제하기</button>
+            <button onClick={requestPay}>카카오페이로 테스트 결제하기</button>
         </div>
     );
 };
