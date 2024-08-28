@@ -1,10 +1,10 @@
 import React from "react";
 import ServiceCard from "./ServiceCard"; // Adjust the import path if needed
-import laundryWomen from "../../Assets/Img/laundry_women.png";
-import premiumLaundry from "../../Assets/Img/premium_laundry.png";
-import dailyLaundry from "../../Assets/Img/daily_laundry.png";
-import clothesRepair from "../../Assets/Img/clothes_repair.png";
-import clothesCollectionBox from "../../Assets/Img/clothes_collection_box.png";
+import laundryWomen from "../../Assets/Img/application/laundry_women.png";
+import premiumLaundry from "../../Assets/Img/application/premium_laundry.png";
+import dailyLaundry from "../../Assets/Img/application/daily_laundry.png";
+import clothesRepair from "../../Assets/Img/application/clothes_repair.png";
+import clothesCollectionBox from "../../Assets/Img/application/clothes_collection_box.png";
 
 const services = [
     {
