@@ -33,7 +33,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           <img
             src={image}
             alt={title}
-            className={`ml-4 object-contain h-24 w-24 sm:h-28 sm:w-28 2xl:w-44 3xl:h-48`}
+            className={`h-20 w-20`}
           />
         )}
       </div>
