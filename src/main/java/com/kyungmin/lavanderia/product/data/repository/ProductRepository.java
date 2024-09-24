@@ -1,4 +1,4 @@
-package com.kyungmin.lavanderia.product.data;
+package com.kyungmin.lavanderia.product.data.repository;
 
 import com.kyungmin.lavanderia.product.data.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -3,10 +3,7 @@ package com.kyungmin.lavanderia.board.data.entity;
 import com.kyungmin.lavanderia.global.entity.TimeLog;
 import com.kyungmin.lavanderia.member.data.entity.Member;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
@@ -32,7 +29,7 @@ public class Community extends TimeLog {
     private String content;
 
     @Column(name = "VIEW_COUNT")
-    private Integer viewCount = 0;
+    private Integer viewCount;
 
     @Column(name = "CATEGORY")
     private String category;

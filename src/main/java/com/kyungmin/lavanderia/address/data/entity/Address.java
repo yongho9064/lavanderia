@@ -34,8 +34,8 @@ public class Address {
     @Column(name = "RECEIVER_PHONE")
     private String receiverPhone; // 수령인 전화번호
 
-    @Column(name = "REQUEST")
-    private String request; // 요청사항
+    @Column(name = "DELIVERY_REQUEST_MESSAGE")
+    private String deliveryRequestMessage; // 배송 요청 메시지
 
     @Column(name = "ADDRESS")
     private String address; // 주소
@@ -43,16 +43,19 @@ public class Address {
     @Column(name = "ADDRESS_DETAIL")
     private String addressDetail; // 상세 주소
 
+    @Column(name = "POSTAL_CODE")
+    private String postalCode; // 우편번호
+
     @Column(name = "ADDRESS_DEFAULT_YN")
     private char addressDefaultYn; // 기본 주소 여부
 
     @Builder
-    public Address(Member memberId, String addressName, String receiverName, String receiverPhone, String request, String address, String addressDetail, char addressDefaultYn) {
+    public Address(Member memberId, String addressName, String receiverName, String receiverPhone, String deliveryRequestMessage, String address, String addressDetail, char addressDefaultYn) {
         this.memberId = memberId;
         this.addressName = addressName;
         this.receiverName = receiverName;
         this.receiverPhone = receiverPhone;
-        this.request = request;
+        this.deliveryRequestMessage = deliveryRequestMessage;
         this.address = address;
         this.addressDetail = addressDetail;
         this.addressDefaultYn = addressDefaultYn;
