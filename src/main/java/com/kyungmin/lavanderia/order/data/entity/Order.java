@@ -1,14 +1,21 @@
 package com.kyungmin.lavanderia.order.data.entity;
 
-import com.kyungmin.lavanderia.product.data.entity.Product;
+import com.kyungmin.lavanderia.order.data.constant.DeliveryStatus;
 import jakarta.persistence.*;
-import jdk.jfr.Timestamp;
-import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.CurrentTimestamp;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "TBL_ORDER")
 public class Order {
 
@@ -17,14 +24,40 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long orderId;
 
-    @Column(name = "ORDER_DATE")
-    @CurrentTimestamp
-    private Date orderDate;
+    @Column(name = "MEMBER_ID")
+    private String memberId;
 
-    @Column(name = "PRICE")
-    private Long price;
+    @CreationTimestamp
+    @Column(name = "ORDER_DATE", updatable = false)
+    private LocalDateTime orderDate;
 
-    @ManyToOne
-    @JoinColumn(name = "PRODUCT_ID")
-    private Product product;
+    @Column(name = "RECEIVER_NAME")
+    private String rcvrName;
+
+    @Column(name = "RECEIVER_PHONE")
+    private String rcvrPhone;
+
+    @Column(name = "RECEIVER_ADDRESS")
+    private String rcvrAddress;
+
+    @Column(name = "RECEIVER_DETAIL_ADDRESS")
+    private String rcvrDetailAddress;
+
+    @Column(name = "RECEIVER_POSTAL_CODE")
+    private String rcvrPostalCode;
+
+    @Column(name = "DELIVERY_REQUEST_MESSAGE")
+    private String dlvrReqMessage;
+
+    @Column(name = "DELIVERY_STATUS")
+    private String dlvrReqStatus;
+
+    @OneToMany(mappedBy = "orderId")
+    private List<OrderDetail> orderDetailList;
+
+    @PrePersist
+    public void prePersist() {
+        this.dlvrReqStatus = DeliveryStatus.READY.getStatus();
+    }
+
 }

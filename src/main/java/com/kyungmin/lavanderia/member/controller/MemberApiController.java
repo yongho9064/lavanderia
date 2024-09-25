@@ -21,9 +21,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "회원 API")
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "회원 API")
 public class MemberApiController {
 
     private final MemberService memberService;
