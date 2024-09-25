@@ -33,7 +33,7 @@ public class AddressServiceImpl implements AddressService {
                 .addressName(addressInsertDTO.getAddressName())
                 .receiverName(addressInsertDTO.getReceiverName())
                 .receiverPhone(addressInsertDTO.getReceiverPhone())
-                .request(addressInsertDTO.getRequest())
+                .deliveryRequestMessage(addressInsertDTO.getDlvrReqMassage())
                 .address(addressInsertDTO.getAddress())
                 .addressDetail(addressInsertDTO.getAddressDetail())
                 .addressDefaultYn(addressInsertDTO.getAddressDefaultYn())
@@ -50,7 +50,7 @@ public class AddressServiceImpl implements AddressService {
         address.setAddressName(addressUpdateDTO.getAddressName());
         address.setReceiverName(addressUpdateDTO.getReceiverName());
         address.setReceiverPhone(addressUpdateDTO.getReceiverPhone());
-        address.setRequest(addressUpdateDTO.getRequest());
+        address.setDeliveryRequestMessage(addressUpdateDTO.getDeliveryRequestMessage());
         address.setAddress(addressUpdateDTO.getAddress());
         address.setAddressDetail(addressUpdateDTO.getAddressDetail());
         address.setAddressDefaultYn(addressUpdateDTO.getAddressDefaultYn());
@@ -84,7 +84,7 @@ public class AddressServiceImpl implements AddressService {
                 .addressName(address.getAddressName())
                 .receiverName(address.getReceiverName())
                 .receiverPhone(address.getReceiverPhone())
-                .request(address.getRequest())
+                .deliveryRequestMessage(address.getDeliveryRequestMessage())
                 .address(address.getAddress())
                 .addressDetail(address.getAddressDetail())
                 .addressDefaultYn(address.getAddressDefaultYn())
@@ -101,7 +101,7 @@ public class AddressServiceImpl implements AddressService {
                         .addressName(address.getAddressName())
                         .receiverName(address.getReceiverName())
                         .receiverPhone(address.getReceiverPhone())
-                        .request(address.getRequest())
+                        .deliveryRequestMessage(address.getDeliveryRequestMessage())
                         .address(address.getAddress())
                         .addressDetail(address.getAddressDetail())
                         .addressDefaultYn(address.getAddressDefaultYn())
