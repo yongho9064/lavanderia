@@ -1,7 +1,8 @@
 package com.kyungmin.lavanderia.payment.controller;
 
+import com.kyungmin.lavanderia.order.data.entity.Order;
 import com.kyungmin.lavanderia.order.data.entity.OrderDetail;
-import com.kyungmin.lavanderia.order.service.OrderDetailService;
+import com.kyungmin.lavanderia.order.data.repository.OrderRepository;
 import com.kyungmin.lavanderia.payment.data.dto.PaymentDTO;
 import com.kyungmin.lavanderia.payment.data.dto.PaymentDTO.PaymentInfo;
 import com.kyungmin.lavanderia.payment.service.PaymentService;
@@ -22,25 +23,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class PaymentController {
 
     private static final Logger log = LoggerFactory.getLogger(PaymentController.class);
+
     private final PaymentService paymentService;
-    private final OrderDetailService orderDetailService;
+
+    private final OrderRepository orderRepository;
 
     @PostMapping("/complete")
     public ResponseEntity<String> completePayment(@RequestBody PaymentDTO paymentDTO) {
         try {
             // 요청의 body에서 paymentId와 order를 받습니다.
             String paymentId = paymentDTO.getPaymentId();
-            Long order = paymentDTO.getOrderId();
+            Long orderId = paymentDTO.getOrderId();
 
             // 1. 포트원 결제내역 단건조회
             PaymentInfo paymentInfo = paymentService.getPaymentDetails(paymentId);
 
             // 2. 고객사 내부 주문 데이터의 가격과 실제 지불된 금액을 비교
-            OrderDetail orderDetail = orderDetailService.getOrderDetail(order);
+            Order order = orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("Order not found."));
 
-            if (orderDetail.getPrice() == paymentInfo.getAmount().getTotal()) {
+            // 주문 상세 정보의 가격을 합산
+            int totalPrice = order.getOrderDetailList().stream().mapToInt(OrderDetail::getPrice).sum();
+
+            if (totalPrice == paymentInfo.getAmount().getTotal()) {
                 // 3. 결제 상태에 따라 처리
-                paymentService.processPayment(paymentInfo);
+                paymentService.processPayment(paymentInfo, orderId);
             } else {
                 // 결제 금액이 불일치하여 위/변조 시도가 의심됩니다.
                 return ResponseEntity.status(400).body("Payment amount mismatch.");
@@ -53,4 +59,5 @@ public class PaymentController {
             return ResponseEntity.status(400).body(e.getMessage());
         }
     }
+
 }
