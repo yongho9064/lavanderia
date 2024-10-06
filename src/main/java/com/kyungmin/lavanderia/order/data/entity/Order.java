@@ -2,21 +2,19 @@ package com.kyungmin.lavanderia.order.data.entity;
 
 import com.kyungmin.lavanderia.order.data.constant.DeliveryStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity
 @Data
+@Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Table(name = "TBL_ORDER")
+@ToString(exclude = "orderDetailList")
 public class Order {
 
     @Id
