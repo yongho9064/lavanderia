@@ -62,7 +62,7 @@ const Community = () => {
 
       {/* Header */}
 
-      <header className="w-full px-4 sticky top-[116px] bg-white z-10">
+      <header className="w-full px-4 sticky top-[116px] z-10  backdrop-blur-sm">
         <div className="flex gap-4 p-3">
           {tabs.map(tab => (
             <button
@@ -114,7 +114,7 @@ const Community = () => {
       </footer>
 
       <button
-        className={`fixed bottom-0 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white rounded-full p-4 shadow-lg hover:bg-blue-700 transition-transform ${
+        className={`fixed bottom-0 left-1/2 transform -translate-x-1/2 bg-black text-white rounded-full p-4 shadow-lg hover:bg-gray-600 transition-transform ${
           isScrollingUp ? '-translate-y-10' : 'translate-y-full'
         }`}
         onClick={handleWritePost}

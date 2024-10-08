@@ -59,7 +59,7 @@ const Signup = () => {
             case 'confirmPassword':
                 return '비밀번호 확인을 입력해주세요';
             case 'memberBirth':
-                return '생년월일을 입력해주세요';
+                return '생년월일을 입력해주세요 YYYY-MM-DD';
             default:
                 return '';
         }
@@ -210,7 +210,7 @@ const Signup = () => {
                         </label>
                         <input
                           className={`w-full border-b pl-0 font-bold text-xl border-0 border-gray-300 outline-none focus:ring-0 focus:border-gray-300 mb-2 ${errors[field] ? 'border-red-500' : ''}`}
-                          type={field.includes('password') || field.includes('confirmPassword') ? 'password' : 'text'}
+                          type={field.includes('memberPwd') || field.includes('confirmPassword') ? 'password' : 'text'}
                           id={field}
                           ref={(el) => (inputRefs.current[index] = el)}
                           value={formData[field]}

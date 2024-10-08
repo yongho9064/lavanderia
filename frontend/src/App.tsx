@@ -10,7 +10,6 @@ import Header from "./Components/common/Header";
 import ScrollToTop from "./Components/common/ScrollToTop";
 import Signup from "./Pages/auth/Signup";
 import Application from "./Pages/application/Application";
-import ApplicationDetail from "./Pages/application/ApplicationDetail";
 import ImgApplication from "./Pages/application/ImgApplication";
 import Cart from "./Pages/application/Cart";
 import { AuthProvider } from "./Context";
@@ -39,7 +38,6 @@ function App() {
           {/* 로그인 필요 페이지 */}
           <Route element={<ProtectedRoute />}>
             <Route path="application" element={<Application />} />
-            <Route path="applicationDetail" element={<ApplicationDetail />} />
             <Route path="imgApplication" element={<ImgApplication />} />
             <Route path="payment" element={<Payment />} />
             <Route path="cart" element={<Cart />} />
