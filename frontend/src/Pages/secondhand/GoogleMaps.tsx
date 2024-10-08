@@ -24,9 +24,9 @@ const GoogleMaps = () => {
           const response = await axios.get(
             `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&language=ko&key=${API_KEY}`,
           )
-          // filter 확인용
+          // filter 확인용!
           const data = response.data
-          // 렌더링 주소 확인용
+          // 렌더링 주소 확인용!
           const location = response.data.results[3].formatted_address
           console.log(data)
           console.log(location, 'asdasd')
