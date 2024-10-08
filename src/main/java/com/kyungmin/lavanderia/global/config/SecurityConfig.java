@@ -4,11 +4,10 @@ import com.kyungmin.lavanderia.global.auth.jwt.data.repository.RefreshRepository
 import com.kyungmin.lavanderia.global.auth.jwt.filter.CustomLogoutFilter;
 import com.kyungmin.lavanderia.global.auth.jwt.filter.JWTFilter;
 import com.kyungmin.lavanderia.global.auth.jwt.filter.LoginFilter;
-import com.kyungmin.lavanderia.global.auth.util.JWTUtil;
-import com.kyungmin.lavanderia.global.auth.util.MakeCookie;
 import com.kyungmin.lavanderia.global.auth.oauth2.handler.CustomSuccessHandler;
 import com.kyungmin.lavanderia.global.auth.oauth2.service.CustomOAuth2UserService;
-import jakarta.servlet.http.HttpServletRequest;
+import com.kyungmin.lavanderia.global.auth.util.JWTUtil;
+import com.kyungmin.lavanderia.global.auth.util.MakeCookie;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,7 +22,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.Collections;
 
@@ -59,23 +57,20 @@ public class SecurityConfig {
         loginFilter.setFilterProcessesUrl("/signin"); // 실제 로그인을 처리할 URL을 입력
 
         http.cors((cors) -> cors
-                .configurationSource(new CorsConfigurationSource() {
-                    @Override
-                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                .configurationSource(request -> {
 
-                        CorsConfiguration configuration = new CorsConfiguration();
+                    CorsConfiguration configuration = new CorsConfiguration();
 
-                        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000")); // 허용할 포트
-                        configuration.setAllowedMethods(Collections.singletonList("*")); // 모든 메소드 허용
-                        configuration.setAllowCredentials(true);
-                        configuration.setAllowedHeaders(Collections.singletonList("*")); // 헤더 허용
-                        configuration.setMaxAge(3600L);
+                    configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000")); // 허용할 포트
+                    configuration.setAllowedMethods(Collections.singletonList("*")); // 모든 메소드 허용
+                    configuration.setAllowCredentials(true);
+                    configuration.setAllowedHeaders(Collections.singletonList("*")); // 헤더 허용
+                    configuration.setMaxAge(3600L);
 
-                        configuration.setExposedHeaders(Collections.singletonList("Set-Cookie"));
-                        configuration.setExposedHeaders(Collections.singletonList("Authorization")); // 헤더 허용
+                    configuration.setExposedHeaders(Collections.singletonList("Set-Cookie"));
+                    configuration.setExposedHeaders(Collections.singletonList("Authorization")); // 헤더 허용
 
-                        return null;
-                    }
+                    return configuration;
                 }));
 
         // CSRF(Cross-Site Request Forgery) 보호를 비활성화

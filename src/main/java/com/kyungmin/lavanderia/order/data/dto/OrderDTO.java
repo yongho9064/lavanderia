@@ -2,17 +2,23 @@ package com.kyungmin.lavanderia.order.data.dto;
 
 import com.kyungmin.lavanderia.order.data.dto.OrderDetailDTO.OrderDetailInsert;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
-@Builder
 public class OrderDTO {
+
+    private OrderDTO() {
+        throw new IllegalStateException("Utility class");
+    }
 
     @Data
     @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class OrderInsert {
 
         @Schema(description = "수령인 이름", example = "홍길동")
