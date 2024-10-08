@@ -1,129 +1,68 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import useGeolocation from '../../Typings/usedTrade/useGeolocation';
-import reverseGeocode from '../../Typings/usedTrade/reverseGeocode';
-import axios from 'axios';
-import { FaLocationDot } from 'react-icons/fa6';
-
-const KAKAO_MAPS_API_KEY: string = process.env.REACT_APP_KAKAO_MAPS_API_KEY || '';
-
-if (!KAKAO_MAPS_API_KEY) {
-    throw new Error('Kakao Maps API key is missing. Please add REACT_APP_KAKAO_MAPS_API_KEY to your .env file.');
-}
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 interface Item {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    city: string;
-    region: string;
-    subregion: string;
-    imgUrl: string;
+  id: number
+  name: string
+  description: string
+  price: number
+  city: string
+  region: string
+  subregion?: string // 선택적 속성
+  imgUrl: string
 }
 
-// 문자열의 앞뒤 공백을 제거하고 소문자로 변환
-const normalizeString = (str: string) => str.trim().toLowerCase();
+const GoogleMaps = () => {
+  const [list, setList] = useState('')
+  const [trades, setTrades] = useState<Item[]>([])
+  const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY // 발급받은 Google API 키
 
-const GoogleMaps: React.FC = () => {
-    const { location, error } = useGeolocation();
-    const [address, setAddress] = useState<{ city: string; region: string; subregion: string }>({ city: '', region: '', subregion: '' });
-    const [items, setItems] = useState<Item[]>([]);
-    const [filteredItems, setFilteredItems] = useState<Item[]>([]);
-    const [geocodeError, setGeocodeError] = useState<string | null>(null);
-
-    // 아이템 데이터 가져오기
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('/mock/usdTrade.json');
-                setItems(response.data);
-            } catch (error) {
-                console.error("Error fetching mock items:", error);
-            }
-        };
-        fetchData();
-    }, []);
-
-    // 사용자의 위치가 변경되었을 때 역지오코딩 수행
-    useEffect(() => {
-        if (location.latitude && location.longitude) {
-            reverseGeocode(location.latitude, location.longitude, KAKAO_MAPS_API_KEY)
-              .then(address => {
-                  setAddress(address);
-              })
-              .catch(error => {
-                  console.error(error);
-                  setGeocodeError('Failed to fetch geocode data');
-              });
-        }
-    }, [location]);
-
-    // 주소에 따라 아이템 필터링
-    useEffect(() => {
-        if (address.city && address.region && address.subregion) {
-            const filtered = items.filter(item => {
-                const normalizedItemCity = normalizeString(item.city);
-                const normalizedItemRegion = normalizeString(item.region);
-                const normalizedItemSubregion = item.subregion ? normalizeString(item.subregion) : '';
-                const normalizedAddressCity = normalizeString(address.city);
-                const normalizedAddressRegion = normalizeString(address.region);
-                const normalizedAddressSubregion = normalizeString(address.subregion);
-
-                return normalizedItemCity === normalizedAddressCity &&
-                  normalizedItemRegion === normalizedAddressRegion &&
-                  normalizedItemSubregion === normalizedAddressSubregion;
-            });
-            console.log("Filtered Items:", filtered);
-            setFilteredItems(filtered);
-        }
-    }, [address, items]);
-
-    // 이미지 URL 가져오기
-    const getImageUrl = (imageUrl: string) => {
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const getLocation = async () => {
         try {
-            return require(`../../Assets/Img/home/useTrade/${imageUrl}`);
-        } catch (error) {
-            console.error('Error loading image:', error);
-            return '';
+          const response = await axios.get(
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&language=ko&key=${API_KEY}`,
+          )
+          // filter 확인용
+          const data = response.data
+          // 렌더링 주소 확인용
+          const location = response.data.results[3].formatted_address
+          console.log(data)
+          console.log(location, 'asdasd')
+          const usdTradeResponse = await axios.get('/mock/usdTrade.json')
+          const usdData = usdTradeResponse.data
+          const filteredData = usdData.filter((value: any) => {
+            return (
+              value.city.trim() ===
+              data.results[0].address_components[2].long_name.trim()
+            )
+          })
+
+          console.log(filteredData, 'filter')
+          setTrades(filteredData)
+          setList(location)
+        } catch (e) {
+          console.log(e)
         }
-    };
+      }
+      getLocation()
+    })
+  }, [])
 
-    // 에러 처리
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
+  return (
+    <div className="m-auto max-w-6xl p-5">
+      {list}
+      {trades.map((value) =>
+        trades ? (
+          <p>{value.city}주소 맞다 새끼야</p>
+        ) : (
+          <p>123 주소 틀리잖아 새끼야</p>
+        ),
+      )}
+      <h1>사용자 위치 기반 주소 정보</h1>
+    </div>
+  )
+}
 
-    if (geocodeError) {
-        return <div>Error: {geocodeError}</div>;
-    }
-
-    return (
-      <div className='max-w-6xl m-auto p-5'>
-          <h1 className="flex items-center mb-2 mt-2">
-              <FaLocationDot className="text-red-600" />  {address.region} {address.city} {address.subregion}
-          </h1>
-          {filteredItems.length > 0 ? (
-            <ul className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-4'>
-                {filteredItems.map(item => (
-                  <li key={item.id} className='rounded-lg p-4 border'>
-                      <Link to={`/secondhand/${item.id}`} className='block'>
-                          <img src={getImageUrl(item.imgUrl)} alt={item.name}
-                               className='w-full object-cover rounded-lg mb-2'/>
-                          <h2 className='text-sm font-semibold mb-1'>{item.name}</h2>
-                          <p className='text-base font-extralight mb-1'>{item.description}</p>
-                          <p className='text-lg font-bold mb-1'>{item.price.toLocaleString()}원</p>
-                          <p className='text-sm mb-1'>{item.city} {item.region} {item.subregion}</p>
-                          <p className='text-sm text-gray-500'>관심 77 · 채팅 84</p>
-                      </Link>
-                  </li>
-                ))}
-            </ul>
-          ) : (
-            <p>No items found in your location.</p>
-          )}
-      </div>
-    );
-};
-
-export default GoogleMaps;
+export default GoogleMaps
