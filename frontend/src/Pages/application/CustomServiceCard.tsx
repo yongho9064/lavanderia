@@ -28,7 +28,7 @@ const CustomServiceCard: React.FC<ServiceCardProps> = ({
         </p>
         <p className="text-left text-xs text-blue-400 sm:text-sm">{details}</p>
       </div>
-      <div className="flex h-full items-end">
+      <div className="flex h-full items-end bg">
         {image && (
           <img
             src={image}
