@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { calculateDistance } from './GoogleHaversine'
 
 interface Item {
   id: number
@@ -15,52 +16,87 @@ interface Item {
 const GoogleMaps = () => {
   const [list, setList] = useState('')
   const [trades, setTrades] = useState<Item[]>([])
+  const [currentPosition, setCurrentPosition] = useState<{
+    latitude: number
+    longitude: number
+  } | null>(null)
+  const [previousPosition, setPreviousPosition] = useState<{
+    latitude: number
+    longitude: number
+  } | null>(null)
   const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY // 발급받은 Google API 키
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const getLocation = async () => {
-        try {
-          const response = await axios.get(
-            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&language=ko&key=${API_KEY}`,
-          )
-          // filter 확인용
-          const data = response.data
-          // 렌더링 주소 확인용
-          const location = response.data.results[3].formatted_address
-          console.log(data)
-          console.log(location, 'asdasd')
-          const usdTradeResponse = await axios.get('/mock/usdTrade.json')
-          const usdData = usdTradeResponse.data
-          const filteredData = usdData.filter((value: any) => {
-            return (
-              value.city.trim() ===
-              data.results[0].address_components[2].long_name.trim()
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const getLocation = async () => {
+          const { latitude, longitude } = position.coords
+          setCurrentPosition({ latitude, longitude })
+          try {
+            // 위치 정보 요청
+            const response = await axios.get(
+              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&language=ko&key=${API_KEY}`,
             )
-          })
-
-          console.log(filteredData, 'filter')
-          setTrades(filteredData)
-          setList(location)
-        } catch (e) {
-          console.log(e)
+            const data = response.data
+            // 위치 주소 확인
+            const location = data.results[3].formatted_address
+            setList(location)
+            // Mock 데이터 요청
+            const usdTradeResponse = await axios.get('/mock/usdTrade.json')
+            const usdData = usdTradeResponse.data
+            // 도시 필터링
+            const filteredData = usdData.filter((value: Item) => {
+              return (
+                value.city.trim() ===
+                data.results[0].address_components[2].long_name.trim()
+              )
+            })
+            setTrades(filteredData)
+            if (previousPosition) {
+              // 거리 계산
+              const distance = calculateDistance(
+                previousPosition.latitude,
+                previousPosition.longitude,
+                latitude,
+                longitude,
+              )
+              if (distance >= 2) {
+                alert('2km 이상 이동하여 위치를 다시 가져옵니다.')
+                setPreviousPosition({ latitude, longitude })
+                // 위치 기반 데이터 필터링
+                console.log(filteredData, '필터된 데이터')
+                setTrades(filteredData)
+              }
+            } else {
+              setPreviousPosition({ latitude, longitude })
+            }
+          } catch (e) {
+            console.log(e)
+          }
         }
-      }
-      getLocation()
-    })
-  }, [])
+        getLocation()
+      },
+      (error) => {
+        console.error(error)
+        alert('위치 정보를 가져올 수 없습니다.')
+      },
+      {
+        enableHighAccuracy: true, // 정확한 위치 정보 요청
+        timeout: 10000, // 10초 안에 위치 정보 가져오기
+        maximumAge: 0, // 캐시된 위치 정보 사용하지 않기
+      },
+    )
+  }, [previousPosition]) // 존재하는 데이터 변경될 떄만 실행
 
   return (
     <div className="m-auto max-w-6xl p-5">
-      {list}
-      {trades.map((value) =>
-        trades ? (
-          <p>{value.city}주소 맞다 새끼야</p>
-        ) : (
-          <p>123 주소 틀리잖아 새끼야</p>
-        ),
-      )}
       <h1>사용자 위치 기반 주소 정보</h1>
+      <p>{list}</p>
+      {trades.length > 0 ? (
+        trades.map((trade) => <p key={trade.id}>{trade.city} 주소 맞다!</p>)
+      ) : (
+        <p>주소가 틀려요 위치 정보를 동의했나요?</p>
+      )}
     </div>
   )
 }

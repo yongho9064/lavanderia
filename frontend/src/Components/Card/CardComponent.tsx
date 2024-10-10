@@ -1,31 +1,37 @@
-import React from 'react';
+import React from 'react'
 
 interface CardComponentProps {
-    imgSrc: string;
-    title: string;
-    description: string;
-    isReversed?: boolean;
+  imgSrc: string
+  title: string
+  description: string
+  isReversed?: boolean
 }
 
-const CardComponent: React.FC<CardComponentProps> = ({ imgSrc, title, description  }) => {
-    const formattedDescription = description.split('\n').map((line, index) => (
-        <React.Fragment key={index}>
-            {line}
-            <br />
-        </React.Fragment>
-    ));
+const CardComponent: React.FC<CardComponentProps> = ({
+  imgSrc,
+  title,
+  description,
+}) => {
+  const formattedDescription = description.split('\n').map((line, index) => (
+    <React.Fragment key={index}>
+      {line}
+      <br />
+    </React.Fragment>
+  ))
 
-    return (
-        <div className={`mb-16 flex justify-between items-center flex-col sm:flex-row p-4 w-full `}>
-            <div>
-                <img src={imgSrc} className=" object-cover" alt={title} />
-            </div>
-            <div className="sm:w-1/2 flex flex-col justify-center  sm:text-left md:ml-4">
-                <h4 className="mb-4 text-2xl mt-4 sm:mt-0">{title}</h4>
-                <p className="text-base text-gray-500">{formattedDescription}</p>
-            </div>
-        </div>
-    );
-};
+  return (
+    <div
+      className={`mb-16 flex w-full flex-col items-center justify-between p-4 sm:flex-row `}
+    >
+      <div>
+        <img src={imgSrc} className=" object-cover" alt={title} />
+      </div>
+      <div className="m-0.5 ml-4 flex flex-col justify-center sm:w-1/2  sm:text-left md:ml-4">
+        <h4 className="mb-4 mt-4 text-2xl sm:mt-0">{title}</h4>
+        <p className="text-base text-gray-500">{formattedDescription}</p>
+      </div>
+    </div>
+  )
+}
 
-export default CardComponent;
+export default CardComponent
