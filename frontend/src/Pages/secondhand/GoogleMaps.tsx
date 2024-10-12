@@ -13,6 +13,12 @@ interface Item {
   imgUrl: string
 }
 
+interface AddressComponent {
+  long_name: string
+  short_name: string
+  types: string[]
+}
+
 const GoogleMaps = () => {
   const [list, setList] = useState('')
   const [trades, setTrades] = useState<Item[]>([])
@@ -35,7 +41,7 @@ const GoogleMaps = () => {
           try {
             // 위치 정보 요청
             const response = await axios.get(
-              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&language=ko&key=${API_KEY}`,
+              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&language=ko&region=ko&key=${API_KEY}`,
             )
             const data = response.data
             // 위치 주소 확인
@@ -44,12 +50,24 @@ const GoogleMaps = () => {
             // Mock 데이터 요청
             const usdTradeResponse = await axios.get('/mock/usdTrade.json')
             const usdData = usdTradeResponse.data
-            // 도시 필터링
-            const filteredData = usdData.filter((value: Item) => {
-              return (
-                value.city.trim() ===
-                data.results[0].address_components[2].long_name.trim()
+
+            const addressComponents =
+              response.data.results[0].address_components
+
+            const searchAddress = (
+              components: AddressComponent[],
+              type: string,
+            ): AddressComponent | undefined => {
+              return components.find((components) =>
+                components.types.includes(type),
               )
+            }
+
+            const region = searchAddress(addressComponents, 'political')
+            console.log(region, 'asdasdas')
+            // 동네 필터링
+            const filteredData = usdData.filter((value: Item) => {
+              return value.subregion === region?.long_name
             })
             setTrades(filteredData)
             if (previousPosition) {
@@ -93,7 +111,9 @@ const GoogleMaps = () => {
       <h1>사용자 위치 기반 주소 정보</h1>
       <p>{list}</p>
       {trades.length > 0 ? (
-        trades.map((trade) => <p key={trade.id}>{trade.city} 주소 맞다!</p>)
+        trades.map((trade) => (
+          <p key={trade.id}>{trade.subregion} 주소 맞다!</p>
+        ))
       ) : (
         <p>주소가 틀려요 위치 정보를 동의했나요?</p>
       )}
