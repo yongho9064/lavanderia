@@ -20,7 +20,7 @@ const Custom_services = [
     {
         title: "프리미엄 세탁",
         description: "더 섬세한 케어로 맞춤세탁",
-        details: "모든 의류, 패션잡화 및 신발에 가능합니다!",
+        details: "고가의 브랜드 및 명품 잡화를 맞춤세탁!",
         image: premiumLaundry,
         url: "imgApplication",
     },
@@ -29,8 +29,8 @@ const Custom_services = [
 const services = [
     {
         title: "생활 빨래",
-        description: "소재/색깔 구분없이 일괄 물세탁",
-        details: "수건,속옷 양말등",
+        description: "소재/색깔 구분없이 일괄 세탁",
+        details: "티셔츠, 수건, 속옷 양말등 색상을 구분 해주세요!",
         image: dailyLaundry,
     },
     {
@@ -57,7 +57,6 @@ const Application = () => {
     };
 
     const closeModal = () => {
-
         setIsModalOpen(false);
         setSelectedService(null);
     };

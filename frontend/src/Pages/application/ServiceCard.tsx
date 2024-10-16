@@ -14,11 +14,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             onClick={onClick}
         >
             <div className="mt-0 flex h-full flex-grow flex-col ">
-                <h2 className="flex mb-2 text-xl font-bold sm:text-2xl ">{title}</h2>
-                <p className="mb-2 text-left text-sm text-gray-500 sm:text-base">
+                <h2 className="flex mb-2 text-2xl font-bold">{title}</h2>
+                <p className="mb-2 text-left text-base text-gray-500">
                     {description}
                 </p>
-                <p className="text-left text-xs text-blue-400 sm:text-sm">{details}</p>
+                <p className="text-left text-sm text-blue-400">{details}</p>
             </div>
             <div className="flex h-full items-end">
                 {image && (
