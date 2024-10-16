@@ -7,7 +7,7 @@ import clothesCollectionBox from "../../Assets/Img/application/clothes_collectio
 
 import CustomServiceCard from "./CustomServiceCard";
 import ServiceCard from "./ServiceCard";
-import ApplicationModal from "../../Components/common/ApplicationModal";
+import ApplicationModal from "./ApplicationModal";
 
 const Custom_services = [
     {
