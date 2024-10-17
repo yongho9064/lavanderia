@@ -7,7 +7,7 @@ const EnterPassword = () => {
         setPassword(e.target.value);
     }
     return (
-        <section className="min-h-fit flex flex-col justify-between">
+        <section className="min-h-full flex flex-col justify-between">
             <h4 className="text-xs  font-semibold mt-4 mb-4 p-2 ">
                 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 입력해주세요
             </h4>
@@ -15,8 +15,9 @@ const EnterPassword = () => {
                 <label>
                     <input
                         type="password"
-                        className="h-10 w-full mb-96  border border-gray-300 rounded placeholder-gray-400 placeholder:text-base focus:outline-none focus:ring-2 focus:ring-amber-300"
+                        className="w-full mb-2 p-2 border border-red-500 rounded"
                         placeholder="비밀번호 입력"
+                        value={password}
                         onChange={handleChange}
                     />
                 </label>
