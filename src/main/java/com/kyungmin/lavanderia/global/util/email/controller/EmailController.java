@@ -23,10 +23,32 @@ public class EmailController {
 
     private final EmailService emailService;
 
-//    private ResponseEntity<String> response(HttpStatus httpStatus,String result) {
-//        return ResponseEntity.status(httpStatus)
-//                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
-//                .body(result);
-//    }
+    @PostMapping("/send-signup-code")
+    @Operation(summary = "회원가입 이메일 전송", description = "회원가입 이메일 인증코드를 전송합니다")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "이메일 전송 성공", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "400", description = "이메일 전송 실패", content = @Content(mediaType = "application/json")),
+    })
+    public ResponseEntity<String> sendSignupCode(@RequestBody String email) {
+        HttpStatus httpStatus;
+        String result;
+
+        try {
+            emailService.sendSignupCode(email);
+            httpStatus = HttpStatus.CREATED;
+            result = "이메일 전송 성공";
+        } catch (EmailSendFailedEx e) {
+            httpStatus = HttpStatus.BAD_REQUEST;
+            result = "이메일 전송 실패";
+        }
+
+        return response(httpStatus, result);
+    }
+
+    private ResponseEntity<String> response(HttpStatus httpStatus,String result) {
+        return ResponseEntity.status(httpStatus)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
+                .body(result);
+    }
 
 }

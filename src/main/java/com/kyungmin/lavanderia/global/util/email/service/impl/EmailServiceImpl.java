@@ -3,7 +3,6 @@ package com.kyungmin.lavanderia.global.util.email.service.impl;
 import com.kyungmin.lavanderia.global.util.email.service.EmailService;
 import com.kyungmin.lavanderia.member.exception.EmailAuthenticationFailedEx;
 import com.kyungmin.lavanderia.member.exception.EmailSendFailedEx;
-import com.kyungmin.lavanderia.member.service.MemberService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -30,13 +29,14 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendSignupCode(String email) {
 
-        String token = UUID.randomUUID().toString();
-        String subject = "Lavanderia 회원가입 이메일 인증";
-        String link = "http://localhost:8080/verify-signup-code?email=" + email + "&token=" + token;
-        String text = loadEmailTemplate(link);
+        String randomNumber = Integer.toString((int) ((Math.random() * 900000) + 100000)); // 100000에서 999999 사이의 숫자 생성
+        String subject = "하루세탁 회원가입 이메일 인증";
+        String text = loadEmailTemplate(randomNumber);
 
         String redisKey = "Email Authentication Code, Member Email : " + email;
-        redisTemplate.opsForValue().set(redisKey, token, 5, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(redisKey, randomNumber, 5, TimeUnit.MINUTES);
+        System.out.println("전송 redisKey : " + redisKey);
+        System.out.println("전송 randomNumber : " + randomNumber);
 
         sendEmailUtil(email, subject, text);
     }
@@ -44,15 +44,20 @@ public class EmailServiceImpl implements EmailService {
     // 회원가입 이메일 인증
     @Override
     public void checkSignupCode(String email, String token) {
+        try {
+            String redisKey = "Email Authentication Code, Member Email : " + email;
 
-        String redisKey = "Email Authentication Code, Member Email : " + email;
-        String getToken = (String) redisTemplate.opsForValue().get(redisKey);
+            String getToken = (String) redisTemplate.opsForValue().get(redisKey);
 
-        if (getToken != null && getToken.equals(token)) {
-            redisTemplate.delete(redisKey);
-        } else {
-            throw new EmailAuthenticationFailedEx(email);
+            if (getToken != null && getToken.equals(token)) {
+                redisTemplate.delete(redisKey);
+            } else {
+                throw new EmailAuthenticationFailedEx(email);
+            }
+        }catch (RuntimeException e){
+            throw new RuntimeException(email + " : Email Authentication Code is not found");
         }
+
     }
 
     // 이메일 전송
@@ -71,11 +76,11 @@ public class EmailServiceImpl implements EmailService {
     }
 
     // 이메일 인증 url을 포함한 이메일 템플릿을 로드
-    private String loadEmailTemplate(String link) {
+    private String loadEmailTemplate(String randomNumber) {
         try {
             ClassPathResource resource = new ClassPathResource("/static/verification-email.html");
             String template = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
-            return String.format(template, link);
+            return String.format(template, randomNumber);
         } catch (IOException e) {
             throw new RuntimeException("Failed to load email template", e);
         }
