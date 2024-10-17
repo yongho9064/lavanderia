@@ -35,6 +35,7 @@ import PaymentManagement from './Pages/mypage/PaymentManagement'
 import Notificationsettings from "./Pages/mypage/Notificationsettings";
 import CancellationDetails from "./Pages/mypage/CancellationDetails";
 import EnterPassword from "./Pages/mypage/EnterPassword";
+import ChangeDeliveryAddressManagement from "./Pages/mypage/ChangeDeliveryAddressManagement";
 
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
                   path="/mypage/notificationsettings"
                   element={<Notificationsettings />}
               />
+              <Route path='/mypage/deliveryAddressManagement/ChangeDeliveryAddressManagement' element={<ChangeDeliveryAddressManagement />} />
             </Route>
             {/* 로그인 불필요 페이지! */}
             {/*커뮤니티*/}
