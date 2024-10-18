@@ -26,6 +26,7 @@ import SecondhandDeliveryBuy from "./Pages/secondhand/SecondhandDeliveryBuy";
 import CommunityWrite from './Pages/community/CommunityWrite'
 import Find from "./Pages/auth/Find";
 import SecondPayment from "./Pages/secondhand/SecondPayment";
+import Repair from "./Pages/application/Repair";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="application" element={<Application />} />
             <Route path="imgApplication" element={<ImgApplication />} />
+            <Route path="rapaire" element={<Repair />} />
             <Route path="payment" element={<Payment />} />
             <Route path="cart" element={<Cart />} />
             <Route path="mypage" element={<MyPage />} />

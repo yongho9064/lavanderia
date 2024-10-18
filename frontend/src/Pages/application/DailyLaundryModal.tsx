@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import emptyBasket from '../../Assets/Img/application/empty_laundry_basket.png';
 import fullBasket from '../../Assets/Img/application/full_laundry_basket.png';
 
-const ApplicationModal = ({ service, closeModal }: any) => {
+const DailyLaundryModal = ({ service, closeModal }: any) => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
     // 각 버튼 클릭 시 처리 함수
@@ -39,7 +39,9 @@ const ApplicationModal = ({ service, closeModal }: any) => {
                 <div className="flex w-full h-full mb-4 gap-2">
                     <button
                         className={`w-1/2 flex flex-col items-center justify-center p-2 border rounded-lg transition ${
-                            selectedOption === "3.5KG 미만" ? "border-blue-600 bg-blue-100" : "border-gray-300"
+                            selectedOption === "3.5KG 미만"
+                                ? "border-blue-600 bg-blue-100"
+                                : "border-gray-300 hover:border-blue-600 hover:bg-blue-50"
                         }`}
                         onClick={handleButton1Click}
                     >
@@ -49,7 +51,9 @@ const ApplicationModal = ({ service, closeModal }: any) => {
                     </button>
                     <button
                         className={`w-1/2 flex flex-col items-center justify-center p-2 border rounded-lg transition ${
-                            selectedOption === "3.5KG 이상" ? "border-blue-600 bg-blue-100" : "border-gray-300"
+                            selectedOption === "3.5KG 이상"
+                                ? "border-blue-600 bg-blue-100"
+                                : "border-gray-300 hover:border-blue-600 hover:bg-blue-50"
                         }`}
                         onClick={handleButton2Click}
                     >
@@ -89,4 +93,4 @@ const ApplicationModal = ({ service, closeModal }: any) => {
     );
 };
 
-export default ApplicationModal;
+export default DailyLaundryModal;

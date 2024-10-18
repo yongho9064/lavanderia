@@ -7,7 +7,7 @@ import clothesCollectionBox from "../../Assets/Img/application/clothes_collectio
 
 import CustomServiceCard from "./CustomServiceCard";
 import ServiceCard from "./ServiceCard";
-import ApplicationModal from "./ApplicationModal";
+import DailyLaundryModal from "./DailyLaundryModal";
 
 const Custom_services = [
     {
@@ -38,6 +38,7 @@ const services = [
         description: "의류 또는 신발 모두 수선 가능",
         details: "새로 사는 것보다 수선은 어떠신가요?",
         image: clothesRepair,
+
     },
     {
         title: "헌옷 수거",
@@ -100,7 +101,7 @@ const Application = () => {
                 </div>
 
                 {isModalOpen && (
-                    <ApplicationModal
+                    <DailyLaundryModal
                         service={selectedService}
                         closeModal={closeModal}
                     />
