@@ -51,13 +51,13 @@ public class MemberApiController {
         return response(httpStatus, result);
     }
 
-    @GetMapping("/verify-signup-code")
+    @PostMapping("/verify-signup-code")
     @Operation(summary = "이메일 인증코드 검사", description = "이메일 인증코드를 검사하고, 인증 성공시 회원을 활성화합니다")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "이메일 인증코드 인증 성공", content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "400", description = "이메일 인증코드 인증 실패", content = @Content(mediaType = "application/json")),
     })
-    public ResponseEntity<String> checkSignupCode(@ModelAttribute CheckTokenDTO checkTokenDTO) {
+    public ResponseEntity<String> checkSignupCode(@RequestBody CheckTokenDTO checkTokenDTO) {
 
         HttpStatus httpStatus;
         String result;
@@ -69,9 +69,9 @@ public class MemberApiController {
         } catch (EmailAuthenticationFailedEx e) {
             httpStatus = HttpStatus.BAD_REQUEST;
             result = "이메일 인증 실패";
-        } catch (Exception e) {
-            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-            result = "예상치 못한 오류가 발생했습니다";
+        } catch (RuntimeException e) {
+            httpStatus = HttpStatus.BAD_REQUEST;
+            result = e.getMessage();
         }
 
         return response(httpStatus, result);

@@ -31,9 +31,10 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void signup(SignupDTO signupDto) {
 
+        // 회원 정보 저장
         Member member = Member.builder()
                 .memberId(signupDto.getMemberId())
-                .memberPwd(passwordEncoder.encode(signupDto.getMemberPwd()))
+                .memberPwd(passwordEncoder.encode(signupDto.getMemberPwd())) // 비밀번호 암호화
                 .memberName(signupDto.getMemberName())
                 .memberEmail(signupDto.getMemberEmail())
                 .memberPhone(signupDto.getMemberPhone())
@@ -42,7 +43,14 @@ public class MemberServiceImpl implements MemberService {
                 .build();
 
         memberRepository.save(member);
-        emailService.sendSignupCode(signupDto.getMemberEmail());
+
+        // 회원 권한 저장
+        Role role = Role.builder().
+                authorities("ROLE_USER")
+                .memberId(member)
+                .build();
+
+        roleRepository.save(role);
     }
 
     // 회원 아이디 중복 체크
@@ -96,21 +104,10 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.delete(member);
     }
 
-    // 이메일 인증 후 활성화 상태로 변경
+    // 이메일 인증
     @Override
     public void checkSignupCode(String email, String token) {
         emailService.checkSignupCode(email, token);
-        Member member = memberRepository.findMemberByMemberEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(email + "회원을 찾을 수 없습니다."));
-        member.setAccInactiveYn("N");
-        memberRepository.save(member);
-
-        Role role = Role.builder().
-                authorities("ROLE_USER")
-                .memberId(member)
-                .build();
-
-        roleRepository.save(role);
     }
 
     // 회원 아이디로 회원 조회

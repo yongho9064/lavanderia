@@ -97,7 +97,7 @@ public class Member implements UserDetails {
         this.memberBirth = memberBirth;
         this.memberLevel = (memberLevel != null) ? memberLevel : "1";
         this.memberPoint = (memberPoint != null) ? memberPoint : "0";
-        this.accInactiveYn = (accInactiveYn != null) ? accInactiveYn : "Y";
+        this.accInactiveYn = (accInactiveYn != null) ? accInactiveYn : "N";
         this.tempPwdYn = (tempPwdYn != null) ? tempPwdYn : "N";
         this.accLoginCount = accLoginCount;
         this.loginFailCount = loginFailCount;
