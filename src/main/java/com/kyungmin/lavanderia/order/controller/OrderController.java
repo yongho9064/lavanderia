@@ -31,8 +31,9 @@ public class OrderController {
     @Operation(summary = "주문 추가", description = "주문 정보를 추가하고 주문 ID를 반환합니다.")
     public ResponseEntity<Long> addOrder(@RequestBody OrderInsert orderDTO, @AuthenticationPrincipal Member member) {
 
-        Long orderId = orderService.insertOrder(member.getMemberId(), orderDTO);
+        Long orderId = orderService.insertOrder(member, orderDTO);
 
         return ResponseEntityUtil.response(orderId, HttpStatus.OK);
     }
+
 }

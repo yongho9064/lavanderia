@@ -1,8 +1,12 @@
 package com.kyungmin.lavanderia.order.data.entity;
 
+import com.kyungmin.lavanderia.member.data.entity.Member;
 import com.kyungmin.lavanderia.order.data.constant.DeliveryStatus;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -14,7 +18,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "TBL_ORDER")
-@ToString(exclude = "orderDetailList")
 public class Order {
 
     @Id
@@ -22,8 +25,9 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long orderId;
 
-    @Column(name = "MEMBER_ID")
-    private String memberId;
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member memberId;
 
     @CreationTimestamp
     @Column(name = "ORDER_DATE", updatable = false)
