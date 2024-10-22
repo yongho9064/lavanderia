@@ -23,6 +23,9 @@ public class OrderDetailDTO {
         @Schema(description = "상품 ID", example = "b3c9e0a8-7b4b-4a7b-bd9a-4a84f43c2b08")
         private UUID productId;
 
+        @Schema(description = "세탁물 ID", example = "1")
+        private Long laundryId;
+
         @Schema(description = "수량", example = "2")
         private int quantity;
 

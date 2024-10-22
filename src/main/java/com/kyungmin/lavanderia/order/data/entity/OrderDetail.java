@@ -1,8 +1,12 @@
 package com.kyungmin.lavanderia.order.data.entity;
 
+import com.kyungmin.lavanderia.laundry.data.entity.Laundry;
 import com.kyungmin.lavanderia.product.data.entity.Product;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
@@ -24,6 +28,10 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
     private Product productId;
+
+    @ManyToOne
+    @JoinColumn(name = "LAUNDRY_ID")
+    private Laundry laundry;
 
     @Column(name = "QUANTITY")
     private int quantity;
