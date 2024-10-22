@@ -15,11 +15,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "TBL_PRODUCT")
-@ToString(exclude = {"productImgUrl", "orderDetailList", "cartList"})
+@ToString(exclude = {"productImgUrl", "orderDetaiList", "cartList"})
 public class Product {
 
     @Id @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "PRODUCT_ID", columnDefinition = "BINARY(16)", updatable = false, nullable = false)
     private UUID productId; // 상품 아이디
 
