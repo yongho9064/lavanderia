@@ -1,5 +1,6 @@
 package com.kyungmin.lavanderia.order.service.impl;
 
+import com.kyungmin.lavanderia.member.data.entity.Member;
 import com.kyungmin.lavanderia.order.data.dto.OrderDTO.OrderInsert;
 import com.kyungmin.lavanderia.order.data.entity.Order;
 import com.kyungmin.lavanderia.order.data.entity.OrderDetail;
@@ -21,9 +22,9 @@ public class OrderServiceImpl implements OrderService {
     private final OrderDetailRepository orderDetailRepository;
 
     @Override
-    public Long insertOrder(String memberId, OrderInsert orderDTO) {
+    public Long insertOrder(Member member, OrderInsert orderDTO) {
 
-        Order order = OrderMapper.INSTANCE.toEntity(memberId, orderDTO);
+        Order order = OrderMapper.INSTANCE.toEntity(member, orderDTO);
 
         orderRepository.save(order);
 
