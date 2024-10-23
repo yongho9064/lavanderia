@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Post } from '../../Typings/community/post';
 import { decryptToken } from '../../Utils/auth/crypto';
+import {API_URL} from "../../Api/api";
 
 const tabs = [
   { name: '전체', active: true },
@@ -21,7 +22,7 @@ const Community = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('/community/');
+        const response = await axios.get(`${API_URL}/community/`);
 
         setPosts(response.data);
       } catch (error) {

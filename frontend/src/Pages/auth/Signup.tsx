@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Logo from "../../Components/common/Logo";
+import {API_URL} from "../../Api/api";
 
 interface FormData {
     memberName: string;
@@ -136,7 +137,7 @@ const Signup = () => {
 
             console.log('Form Data to be submitted:', cleanedFormData);
 
-            const response = await axios.post('/signup', cleanedFormData);
+            const response = await axios.post(`${API_URL}/signup`, cleanedFormData);
 
             console.log('Success:', response.data);
             window.alert('로그인 성공! 이메일 인증을 진행해 주세요.');
