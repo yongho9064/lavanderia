@@ -3,6 +3,7 @@ import React, { useRef, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context";
 import Logo from "../../Components/common/Logo";
+import {API_URL} from "../../Api/api";
 
 const Login = () => {
   const { login } = useContext(AuthContext); // authContext에서 login 함수 가져오기
@@ -33,7 +34,7 @@ const Login = () => {
     // 서버랑 연결 필요
     if (isUsernameValid && isPasswordValid) {
       try {
-        const response = await axios.post("/signin", { memberId: formData.memberId, memberPwd: formData.memberPwd });
+        const response = await axios.post(`${API_URL}/signin`, { memberId: formData.memberId, memberPwd: formData.memberPwd });
         const access = response.headers['access'];
 
         login(access, rememberMe);  // Context의 login 메소드 호출

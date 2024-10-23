@@ -1,6 +1,7 @@
 // tokenService.ts
 // axios는 default export로 제공되기 때문에 단일로 가져와야함
 import axios from "axios";
+import {API_URL} from "../../Api/api";
 
 /**
  * 토큰을 사용하여 접근을 인증하고, 만료되거나 유효하지 않은 경우 토큰을 재발급합니다.
@@ -22,7 +23,7 @@ export const authenticateAccess = async (accessToken: string): Promise<any> => {
     console.log(error)
     if (error.response && error.response.statusText === "Unauthorized") {
       try {
-        const reissueResponse = await axios.post("/reissue");
+        const reissueResponse = await axios.post(`${API_URL}/reissue`);
 
         // 리프레쉬토큰 재발급 성공시 반환값
         return reissueResponse.data;

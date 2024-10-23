@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import uploadImg from '../../Assets/Img/application/uploadImg.png';
+import {API_URL} from "../../Api/api";
 
 const ImgApplication: React.FC = () => {
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
@@ -19,7 +20,7 @@ const ImgApplication: React.FC = () => {
         console.log("이미지 보냄");
 
         try {
-            const response = await fetch('http://localhost:8080/calculate-amount', {
+            const response = await fetch(`${API_URL}/calculate-amount`, {
                 method: 'POST',
                 body: formData,
             });

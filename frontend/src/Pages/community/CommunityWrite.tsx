@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { decryptToken } from '../../Utils/auth/crypto'
+import {API_URL} from "../../Api/api";
 
 const CommunityWrite = () => {
   const [title, setTitle] = useState('');
@@ -34,7 +35,7 @@ const CommunityWrite = () => {
       }
 
       const access = decryptToken(encryptedAccess);
-      await axios.post('/community/save', formData, {
+      await axios.post(`${API_URL}/community/save`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           access: access,

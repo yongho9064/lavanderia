@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import {API_URL} from "../../Api/api";
 
 // declare global 사용하여 window 객체 확장 타입 정의
 declare global {
@@ -50,7 +51,7 @@ const ImportPayment: React.FC = () => {
             },
             async (rsp) => {
                 try {
-                    const { data } = await axios.post(`http://localhost:8080/verifyIamport/${rsp.imp_uid}`);
+                    const { data } = await axios.post(`${API_URL}/verifyIamport/${rsp.imp_uid}`);
                     if (rsp.paid_amount === data.response.amount) {
                         alert('결제 성공');
                     } else {

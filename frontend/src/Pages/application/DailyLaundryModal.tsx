@@ -8,18 +8,18 @@ const DailyLaundryModal = ({ service, closeModal }: any) => {
     // 각 버튼 클릭 시 처리 함수
     const handleButton1Click = () => {
         setSelectedOption("3.5KG 미만");
-        console.log("3.5KG 미만 버튼 클릭됨");
+
     };
 
     const handleButton2Click = () => {
         setSelectedOption("3.5KG 이상");
-        console.log("3.5KG 이상 버튼 클릭됨");
+
     };
 
     // 확인 버튼 클릭 시 처리 함수
     const handleConfirmClick = () => {
         if (selectedOption) {
-            console.log(`${selectedOption}이(가) 선택되었습니다.`);
+
             closeModal();
         }
     };

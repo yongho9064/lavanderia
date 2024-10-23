@@ -12,7 +12,6 @@ const CustomServiceCard: React.FC<ServiceCardProps> = ({
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    console.log(url)
     navigate(`/${url}`, { state: { title } });
   };
 
