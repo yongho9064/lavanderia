@@ -1,5 +1,6 @@
 package com.kyungmin.lavanderia.cart.data.entity;
 
+import com.kyungmin.lavanderia.laundry.data.entity.Laundry;
 import com.kyungmin.lavanderia.member.data.entity.Member;
 import com.kyungmin.lavanderia.product.data.entity.Product;
 import jakarta.persistence.*;
@@ -30,5 +31,9 @@ public class Cart {
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "LAUNDRY_ID")
+    private Laundry laundry;
 
 }

@@ -2,6 +2,7 @@ package com.kyungmin.lavanderia.member.data.entity;
 
 import com.kyungmin.lavanderia.address.data.entity.Address;
 import com.kyungmin.lavanderia.cart.data.entity.Cart;
+import com.kyungmin.lavanderia.order.data.entity.Order;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
@@ -18,8 +19,10 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
 @DynamicInsert
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "TBL_MEMBER")
 public class Member implements UserDetails {
 
@@ -85,7 +88,10 @@ public class Member implements UserDetails {
     @OneToMany(mappedBy = "memberId", cascade = CascadeType.ALL)
     List<Cart> cart; // 장바구니
 
-    @Builder
+    @OneToMany(mappedBy = "memberId", cascade = CascadeType.ALL)
+    List<Order> order; // 주문
+
+    /*@Builder
     public Member(String memberId, String memberPwd, String memberName, String memberEmail, String memberPhone, String agreeMarketingYn, List<Role> roles, LocalDate memberBirth, String memberLevel,
                   String memberPoint, String accInactiveYn, String tempPwdYn, long accLoginCount, long loginFailCount, LocalDateTime lastLoginDate, LocalDateTime accRegisterDate, LocalDateTime accUpdateDate, LocalDateTime accDeleteDate){
         this.memberId = memberId;
@@ -106,7 +112,7 @@ public class Member implements UserDetails {
         this.accUpdateDate = accUpdateDate;
         this.accDeleteDate = accDeleteDate;
         this.roles = roles;
-    }
+    }*/
 
     @PrePersist
     protected void onCreate() {
