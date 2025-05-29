@@ -2,15 +2,15 @@
 
 ## 👥 팀원
 
-### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">엔젤릭버스터 이용호</span>
+### 🔥 <span style="color:#3CB371; font-family: 'Comic Sans MS', cursive, sans-serif;">[Back End] 이용호</span>
 
-### 🔫 <span style="color:#FF0000; font-family: 'Comic Sans MS', cursive, sans-serif;">청년 정치인 김건</span>
+### 🔫 <span style="color:#FF0000; font-family: 'Comic Sans MS', cursive, sans-serif;">[Back End] 김건</span>
 
-### 🌈 <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">성소수자 노희철</span>
+### 🌈 <span style="color:#FFA500; font-family: 'Comic Sans MS', cursive, sans-serif;">[Back End] 노희철</span>
 
-### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">일간베스트 총괄 이관용</span>
+### 🌑 <span style="color:#9400D3; font-family: 'Comic Sans MS', cursive, sans-serif;">[Front End] 이관용</span>
 
-### ⚡️ <span style="color:#FF6347; font-family: 'Comic Sans MS', cursive, sans-serif;">남성 페미니스트 대표 박민규</span>
+### ⚡️ <span style="color:#FF6347; font-family: 'Comic Sans MS', cursive, sans-serif;">[Front End] 박민규</span>
 
 ## 🚀 프로젝트 실행 방법
 
@@ -73,6 +73,6 @@ docker-compose down
 
 🚧 공사중
 
-## 🎸 私たちのプロジェクトは台無しだった...
+## 🏠 집에 가고싶다...
+![image](https://github.com/user-attachments/assets/1f00da41-00f2-4f12-9d88-2d722f6f4451)
 
-![image](https://mblogthumb-phinf.pstatic.net/MjAyMzAyMjdfNTYg/MDAxNjc3NDI4ODkxNzg4.XxxPeBm9ltiL0iF2h0ikAzdG81pEMB4Tp-ORexO6NFog.e4zEIRUMalaHP29ukMhnfC-VtkPRZZLr-jTqXYp3ArUg.JPEG.thsldpswpf0112/봇치2.jpg?type=w800)
